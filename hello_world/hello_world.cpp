@@ -2,8 +2,6 @@
 
 int	main()
 {
-	std::string MyName;
-	std::cin >> MyName;
-	std::cout << "Hello " + MyName.substr(0, 3) << std::endl;
+	std::cout << "Hello world!" << std::endl;
 	return (0);
 }
