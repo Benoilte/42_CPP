@@ -1,0 +1,9 @@
+# executable
+megaphone
+test_megaphone
+
+# object file
+*.o
+
+# dependencies file
+*.d
