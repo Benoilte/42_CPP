@@ -6,14 +6,12 @@
 #    By: bebrandt <benoit.brandt@proton.me>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/05 14:13:37 by bebrandt          #+#    #+#              #
-#    Updated: 2024/11/05 14:13:49 by bebrandt         ###   ########.fr        #
+#    Updated: 2024/11/05 15:15:21 by bebrandt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 EX_00_DIR		= 	ex00/
-EX_00_NAME		=	megaphone
 TEST_EX_00_DIR	= 	spec/ex00/
-TEST_EX_00_NAME	=	test_megaphone
 
 ex00:
 	@make -C $(EX_00_DIR) $(MAKEFLAGS)
