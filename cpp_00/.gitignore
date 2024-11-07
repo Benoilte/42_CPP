@@ -7,3 +7,6 @@ test_megaphone
 
 # dependencies file
 *.d
+
+# config file
+.vscode/*
