@@ -6,7 +6,7 @@
 #    By: bebrandt <benoit.brandt@proton.me>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/04 16:39:23 by bebrandt          #+#    #+#              #
-#    Updated: 2024/11/05 13:07:45 by bebrandt         ###   ########.fr        #
+#    Updated: 2024/11/06 08:00:30 by bebrandt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,9 +36,9 @@ CLEAR_LINE		=	\033[2K
 TOTAL_FILES		=	$(words $(SRCS))
 COMPILED_COUNT	=	0
 
--include $(DEPS)
-
 all:			$(NAME)
+
+-include $(DEPS)
 
 $(NAME):		$(OBJS)
 				@$(CC) $(COMP_FLAGS) $(CPP_FLAGS) $(OBJS) -o $@
