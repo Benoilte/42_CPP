@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   megaphone.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebrandt <benoit.brandt@proton.me>         +#+  +:+       +#+        */
+/*   By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:39:20 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/07 09:03:15 by bebrandt         ###   ########.fr       */
+/*   Updated: 2024/11/07 11:24:01 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,14 @@ void	loud_and_unbearable_noise()
 	std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
 }
 
-void	megaphone(std::string const& str)
+void	megaphone(std::string str)
 {
-	std::cout << str << std::endl;
+	size_t	len { str.length() };
+
+    for (size_t i = 0; i < len; i++) { 
+        str[i] = std::toupper(str[i]); 
+    }
+	std::cout << str;
 }
 
 int	main(int argc, char* argv[])
@@ -31,6 +36,7 @@ int	main(int argc, char* argv[])
 	{
 		for (int i = 1; i < argc; i++)
 			megaphone(argv[i]);
+		std::cout << std::endl; 
 	}
 	return (0);
 }
