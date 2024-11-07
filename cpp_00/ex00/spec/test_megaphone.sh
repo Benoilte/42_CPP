@@ -29,7 +29,7 @@ fi
 
 echo -e $YELLOW"\nTest megaphone program with several argument\n"
 ./../megaphone Damnit " ! " "Sorry students, I thought this thing was off." > test.txt
-if cmp -s test.txt expected/one_string.txt
+if cmp -s test.txt expected/several_arg.txt
 then
 	echo -e $GREEN"SUCCESS"$DEF_COLOR
 else
@@ -40,7 +40,7 @@ fi
 
 echo -e $YELLOW"\nTest megaphone program with two args and number\n"
 ./../megaphone 1a2b3c "Boum4" > test.txt
-if cmp -s test.txt expected/one_string.txt
+if cmp -s test.txt expected/two_args_and_number.txt
 then
 	echo -e $GREEN"SUCCESS"$DEF_COLOR
 else
@@ -51,7 +51,7 @@ fi
 
 echo -e $YELLOW"\nTest megaphone program with one letter arg\n"
 ./../megaphone h > test.txt
-if cmp -s test.txt expected/one_string.txt
+if cmp -s test.txt expected/one_letter_arg.txt
 then
 	echo -e $GREEN"SUCCESS"$DEF_COLOR
 else
@@ -62,7 +62,7 @@ fi
 
 echo -e $YELLOW"\nTest megaphone program with one number arg\n"
 ./../megaphone 42 > test.txt
-if cmp -s test.txt expected/one_string.txt
+if cmp -s test.txt expected/one_number_arg.txt
 then
 	echo -e $GREEN"SUCCESS"$DEF_COLOR
 else
@@ -73,7 +73,7 @@ fi
 
 echo -e $YELLOW"\nTest megaphone program with only space arg\n"
 ./../megaphone "    " > test.txt
-if cmp -s test.txt expected/one_string.txt
+if cmp -s test.txt expected/only_space_arg.txt
 then
 	echo -e $GREEN"SUCCESS"$DEF_COLOR
 else
