@@ -6,7 +6,7 @@
 /*   By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:39:09 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/07 19:43:48 by bebrandt         ###   ########.fr       */
+/*   Updated: 2024/11/22 14:43:07 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,23 @@
 
 PhoneBook::PhoneBook(void)
 {
-    this->tab = 8;
-    std::cout << "This is the constructor called" << std::endl;
+    this->_NbContacts = 0;
+    std::cout << "This is the PhoneBook constructor" << std::endl;
 }
 
 PhoneBook::~PhoneBook(void)
 {
-    std::cout << "This is the destructor called" << std::endl;
+    std::cout << "This is the PhoneBook destructor" << std::endl;
 }
 
 void    PhoneBook::add(void)
 {
     std::cout << "This is the add method" << std::endl;
-    std::cout << "Tab: " << this->tab << std::endl;
 }
 
-void    PhoneBook::search(void)
+void    PhoneBook::search(void) const
 {
     std::cout << "This is the search method" << std::endl;
-    std::cout << "Tab: " << this->tab << std::endl;
 }
 
 void    PhoneBook::exit(void)
