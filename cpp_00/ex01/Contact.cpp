@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebrandt <benoit.brandt@proton.me>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:39:17 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/22 14:03:20 by bebrandt         ###   ########.fr       */
+/*   Updated: 2024/11/22 16:09:10 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,19 @@
 - last name
 - nickname
 - phone number
-- darkest secret. 
+- darkest secret.
 
 A saved contact can’t have empty fields.
 */
 
 Contact::Contact(void)
 {
-	std::cout << "This is the Contact constructor" << std::endl;
+	// std::cout << "This is the Contact constructor" << std::endl;
 }
 
 Contact::~Contact(void)
 {
-	std::cout << "This is the Contact destructor" << std::endl;
+	// std::cout << "This is the Contact destructor" << std::endl;
 }
 
 std::string	Contact::getFirstName(void) const

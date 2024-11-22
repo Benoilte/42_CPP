@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebrandt <benoit.brandt@proton.me>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:39:09 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/22 14:43:07 by bebrandt         ###   ########.fr       */
+/*   Updated: 2024/11/22 16:09:56 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 PhoneBook::PhoneBook(void)
 {
     this->_NbContacts = 0;
-    std::cout << "This is the PhoneBook constructor" << std::endl;
+    // std::cout << "This is the PhoneBook constructor" << std::endl;
 }
 
 PhoneBook::~PhoneBook(void)
 {
-    std::cout << "This is the PhoneBook destructor" << std::endl;
+    // std::cout << "This is the PhoneBook destructor" << std::endl;
 }
 
 void    PhoneBook::add(void)
@@ -36,5 +36,5 @@ void    PhoneBook::search(void) const
 
 void    PhoneBook::exit(void)
 {
-    std::cout << "This is the exit method" << std::endl;  
+    std::cout << "This is the exit method" << std::endl;
 }
