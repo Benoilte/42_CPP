@@ -6,7 +6,7 @@
 /*   By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:21:46 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/24 17:38:15 by bebrandt         ###   ########.fr       */
+/*   Updated: 2024/11/24 17:42:21 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "Contact.hpp"
 #include "color.hpp"
 #include <iostream>
+#include <limits>
 
 void	displayCommand(void)
 {
@@ -37,6 +38,11 @@ int main(void)
 		{
 			if (std::cin.eof())
 				break;
+			else
+			{
+				std::cin.clear();
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			}
 		}
 		if ((input.compare("ADD")) == 0)
 			directory.add();

@@ -6,7 +6,7 @@
 /*   By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:39:09 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/24 17:32:49 by bebrandt         ###   ########.fr       */
+/*   Updated: 2024/11/24 17:42:34 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,11 @@ void	PhoneBook::_setContactAttribute(Contact contact, bool (Contact::*set)(std::
 		{
 			if (std::cin.eof())
 				break;
+			else
+			{
+				std::cin.clear();
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			}
 		}
 		attributeValue.erase(attributeValue.find_last_not_of(" \t\n\r\f\v") + 1);
 		if ((contact.*set)(attributeValue))
