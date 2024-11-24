@@ -6,12 +6,13 @@
 /*   By: bebrandt <benoit.brandt@proton.me>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:21:46 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/22 16:40:51 by bebrandt         ###   ########.fr       */
+/*   Updated: 2024/11/23 19:57:00 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 #include "Contact.hpp"
+#include "color.hpp"
 #include <iostream>
 
 void	displayCommand(void)
@@ -35,7 +36,11 @@ int main(void)
 		std::getline(std::cin >> std::ws, input);
 		if ((input.compare("ADD")) == 0)
 		{
-			directory.add();
+			if (directory.getNbContacts() < directory.getMaxContacts())
+				directory.add();
+			else
+				directory.update();
+
 			displayCommand();
 		}
 		else if ((input.compare("SEARCH")) == 0)
@@ -47,7 +52,7 @@ int main(void)
 			std::cout << "Goodbye" << std::endl;
 		else
 		{
-			std::cout << "Unknown command try again" << std::endl;
+			std::cout << RED << "Unknown command try again" << RESET << std::endl;
 			displayCommand();
 		}
 
