@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebrandt <benoit.brandt@proton.me>         +#+  +:+       +#+        */
+/*   By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:21:46 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/23 19:57:00 by bebrandt         ###   ########.fr       */
+/*   Updated: 2024/11/24 17:38:15 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,33 +29,26 @@ int main(void)
 	PhoneBook   directory;
 	std::string input;
 
-	std::cout << "**** Welcome in your Phone Book ****" << std::endl;
-	displayCommand();
-	while((input.compare("EXIT")) != 0)
+	std::cout << "\n**** Welcome in your Phone Book ****" << std::endl;
+	while(std::cin.good() && (input.compare("EXIT")) != 0)
 	{
-		std::getline(std::cin >> std::ws, input);
+		displayCommand();
+		if (!std::getline(std::cin >> std::ws, input))
+		{
+			if (std::cin.eof())
+				break;
+		}
 		if ((input.compare("ADD")) == 0)
-		{
-			if (directory.getNbContacts() < directory.getMaxContacts())
-				directory.add();
-			else
-				directory.update();
-
-			displayCommand();
-		}
+			directory.add();
 		else if ((input.compare("SEARCH")) == 0)
-		{
 			directory.search();
-			displayCommand();
-		}
 		else if ((input.compare("EXIT")) == 0)
 			std::cout << "Goodbye" << std::endl;
 		else
-		{
-			std::cout << RED << "Unknown command try again" << RESET << std::endl;
-			displayCommand();
-		}
+			std::cout << YELLOW << "Unknown command try again" << RESET << std::endl;
 
 	}
+	if (std::cin.fail() && std::cin.eof())
+		std::cout << YELLOW << "End of file reached - Program will exit" << RESET << std::endl;
 	return (0);
 }

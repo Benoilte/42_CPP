@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebrandt <benoit.brandt@proton.me>         +#+  +:+       +#+        */
+/*   By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:39:09 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/23 19:58:55 by bebrandt         ###   ########.fr       */
+/*   Updated: 2024/11/24 17:32:49 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include <limits>
 #include "PhoneBook.hpp"
 #include "color.hpp"
 
@@ -27,22 +28,31 @@ PhoneBook::~PhoneBook(void)
 
 void    PhoneBook::add(void)
 {
-	this->_setContactFirstName(getContactAtIndex(this->_nbContacts));
-	this->_setContactLastName(getContactAtIndex(this->_nbContacts));
-	this->_setContactNickname(getContactAtIndex(this->_nbContacts));
-	this->_setContactPhoneNumber(getContactAtIndex(this->_nbContacts));
-	this->_setContactDarkestSecret(getContactAtIndex(this->_nbContacts));
-	this->_nbContacts++;
-    std::cout << "There is " << this->_nbContacts << " contact in your Phone Book" << std::endl;
-}
-
-void    PhoneBook::update(void)
-{
-    std::cout << "Update Contact number " << this->_contactToUpdate + 1 << std::endl;
-	if (this->_contactToUpdate < (this->_maxContacts - 1))
-		this->_contactToUpdate++;
+	std::string const	firstNameMsg {"Write your first name (Characters without space):"};
+	std::string const	lastNameMsg {"Write your last name (Characters without space):"};
+	std::string const	nicknameMsg {"Write your nickname (Characters without space):"};
+	std::string const	phoneNumberMsg {"Write your Phone Number (Only digit characters):"};
+	std::string const	darkestSecretMsg {"Write your darkest secret:"};
+	int			contactToSet;
+	
+	contactToSet = (this->_nbContacts < this->_maxContacts) ? this->_nbContacts : this->_contactToUpdate;
+	this->_setContactAttribute(getContactAtIndex(contactToSet), &Contact::setFirstName, firstNameMsg);
+	this->_setContactAttribute(getContactAtIndex(contactToSet), &Contact::setLastName, lastNameMsg);
+	this->_setContactAttribute(getContactAtIndex(contactToSet), &Contact::setNickname, nicknameMsg);
+	this->_setContactAttribute(getContactAtIndex(contactToSet), &Contact::setPhoneNumber, phoneNumberMsg);
+	this->_setContactAttribute(getContactAtIndex(contactToSet), &Contact::setDarkestSecret, darkestSecretMsg);
+	if (this->_nbContacts < this->_maxContacts)
+		this->_nbContacts++;
 	else
-		this->_contactToUpdate = 0;
+	{
+    	std::cout << CYAN << "Contact number " << this->_contactToUpdate + 1 << " is replaced\n" << RESET << std::endl;
+		if (this->_contactToUpdate < (this->_maxContacts - 1))
+			this->_contactToUpdate++;
+		else
+			this->_contactToUpdate = 0;
+	}
+	if (std::cin.good())
+		std::cout << CYAN << "There is " << this->_nbContacts << " contact in your Phone Book" << RESET << std::endl;
 }
 
 void    PhoneBook::search(void) const
@@ -70,85 +80,22 @@ int	PhoneBook::getMaxContacts(void) const
 	return (this->_maxContacts);
 }
 
-void	PhoneBook::_setContactFirstName(Contact contact)
+void	PhoneBook::_setContactAttribute(Contact contact, bool (Contact::*set)(std::string), std::string msg)
 {
-	std::string	firstName;
-	int			counter;
+	std::string	attributeValue;
+	bool		isSet;
 
-	counter = 0;
-	while(counter == 0)
+	isSet = false;
+	while(std::cin.good() && !isSet)
 	{
-		std::cout << "Write your first name (Characters without space):" << std::endl;
-		std::getline(std::cin >> std::ws, firstName);
-		firstName.erase(firstName.find_last_not_of(" \t\n\r\f\v") + 1);
-		if (contact.setFirstName(firstName))
-			counter++;
-	}
-}
-
-void	PhoneBook::_setContactLastName(Contact contact)
-{
-	std::string	lastName;
-	int			counter;
-
-	counter = 0;
-	while(counter == 0)
-	{
-		std::cout << "Write your last name (Characters without space):" << std::endl;
-		std::getline(std::cin >> std::ws, lastName);
-		lastName.erase(lastName.find_last_not_of(" \t\n\r\f\v") + 1);
-		if (contact.setLastName(lastName))
-			counter++;
-
-	}
-}
-
-void	PhoneBook::_setContactNickname(Contact contact)
-{
-	std::string	nickname;
-	int			counter;
-
-	counter = 0;
-	while(counter == 0)
-	{
-		std::cout << "Write your nickname (Characters without space):" << std::endl;
-		std::getline(std::cin >> std::ws, nickname);
-		nickname.erase(nickname.find_last_not_of(" \t\n\r\f\v") + 1);
-		if (contact.setNickname(nickname))
-			counter++;
-
-	}
-}
-
-void	PhoneBook::_setContactPhoneNumber(Contact contact)
-{
-	std::string	phoneNumber;
-	int			counter;
-
-	counter = 0;
-	while(counter == 0)
-	{
-		std::cout << "Write your Phone Number (Only digit characters):" << std::endl;
-		std::getline(std::cin >> std::ws, phoneNumber);
-		phoneNumber.erase(phoneNumber.find_last_not_of(" \t\n\r\f\v") + 1);
-		if (contact.setPhoneNumber(phoneNumber))
-			counter++;
-
-	}
-}
-
-void	PhoneBook::_setContactDarkestSecret(Contact contact)
-{
-	std::string	darkestSecret;
-	int			counter;
-
-	counter = 0;
-	while(counter == 0)
-	{
-		std::cout << "Write your darkest secret" << std::endl;
-		std::getline(std::cin >> std::ws, darkestSecret);
-		darkestSecret.erase(darkestSecret.find_last_not_of(" \t\n\r\f\v") + 1);
-		if (contact.setDarkestSecret(darkestSecret))
-			counter++;
+		std::cout << msg << std::endl;
+		if (!std::getline(std::cin >> std::ws, attributeValue))
+		{
+			if (std::cin.eof())
+				break;
+		}
+		attributeValue.erase(attributeValue.find_last_not_of(" \t\n\r\f\v") + 1);
+		if ((contact.*set)(attributeValue))
+			isSet = true;
 	}
 }
