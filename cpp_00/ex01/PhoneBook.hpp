@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebrandt <benoit.brandt@proton.me>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:39:06 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/24 13:22:13 by bebrandt         ###   ########.fr       */
+/*   Updated: 2024/11/24 18:36:00 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ class PhoneBook
 	int	const	_maxContacts;
 
 
-    void	_setContactAttribute(Contact contact, bool (Contact::*set)(std::string), std::string msg);
+    void	_setContactAttribute(	Contact contact,
+									bool (Contact::*set)(std::string),
+									std::string msg);
+	void	_displayContacts(void) const;
 };
 
 #endif

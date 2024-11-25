@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebrandt <benoit.brandt@proton.me>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:39:09 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/24 17:42:34 by bebrandt         ###   ########.fr       */
+/*   Updated: 2024/11/25 10:54:04 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void    PhoneBook::add(void)
 	std::string const	phoneNumberMsg {"Write your Phone Number (Only digit characters):"};
 	std::string const	darkestSecretMsg {"Write your darkest secret:"};
 	int			contactToSet;
-	
+
 	contactToSet = (this->_nbContacts < this->_maxContacts) ? this->_nbContacts : this->_contactToUpdate;
 	this->_setContactAttribute(getContactAtIndex(contactToSet), &Contact::setFirstName, firstNameMsg);
 	this->_setContactAttribute(getContactAtIndex(contactToSet), &Contact::setLastName, lastNameMsg);
@@ -57,7 +57,7 @@ void    PhoneBook::add(void)
 
 void    PhoneBook::search(void) const
 {
-    std::cout << "This is the search method" << std::endl;
+    this->_displayContacts();
 }
 
 void    PhoneBook::exit(void)
@@ -103,4 +103,20 @@ void	PhoneBook::_setContactAttribute(Contact contact, bool (Contact::*set)(std::
 		if ((contact.*set)(attributeValue))
 			isSet = true;
 	}
+}
+
+void	PhoneBook::_displayContacts(void) const
+{
+	std::string horizontalSep;
+	std::string const	title {"|  INDEX   |FIRST NAME|LAST  NAME| NICKNAME |"};
+
+	if (_nbContacts == 0)
+	{
+		std::cout << "Your phone book directory is empty, add some contact to display it" << std::endl;
+		return;
+	}
+	horizontalSep.assign(45, '_');
+	std::cout << horizontalSep << std::endl;
+	std::cout << title << std::endl;
+
 }
