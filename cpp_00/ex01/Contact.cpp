@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebrandt <benoit.brandt@proton.me>         +#+  +:+       +#+        */
+/*   By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:39:17 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/23 20:06:49 by bebrandt         ###   ########.fr       */
+/*   Updated: 2024/11/25 15:20:23 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,69 +36,97 @@ Contact::~Contact(void)
 	// std::cout << "This is the Contact destructor" << std::endl;
 }
 
-std::string	Contact::getFirstName(void) const
+std::string	Contact::getFirstName(bool lengthIsDefine) const
 {
-	return (this->_FirstName);
+	if (lengthIsDefine)
+		return (this->_getAttributeWithFixedSize(this->_firstName));
+	else
+		return (this->_firstName);
 }
 
-bool	Contact::setFirstName(std::string FirstName)
+bool	Contact::setFirstName(std::string firstName)
 {
-	if (this->_attributeHasSpace(FirstName, "first name"))
+	if (this->_attributeHasSpace(firstName, "first name"))
 		return (false);
-	this->_FirstName = FirstName;
+	this->_firstName = firstName;
 	return (true);
 }
 
-std::string	Contact::getLastName(void) const
+std::string	Contact::getLastName(bool lengthIsDefine) const
 {
-	return (this->_LastName);
+	if (lengthIsDefine)
+		return (this->_getAttributeWithFixedSize(this->_lastName));
+	else
+		return (this->_lastName);
 }
 
-bool	Contact::setLastName(std::string LastName)
+bool	Contact::setLastName(std::string lastName)
 {
-	if (this->_attributeHasSpace(LastName, "last name"))
+	if (this->_attributeHasSpace(lastName, "last name"))
 		return (false);
-	this->_LastName = LastName;
+	this->_lastName = lastName;
 	return (true);
 }
 
-std::string	Contact::getNickname(void) const
+std::string	Contact::getNickname(bool lengthIsDefine) const
 {
-	return (this->_Nickname);
+	if (lengthIsDefine)
+		return (this->_getAttributeWithFixedSize(this->_nickname));
+	else
+		return (this->_nickname);
 }
 
-bool	Contact::setNickname(std::string Nickname)
+bool	Contact::setNickname(std::string nickname)
 {
-	if (this->_attributeHasSpace(Nickname, "nickname"))
+	if (this->_attributeHasSpace(nickname, "nickname"))
 		return (false);
-	this->_Nickname = Nickname;
+	this->_nickname = nickname;
 	return (true);
 }
 
-std::string	Contact::getPhoneNumber(void) const
+std::string	Contact::getPhoneNumber(bool lengthIsDefine) const
 {
-	return (this->_PhoneNumber);
+	if (lengthIsDefine)
+		return (this->_getAttributeWithFixedSize(this->_phoneNumber));
+	else
+		return (this->_phoneNumber);
 }
 
-bool	Contact::setPhoneNumber(std::string PhoneNumber)
+bool	Contact::setPhoneNumber(std::string phoneNumber)
 {
-	if (this->_attributeContainOnlyDigit(PhoneNumber, "Phone number"))
+	if (this->_attributeContainOnlyDigit(phoneNumber, "Phone number"))
 	{
-		this->_PhoneNumber = PhoneNumber;
+		this->_phoneNumber = phoneNumber;
 		return (true);
 	}
 	return (false);
 }
 
-std::string	Contact::getDarkestSecret(void) const
+std::string	Contact::getDarkestSecret(bool lengthIsDefine) const
 {
-	return (this->_DarkestSecret);
+	if (lengthIsDefine)
+		return (this->_getAttributeWithFixedSize(this->_darkestSecret));
+	else
+		return (this->_darkestSecret);
 }
 
-bool	Contact::setDarkestSecret(std::string DarkestSecret)
+bool	Contact::setDarkestSecret(std::string darkestSecret)
 {
-	this->_DarkestSecret = DarkestSecret;
+	this->_darkestSecret = darkestSecret;
 	return (true);
+}
+
+std::string	Contact::_getAttributeWithFixedSize(std::string attribute) const
+{
+	size_t const	length {attribute.length()};
+	size_t const	fixedSize { 10 };
+
+	if ((length > fixedSize))
+		return (attribute.substr(0, 9).append("."));
+	else if ((length < fixedSize))
+		return (attribute.append((fixedSize - length), ' '));
+	else
+		return (attribute);
 }
 
 bool	Contact::_attributeHasSpace(std::string attribute, std::string attributeName) const

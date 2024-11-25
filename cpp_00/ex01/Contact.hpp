@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebrandt <benoit.brandt@proton.me>         +#+  +:+       +#+        */
+/*   By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:39:14 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/23 20:00:43 by bebrandt         ###   ########.fr       */
+/*   Updated: 2024/11/25 15:19:24 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,29 +24,30 @@ class Contact
 	Contact(void);
 	~Contact(void);
 
-	std::string	getFirstName(void) const;
+	std::string	getFirstName(bool sizeOfTen) const;
 	bool		setFirstName(std::string);
 
-	std::string	getLastName(void) const;
+	std::string	getLastName(bool sizeOfTen) const;
 	bool		setLastName(std::string);
 
-	std::string	getNickname(void) const;
+	std::string	getNickname(bool sizeOfTen) const;
 	bool		setNickname(std::string);
 
-	std::string	getPhoneNumber(void) const;
+	std::string	getPhoneNumber(bool sizeOfTen) const;
 	bool		setPhoneNumber(std::string);
 
-	std::string	getDarkestSecret(void) const;
+	std::string	getDarkestSecret(bool sizeOfTen) const;
 	bool		setDarkestSecret(std::string);
 
 	private:
 
-	std::string	_FirstName;
-	std::string	_LastName;
-	std::string	_Nickname;
-	std::string	_PhoneNumber;
-	std::string	_DarkestSecret;
+	std::string	_firstName;
+	std::string	_lastName;
+	std::string	_nickname;
+	std::string	_phoneNumber;
+	std::string	_darkestSecret;
 
+	std::string	_getAttributeWithFixedSize(std::string attribute) const;
 	bool		_attributeHasSpace(std::string attribute, std::string attributeName) const;
 	bool		_attributeContainOnlyDigit(std::string attribute, std::string attributeName) const;
 	bool		_attributeContainOnlyAlpha(std::string attribute, std::string attributeName) const;

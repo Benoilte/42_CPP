@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebrandt <benoit.brandt@proton.me>         +#+  +:+       +#+        */
+/*   By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:39:06 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/24 18:36:00 by bebrandt         ###   ########.fr       */
+/*   Updated: 2024/11/25 15:17:17 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,31 +17,32 @@
 
 class PhoneBook
 {
-    public:
+	public:
 
-    PhoneBook(void);
-    ~PhoneBook(void);
+	PhoneBook(void);
+	~PhoneBook(void);
 
-    void    add(void);
-    void    search(void) const;
-    void    exit(void);
+	void		add(void);
+	void		search(void) const;
+	void		exit(void);
 
-	int		getNbContacts(void) const;
-	int		getMaxContacts(void) const;
-	Contact	getContactAtIndex(int i) const;
+	int			getNbContacts(void) const;
+	int			getMaxContacts(void) const;
+	Contact&	getContactAtIndex(int i);
 
-    private:
+	private:
 
-    Contact		_contacts[8];
-    int     	_nbContacts;
-    int     	_contactToUpdate;
+	Contact		_contacts[8];
+	int			_nbContacts;
+	int			_contactToUpdate;
 	int	const	_maxContacts;
+	bool const	_sizeOfTen;
+	bool const	_full;
 
-
-    void	_setContactAttribute(	Contact contact,
+	void	_setContactAttribute(	Contact& contact,
 									bool (Contact::*set)(std::string),
 									std::string msg);
-	void	_displayContacts(void) const;
+	void	_displayIndexedContacts(void) const;
 };
 
 #endif
