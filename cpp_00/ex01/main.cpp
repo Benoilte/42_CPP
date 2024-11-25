@@ -6,7 +6,7 @@
 /*   By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:21:46 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/24 17:42:21 by bebrandt         ###   ########.fr       */
+/*   Updated: 2024/11/25 16:10:12 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,27 @@ void	displayCommand(void)
 	std::cout	<< sep << availableCmd << sep << cmd << sep << std::endl;
 }
 
+
+void	strToUpper(std::string& str)
+{
+	size_t	len { str.length() };
+
+    for (size_t i = 0; i < len; i++) { 
+        str[i] = std::toupper(str[i]); 
+    }
+}
+
 int main(void)
 {
-	PhoneBook   directory;
-	std::string input;
+	PhoneBook			directory;
+	std::string			input;
+	std::string const	addCommand {"ADD"};
+	std::string const	exitCommand {"EXIT"};
+	std::string const	searchCommand {"SEARCH"};
+	size_t const		biggestCommand{searchCommand.length()};
 
 	std::cout << "\n**** Welcome in your Phone Book ****" << std::endl;
-	while(std::cin.good() && (input.compare("EXIT")) != 0)
+	while(std::cin.good() && (input.compare(exitCommand)) != 0)
 	{
 		displayCommand();
 		if (!std::getline(std::cin >> std::ws, input))
@@ -44,12 +58,14 @@ int main(void)
 				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			}
 		}
-		if ((input.compare("ADD")) == 0)
+		if (input.length() <= biggestCommand)
+			strToUpper(input);
+		if ((input.compare(addCommand)) == 0)
 			directory.add();
-		else if ((input.compare("SEARCH")) == 0)
+		else if ((input.compare(searchCommand)) == 0)
 			directory.search();
-		else if ((input.compare("EXIT")) == 0)
-			std::cout << "Goodbye" << std::endl;
+		else if ((input.compare(exitCommand)) == 0)
+			directory.exit();
 		else
 			std::cout << YELLOW << "Unknown command try again" << RESET << std::endl;
 

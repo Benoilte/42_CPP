@@ -6,7 +6,7 @@
 /*   By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:39:09 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/25 15:17:17 by bebrandt         ###   ########.fr       */
+/*   Updated: 2024/11/25 16:10:25 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void    PhoneBook::search(void) const
 
 void    PhoneBook::exit(void)
 {
-    std::cout << "This is the exit method" << std::endl;
+    std::cout << "Goodbye" << std::endl;
 }
 
 Contact&	PhoneBook::getContactAtIndex(int i)
