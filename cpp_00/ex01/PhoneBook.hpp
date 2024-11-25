@@ -6,13 +6,17 @@
 /*   By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:39:06 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/25 15:17:17 by bebrandt         ###   ########.fr       */
+/*   Updated: 2024/11/25 19:06:52 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHONEBOOK_HPP
 # define PHONEBOOK_HPP
 
+#include <iostream>
+#include <limits>
+#include <sstream>
+#include "color.hpp"
 #include "Contact.hpp"
 
 class PhoneBook
@@ -23,12 +27,8 @@ class PhoneBook
 	~PhoneBook(void);
 
 	void		add(void);
-	void		search(void) const;
+	void		search(void);
 	void		exit(void);
-
-	int			getNbContacts(void) const;
-	int			getMaxContacts(void) const;
-	Contact&	getContactAtIndex(int i);
 
 	private:
 
@@ -36,13 +36,16 @@ class PhoneBook
 	int			_nbContacts;
 	int			_contactToUpdate;
 	int	const	_maxContacts;
-	bool const	_sizeOfTen;
+	bool const	_sizeFixed;
 	bool const	_full;
 
-	void	_setContactAttribute(	Contact& contact,
-									bool (Contact::*set)(std::string),
-									std::string msg);
-	void	_displayIndexedContacts(void) const;
+	Contact&	_getContactAtIndex(int i);
+	void		_setContactAttribute(	Contact& contact,
+										bool (Contact::*set)(std::string),
+										std::string msg);
+	void		_displayIndexedContacts(void) const;
+	int			_askUserContactToDisplay(void) const;
+	void		_displayContactInfo(Contact& contact);
 };
 
 #endif

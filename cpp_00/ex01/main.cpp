@@ -6,7 +6,7 @@
 /*   By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:21:46 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/25 16:10:12 by bebrandt         ###   ########.fr       */
+/*   Updated: 2024/11/25 19:13:56 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int main(void)
 				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			}
 		}
+		input.erase(input.find_last_not_of(" \t\n\r\f\v") + 1);
 		if (input.length() <= biggestCommand)
 			strToUpper(input);
 		if ((input.compare(addCommand)) == 0)

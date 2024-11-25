@@ -6,17 +6,14 @@
 /*   By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:39:09 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/25 16:10:25 by bebrandt         ###   ########.fr       */
+/*   Updated: 2024/11/25 19:06:52 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <limits>
 #include "PhoneBook.hpp"
-#include "color.hpp"
 
 PhoneBook::PhoneBook(void)
-: _nbContacts(0), _contactToUpdate(0) , _maxContacts(8), _sizeOfTen(true), _full(false)
+: _nbContacts(0), _contactToUpdate(0) , _maxContacts(8), _sizeFixed(true), _full(false)
 {
     // std::cout << "This is the PhoneBook constructor" << std::endl;
 }
@@ -35,29 +32,39 @@ void    PhoneBook::add(void)
 	std::string const	darkestSecretMsg {"Write your darkest secret:"};
 	int					contactToSet;
 
-	contactToSet = (this->_nbContacts < this->_maxContacts) ? this->_nbContacts : this->_contactToUpdate;
-	this->_setContactAttribute(this->getContactAtIndex(contactToSet), &Contact::setFirstName, firstNameMsg);
-	this->_setContactAttribute(this->getContactAtIndex(contactToSet), &Contact::setLastName, lastNameMsg);
-	this->_setContactAttribute(this->getContactAtIndex(contactToSet), &Contact::setNickname, nicknameMsg);
-	this->_setContactAttribute(this->getContactAtIndex(contactToSet), &Contact::setPhoneNumber, phoneNumberMsg);
-	this->_setContactAttribute(this->getContactAtIndex(contactToSet), &Contact::setDarkestSecret, darkestSecretMsg);
-	if (this->_nbContacts < this->_maxContacts)
-		this->_nbContacts++;
+	contactToSet = (_nbContacts < _maxContacts) ? _nbContacts : _contactToUpdate;
+	_setContactAttribute(_getContactAtIndex(contactToSet), &Contact::setFirstName, firstNameMsg);
+	_setContactAttribute(_getContactAtIndex(contactToSet), &Contact::setLastName, lastNameMsg);
+	_setContactAttribute(_getContactAtIndex(contactToSet), &Contact::setNickname, nicknameMsg);
+	_setContactAttribute(_getContactAtIndex(contactToSet), &Contact::setPhoneNumber, phoneNumberMsg);
+	_setContactAttribute(_getContactAtIndex(contactToSet), &Contact::setDarkestSecret, darkestSecretMsg);
+	if (_nbContacts < _maxContacts)
+		_nbContacts++;
 	else
 	{
-    	std::cout << CYAN << "Contact number " << this->_contactToUpdate + 1 << " is replaced\n" << RESET << std::endl;
-		if (this->_contactToUpdate < (this->_maxContacts - 1))
-			this->_contactToUpdate++;
+    	std::cout << CYAN << "Contact number " << _contactToUpdate + 1 << " is replaced\n" << RESET << std::endl;
+		if (_contactToUpdate < (_maxContacts - 1))
+			_contactToUpdate++;
 		else
-			this->_contactToUpdate = 0;
+			_contactToUpdate = 0;
 	}
 	if (std::cin.good())
-		std::cout << CYAN << "There is " << this->_nbContacts << " contact in your Phone Book" << RESET << std::endl;
+		std::cout << CYAN << "There is " << _nbContacts << " contact in your Phone Book" << RESET << std::endl;
 }
 
-void    PhoneBook::search(void) const
+void    PhoneBook::search(void)
 {
-    this->_displayIndexedContacts();
+	int	indexToDisplay;
+
+	if (_nbContacts == 0)
+	{
+		std::cout << "Your phone book directory is empty, add some contact to display it" << std::endl;
+		return;
+	}
+    _displayIndexedContacts();
+	indexToDisplay = _askUserContactToDisplay();
+	if (std::cin.good())
+    	_displayContactInfo(_getContactAtIndex(indexToDisplay));
 }
 
 void    PhoneBook::exit(void)
@@ -65,19 +72,9 @@ void    PhoneBook::exit(void)
     std::cout << "Goodbye" << std::endl;
 }
 
-Contact&	PhoneBook::getContactAtIndex(int i)
+Contact&	PhoneBook::_getContactAtIndex(int i)
 {
-	return (this->_contacts[i]);
-}
-
-int	PhoneBook::getNbContacts(void) const
-{
-	return (this->_nbContacts);
-}
-
-int	PhoneBook::getMaxContacts(void) const
-{
-	return (this->_maxContacts);
+	return (_contacts[i]);
 }
 
 void	PhoneBook::_setContactAttribute(Contact& contact, bool (Contact::*set)(std::string), std::string msg)
@@ -109,23 +106,62 @@ void	PhoneBook::_displayIndexedContacts(void) const
 {
 	std::string horizontalSep;
 	std::string const	title {"|  INDEX   |FIRST NAME|LAST  NAME| NICKNAME |\n"};
-	std::string index {"|    1     |"};
 
-	if (this->_nbContacts == 0)
-	{
-		std::cout << "Your phone book directory is empty, add some contact to display it" << std::endl;
-		return;
-	}
 	horizontalSep.insert(0, 45, '-').append("\n");
 	std::cout << horizontalSep << title << horizontalSep;
-	for  (int i = 0; i < this->_nbContacts; i++)
+	for  (int i = 0; i < _nbContacts; i++)
 	{
-		std::cout	<< index.replace(5, 1, std::to_string(i + 1)) 
-					<< this->_contacts[i].getFirstName(this->_sizeOfTen).append("|") 
-					<< this->_contacts[i].getLastName(this->_sizeOfTen).append("|") 
-					<< this->_contacts[i].getNickname(this->_sizeOfTen).append("|") 
+		std::cout	<< "|    " << i + 1 << "     |" 
+					<< _contacts[i].getFirstName(_sizeFixed).append("|") 
+					<< _contacts[i].getLastName(_sizeFixed).append("|") 
+					<< _contacts[i].getNickname(_sizeFixed).append("|") 
 					<< '\n' 
 					<< horizontalSep;
 	}
 }
 
+int	PhoneBook::_askUserContactToDisplay(void) const
+{
+	std::string const	msg {"Choose an index to display a contact:"};
+	std::string const	wrongInput {"Please, your input should contain only one numeric character\n"};
+	std::string const	indexOutOfRange {"The index you choose is out of Range. Please select an index between "};
+	int					index;
+
+	while(std::cin.good())
+	{
+		std::cout << msg << std::endl;
+		std::cin >> index;
+		if (std::cin.fail())
+		{
+			if (std::cin.eof())
+				break;
+			else
+			{
+				std::cin.clear();
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				std::cout << YELLOW << wrongInput << RESET << std::endl;
+				continue;
+			}
+		}
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        if (std::cin.gcount() > 1)
+        {
+			std::cout << YELLOW << wrongInput << RESET << std::endl;
+            continue;
+        }
+		if (--index < _nbContacts)
+			return (index);
+		else
+			std::cout << YELLOW << indexOutOfRange << "1 and " << _nbContacts << RESET << std::endl;
+	}
+	return (0);
+}
+
+void	PhoneBook::_displayContactInfo(Contact& contact)
+{
+	std::cout	<< "First name:\t" << contact.getFirstName(_full) << '\n'
+				<< "Last name:\t" << contact.getLastName(_full) << '\n'
+				<< "Nickname:\t" << contact.getNickname(_full) << '\n'
+				<< "Phone number:\t" << contact.getPhoneNumber(_full) << '\n'
+				<< "Darkest secret:\t" << contact.getDarkestSecret(_full) << std::endl;
+}

@@ -6,25 +6,11 @@
 /*   By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:39:17 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/25 15:20:23 by bebrandt         ###   ########.fr       */
+/*   Updated: 2024/11/25 19:08:25 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
 #include "Contact.hpp"
-#include "color.hpp"
-
-/*
-◦ The contact fields are:
-
-- first name
-- last name
-- nickname
-- phone number
-- darkest secret.
-
-A saved contact can’t have empty fields.
-*/
 
 Contact::Contact(void)
 {
@@ -39,64 +25,64 @@ Contact::~Contact(void)
 std::string	Contact::getFirstName(bool lengthIsDefine) const
 {
 	if (lengthIsDefine)
-		return (this->_getAttributeWithFixedSize(this->_firstName));
+		return (_getAttributeWithFixedSize(_firstName));
 	else
-		return (this->_firstName);
+		return (_firstName);
 }
 
 bool	Contact::setFirstName(std::string firstName)
 {
-	if (this->_attributeHasSpace(firstName, "first name"))
+	if (_attributeHasSpace(firstName, "first name"))
 		return (false);
-	this->_firstName = firstName;
+	_firstName = firstName;
 	return (true);
 }
 
 std::string	Contact::getLastName(bool lengthIsDefine) const
 {
 	if (lengthIsDefine)
-		return (this->_getAttributeWithFixedSize(this->_lastName));
+		return (_getAttributeWithFixedSize(_lastName));
 	else
-		return (this->_lastName);
+		return (_lastName);
 }
 
 bool	Contact::setLastName(std::string lastName)
 {
-	if (this->_attributeHasSpace(lastName, "last name"))
+	if (_attributeHasSpace(lastName, "last name"))
 		return (false);
-	this->_lastName = lastName;
+	_lastName = lastName;
 	return (true);
 }
 
 std::string	Contact::getNickname(bool lengthIsDefine) const
 {
 	if (lengthIsDefine)
-		return (this->_getAttributeWithFixedSize(this->_nickname));
+		return (_getAttributeWithFixedSize(_nickname));
 	else
-		return (this->_nickname);
+		return (_nickname);
 }
 
 bool	Contact::setNickname(std::string nickname)
 {
-	if (this->_attributeHasSpace(nickname, "nickname"))
+	if (_attributeHasSpace(nickname, "nickname"))
 		return (false);
-	this->_nickname = nickname;
+	_nickname = nickname;
 	return (true);
 }
 
 std::string	Contact::getPhoneNumber(bool lengthIsDefine) const
 {
 	if (lengthIsDefine)
-		return (this->_getAttributeWithFixedSize(this->_phoneNumber));
+		return (_getAttributeWithFixedSize(_phoneNumber));
 	else
-		return (this->_phoneNumber);
+		return (_phoneNumber);
 }
 
 bool	Contact::setPhoneNumber(std::string phoneNumber)
 {
-	if (this->_attributeContainOnlyDigit(phoneNumber, "Phone number"))
+	if (_attributeContainOnlyDigit(phoneNumber, "Phone number"))
 	{
-		this->_phoneNumber = phoneNumber;
+		_phoneNumber = phoneNumber;
 		return (true);
 	}
 	return (false);
@@ -105,14 +91,14 @@ bool	Contact::setPhoneNumber(std::string phoneNumber)
 std::string	Contact::getDarkestSecret(bool lengthIsDefine) const
 {
 	if (lengthIsDefine)
-		return (this->_getAttributeWithFixedSize(this->_darkestSecret));
+		return (_getAttributeWithFixedSize(_darkestSecret));
 	else
-		return (this->_darkestSecret);
+		return (_darkestSecret);
 }
 
 bool	Contact::setDarkestSecret(std::string darkestSecret)
 {
-	this->_darkestSecret = darkestSecret;
+	_darkestSecret = darkestSecret;
 	return (true);
 }
 
@@ -148,20 +134,6 @@ bool	Contact::_attributeContainOnlyDigit(std::string attribute, std::string attr
         if (!std::isdigit(attribute[i]))
 		{
 			std::cout << YELLOW << "Please, your " << attributeName << " should contain only numeric characters\n" << RESET << std::endl;
-			return (false);
-		}
-    }
-	return (true);
-}
-
-bool	Contact::_attributeContainOnlyAlpha(std::string attribute, std::string attributeName) const
-{
-	size_t	len { attribute.length() };
-
-	for (size_t i = 0; i < len; i++) {
-        if (!std::isalpha(attribute[i]))
-		{
-			std::cout << YELLOW << "Please, your " << attributeName << " should contain only alphabetic characters\n" << RESET << std::endl;
 			return (false);
 		}
     }

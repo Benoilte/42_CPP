@@ -6,20 +6,20 @@
 /*   By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:39:14 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/25 15:19:24 by bebrandt         ###   ########.fr       */
+/*   Updated: 2024/11/25 19:08:28 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONTACT_HPP
 # define CONTACT_HPP
 
+#include <iostream>
 #include <string>
+#include "color.hpp"
 
 class Contact
 {
 	public:
-
-	int tab;
 
 	Contact(void);
 	~Contact(void);
@@ -50,7 +50,6 @@ class Contact
 	std::string	_getAttributeWithFixedSize(std::string attribute) const;
 	bool		_attributeHasSpace(std::string attribute, std::string attributeName) const;
 	bool		_attributeContainOnlyDigit(std::string attribute, std::string attributeName) const;
-	bool		_attributeContainOnlyAlpha(std::string attribute, std::string attributeName) const;
 };
 
 #endif
