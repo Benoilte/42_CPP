@@ -6,24 +6,63 @@
 /*   By: bebrandt <benoit.brandt@proton.me>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:39:09 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/26 10:00:47 by bebrandt         ###   ########.fr       */
+/*   Updated: 2024/11/26 16:16:23 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 
 PhoneBook::PhoneBook(void)
-: _nbContacts(0), _contactToUpdate(0) , _maxContacts(8), _sizeFixed(true), _full(false)
+:	_addCommand("ADD"), _searchCommand("SEARCH"), _exitCommand("EXIT"),
+	_nbContacts(0), _contactToUpdate(0) , _maxContacts(8),
+	_sizeFixed(true), _full(false)
 {
-    // std::cout << "This is the PhoneBook constructor" << std::endl;
+	std::string	commands[3] = {_addCommand, _searchCommand, _exitCommand};
+	_biggestSizeCommand = 0;
+	for (int i = 0; i < 3; i++)
+	{
+		if (commands[i].length() > _biggestSizeCommand)
+			_biggestSizeCommand = commands[i].length();
+	}
+	std::cout << "\n**** Welcome in your Phone Book ****" << std::endl;
 }
 
 PhoneBook::~PhoneBook(void)
 {
-    // std::cout << "This is the PhoneBook destructor" << std::endl;
+	std::cout << "**** You are exiting your Phone Book - your contacts are lost forever ****" << std::endl;
 }
 
-void    PhoneBook::add(void)
+size_t	PhoneBook::getBiggestSizeCommand(void) const
+{
+	return (_biggestSizeCommand);
+}
+
+void	PhoneBook::displayAvailableCommands(void) const
+{
+	std::string	const sep {"\n***********************"};
+	std::string	const availableCmd {"\n#  AVAILABLE COMMAND  #"};
+	std::string	const cmd {"\n# ADD - SEARCH - EXIT #"};
+
+	std::cout	<< sep << availableCmd << sep << cmd << sep << std::endl;
+}
+
+int	PhoneBook::executeCommands(std::string command)
+{
+	if ((command.compare(_addCommand)) == 0)
+		_add();
+	else if ((command.compare(_searchCommand)) == 0)
+		_search();
+	else if ((command.compare(_exitCommand)) == 0)
+	{
+		_exit();
+		return (-1);
+	}
+	else
+		_unknownCommand();
+	return (0);
+}
+
+void    PhoneBook::_add(void)
 {
 	std::string const	firstNameMsg {"Write your first name (Characters without space):"};
 	std::string const	lastNameMsg {"Write your last name (Characters without space):"};
@@ -52,13 +91,13 @@ void    PhoneBook::add(void)
 		std::cout << CYAN << "There is " << _nbContacts << " contact in your Phone Book" << RESET << std::endl;
 }
 
-void    PhoneBook::search(void)
+void    PhoneBook::_search(void)
 {
 	int	indexToDisplay;
 
 	if (_nbContacts == 0)
 	{
-		std::cout << "Your phone book directory is empty, add some contact to display it" << std::endl;
+		std::cout << "Your phone book directory is empty, _ some contact to display it" << std::endl;
 		return;
 	}
     _displayIndexedContacts();
@@ -67,9 +106,14 @@ void    PhoneBook::search(void)
     	_displayContactInfo(_getContactAtIndex(indexToDisplay));
 }
 
-void    PhoneBook::exit(void)
+void    PhoneBook::_exit(void)
 {
     std::cout << "Goodbye" << std::endl;
+}
+
+void    PhoneBook::_unknownCommand(void) const
+{
+    std::cout << YELLOW << "Unknown command try again" << RESET << std::endl;
 }
 
 Contact&	PhoneBook::_getContactAtIndex(int i)
@@ -123,7 +167,7 @@ void	PhoneBook::_displayIndexedContacts(void) const
 int	PhoneBook::_askUserContactToDisplay(void) const
 {
 	std::string const	msg {"Choose a contact's index to display its informations:"};
-	std::string const	wrongInput {"Please, your input should contain only numeric characters and should be valid as integer\n"};
+	std::string const	wrongInput {"Please, your input should contain only numeric characters and should be a valid integer\n"};
 	std::string const	indexOutOfRange {"The index you choose is out of Range. Please select an index between "};
 	int					index;
 

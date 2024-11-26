@@ -3,51 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebrandt <benoit.brandt@proton.me>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:21:46 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/25 19:13:56 by bebrandt         ###   ########.fr       */
+/*   Updated: 2024/11/26 16:21:15 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PhoneBook.hpp"
 #include "Contact.hpp"
-#include "color.hpp"
-#include <iostream>
-#include <limits>
+#include "PhoneBook.hpp"
 
-void	displayCommand(void)
+void	normalizedInput(std::string& input, size_t sizeMax)
 {
-	std::string	const sep {"\n***********************"};
-	std::string	const availableCmd {"\n#  AVAILABLE COMMAND  #"};
-	std::string	const cmd {"\n# ADD - SEARCH - EXIT #"};
+	size_t	len;
 
-	std::cout	<< sep << availableCmd << sep << cmd << sep << std::endl;
-}
-
-
-void	strToUpper(std::string& str)
-{
-	size_t	len { str.length() };
-
-    for (size_t i = 0; i < len; i++) { 
-        str[i] = std::toupper(str[i]); 
-    }
+	input.erase(input.find_last_not_of(" \t\n\r\f\v") + 1);
+	len = input.length();
+	if (len <= sizeMax)
+	{
+		for (size_t i = 0; i < len; i++)
+			input[i] = std::toupper(input[i]);
+	}
 }
 
 int main(void)
 {
 	PhoneBook			directory;
 	std::string			input;
-	std::string const	addCommand {"ADD"};
-	std::string const	exitCommand {"EXIT"};
-	std::string const	searchCommand {"SEARCH"};
-	size_t const		biggestCommand{searchCommand.length()};
 
-	std::cout << "\n**** Welcome in your Phone Book ****" << std::endl;
-	while(std::cin.good() && (input.compare(exitCommand)) != 0)
+	while(std::cin.good())
 	{
-		displayCommand();
+		directory.displayAvailableCommands();
 		if (!std::getline(std::cin >> std::ws, input))
 		{
 			if (std::cin.eof())
@@ -58,18 +44,8 @@ int main(void)
 				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			}
 		}
-		input.erase(input.find_last_not_of(" \t\n\r\f\v") + 1);
-		if (input.length() <= biggestCommand)
-			strToUpper(input);
-		if ((input.compare(addCommand)) == 0)
-			directory.add();
-		else if ((input.compare(searchCommand)) == 0)
-			directory.search();
-		else if ((input.compare(exitCommand)) == 0)
-			directory.exit();
-		else
-			std::cout << YELLOW << "Unknown command try again" << RESET << std::endl;
-
+		normalizedInput(input, directory.getBiggestSizeCommand());
+		if (directory.executeCommands(input) == -1) break;
 	}
 	if (std::cin.fail() && std::cin.eof())
 		std::cout << YELLOW << "End of file reached - Program will exit" << RESET << std::endl;
