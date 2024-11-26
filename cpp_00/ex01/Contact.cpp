@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebrandt <benoit.brandt@proton.me>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:39:17 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/25 19:08:25 by bebrandt         ###   ########.fr       */
+/*   Updated: 2024/11/26 09:42:29 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ std::string	Contact::_getAttributeWithFixedSize(std::string attribute) const
 	if ((length > fixedSize))
 		return (attribute.substr(0, 9).append("."));
 	else if ((length < fixedSize))
-		return (attribute.append((fixedSize - length), ' '));
+		return (attribute.insert(0, (fixedSize - length), ' '));
 	else
 		return (attribute);
 }

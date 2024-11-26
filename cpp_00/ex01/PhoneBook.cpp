@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebrandt <benoit.brandt@proton.me>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:39:09 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/25 19:06:52 by bebrandt         ###   ########.fr       */
+/*   Updated: 2024/11/26 10:00:47 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,19 +111,19 @@ void	PhoneBook::_displayIndexedContacts(void) const
 	std::cout << horizontalSep << title << horizontalSep;
 	for  (int i = 0; i < _nbContacts; i++)
 	{
-		std::cout	<< "|    " << i + 1 << "     |" 
-					<< _contacts[i].getFirstName(_sizeFixed).append("|") 
-					<< _contacts[i].getLastName(_sizeFixed).append("|") 
-					<< _contacts[i].getNickname(_sizeFixed).append("|") 
-					<< '\n' 
+		std::cout	<< "|         " << i + 1 << "|"
+					<< _contacts[i].getFirstName(_sizeFixed).append("|")
+					<< _contacts[i].getLastName(_sizeFixed).append("|")
+					<< _contacts[i].getNickname(_sizeFixed).append("|")
+					<< '\n'
 					<< horizontalSep;
 	}
 }
 
 int	PhoneBook::_askUserContactToDisplay(void) const
 {
-	std::string const	msg {"Choose an index to display a contact:"};
-	std::string const	wrongInput {"Please, your input should contain only one numeric character\n"};
+	std::string const	msg {"Choose a contact's index to display its informations:"};
+	std::string const	wrongInput {"Please, your input should contain only numeric characters and should be valid as integer\n"};
 	std::string const	indexOutOfRange {"The index you choose is out of Range. Please select an index between "};
 	int					index;
 
@@ -149,10 +149,10 @@ int	PhoneBook::_askUserContactToDisplay(void) const
 			std::cout << YELLOW << wrongInput << RESET << std::endl;
             continue;
         }
-		if (--index < _nbContacts)
+		if ((--index < _nbContacts) && (index >= 0))
 			return (index);
 		else
-			std::cout << YELLOW << indexOutOfRange << "1 and " << _nbContacts << RESET << std::endl;
+			std::cout << YELLOW << indexOutOfRange << "1 and " << _nbContacts << '\n' << RESET << std::endl;
 	}
 	return (0);
 }
