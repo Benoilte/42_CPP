@@ -6,7 +6,7 @@
 /*   By: bebrandt <benoit.brandt@proton.me>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:39:09 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/26 16:16:23 by bebrandt         ###   ########.fr       */
+/*   Updated: 2024/11/26 19:11:24 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void    PhoneBook::_search(void)
 
 	if (_nbContacts == 0)
 	{
-		std::cout << "Your phone book directory is empty, _ some contact to display it" << std::endl;
+		std::cout << "Your phone book directory is empty, add some contact to display it" << std::endl;
 		return;
 	}
     _displayIndexedContacts();

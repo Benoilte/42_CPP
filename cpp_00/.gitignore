@@ -1,6 +1,8 @@
 # executable
 megaphone
 test_megaphone
+*PhoneBook
+*Account
 
 # object file
 *.o
