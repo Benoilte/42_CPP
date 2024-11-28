@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebrandt <benoit.brandt@proton.me>         +#+  +:+       +#+        */
+/*   By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:39:14 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/26 16:21:06 by bebrandt         ###   ########.fr       */
+/*   Updated: 2024/11/28 14:21:32 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,9 @@ class Contact
 	std::string	_darkestSecret;
 
 	std::string	_getAttributeWithFixedSize(std::string attribute) const;
+	bool		_attributeIsEmpty(std::string attribute, std::string attributeName) const;
 	bool		_attributeHasSpace(std::string attribute, std::string attributeName) const;
-	bool		_attributeContainOnlyDigit(std::string attribute, std::string attributeName) const;
+	bool		_attributeContainNotOnlyDigit(std::string attribute, std::string attributeName) const;
 };
 
 #endif

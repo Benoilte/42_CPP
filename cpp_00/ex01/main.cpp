@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebrandt <benoit.brandt@proton.me>         +#+  +:+       +#+        */
+/*   By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 19:21:46 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/26 16:21:15 by bebrandt         ###   ########.fr       */
+/*   Updated: 2024/11/28 14:08:44 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	normalizedInput(std::string& input, size_t sizeMax)
 {
 	size_t	len;
 
+	input.erase(0, input.find_first_not_of(" \t\n\r\f\v"));
 	input.erase(input.find_last_not_of(" \t\n\r\f\v") + 1);
 	len = input.length();
 	if (len <= sizeMax)
@@ -34,7 +35,7 @@ int main(void)
 	while(std::cin.good())
 	{
 		directory.displayAvailableCommands();
-		if (!std::getline(std::cin >> std::ws, input))
+		if (!std::getline(std::cin, input))
 		{
 			if (std::cin.eof())
 				break;

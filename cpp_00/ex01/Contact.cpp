@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebrandt <benoit.brandt@proton.me>         +#+  +:+       +#+        */
+/*   By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:39:17 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/26 09:42:29 by bebrandt         ###   ########.fr       */
+/*   Updated: 2024/11/28 14:22:58 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ std::string	Contact::getFirstName(bool lengthIsDefine) const
 
 bool	Contact::setFirstName(std::string firstName)
 {
-	if (_attributeHasSpace(firstName, "first name"))
+	if (_attributeIsEmpty(firstName, "first name") || _attributeHasSpace(firstName, "first name"))
 		return (false);
 	_firstName = firstName;
 	return (true);
@@ -48,7 +48,7 @@ std::string	Contact::getLastName(bool lengthIsDefine) const
 
 bool	Contact::setLastName(std::string lastName)
 {
-	if (_attributeHasSpace(lastName, "last name"))
+	if (_attributeIsEmpty(lastName, "last name") || _attributeHasSpace(lastName, "last name"))
 		return (false);
 	_lastName = lastName;
 	return (true);
@@ -64,7 +64,7 @@ std::string	Contact::getNickname(bool lengthIsDefine) const
 
 bool	Contact::setNickname(std::string nickname)
 {
-	if (_attributeHasSpace(nickname, "nickname"))
+	if (_attributeIsEmpty(nickname, "nickname") || _attributeHasSpace(nickname, "nickname"))
 		return (false);
 	_nickname = nickname;
 	return (true);
@@ -80,12 +80,10 @@ std::string	Contact::getPhoneNumber(bool lengthIsDefine) const
 
 bool	Contact::setPhoneNumber(std::string phoneNumber)
 {
-	if (_attributeContainOnlyDigit(phoneNumber, "Phone number"))
-	{
-		_phoneNumber = phoneNumber;
-		return (true);
-	}
-	return (false);
+	if (_attributeIsEmpty(phoneNumber, "Phone number") || _attributeContainNotOnlyDigit(phoneNumber, "Phone number"))
+		return (false);
+	_phoneNumber = phoneNumber;
+	return (true);
 }
 
 std::string	Contact::getDarkestSecret(bool lengthIsDefine) const
@@ -98,6 +96,7 @@ std::string	Contact::getDarkestSecret(bool lengthIsDefine) const
 
 bool	Contact::setDarkestSecret(std::string darkestSecret)
 {
+	if (_attributeIsEmpty(darkestSecret, "darkest secret")) return (false);
 	_darkestSecret = darkestSecret;
 	return (true);
 }
@@ -115,6 +114,16 @@ std::string	Contact::_getAttributeWithFixedSize(std::string attribute) const
 		return (attribute);
 }
 
+bool	Contact::_attributeIsEmpty(std::string attribute, std::string attributeName) const
+{
+	if (attribute.empty())
+	{
+		std::cout << YELLOW << "Please, your " << attributeName << " should not be empty\n" << RESET << std::endl;
+		return (true);
+	}
+	return (false);
+}
+
 bool	Contact::_attributeHasSpace(std::string attribute, std::string attributeName) const
 {
 	if (attribute.find_first_of(' ') != std::string::npos)
@@ -126,7 +135,7 @@ bool	Contact::_attributeHasSpace(std::string attribute, std::string attributeNam
 		return (false);
 }
 
-bool	Contact::_attributeContainOnlyDigit(std::string attribute, std::string attributeName) const
+bool	Contact::_attributeContainNotOnlyDigit(std::string attribute, std::string attributeName) const
 {
 	size_t	len { attribute.length() };
 
@@ -134,8 +143,8 @@ bool	Contact::_attributeContainOnlyDigit(std::string attribute, std::string attr
         if (!std::isdigit(attribute[i]))
 		{
 			std::cout << YELLOW << "Please, your " << attributeName << " should contain only numeric characters\n" << RESET << std::endl;
-			return (false);
+			return (true);
 		}
     }
-	return (true);
+	return (false);
 }

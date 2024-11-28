@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_cout_cin.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebrandt <benoit.brandt@proton.me>         +#+  +:+       +#+        */
+/*   By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 12:01:46 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/06 12:04:52 by bebrandt         ###   ########.fr       */
+/*   Updated: 2024/11/28 13:47:39 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,8 @@
 
 int main()
 {
-    std::cout << "Enter a number: "; // ask user for a number
-    int x{}; // define variable x to hold user input
-    int y{}; // define variable x to hold user input
-    std::cin >> x; // get number from keyboard and store it in variable x
-    std::cout << "Enter a number: "; // ask user for a number
-    std::cin >> y; // get number from keyboard and store it in variable x
-    std::cout << "You entered " << x << " and " << y << '\n';
-
-    return 0;
+	std::string input;
+	std::cout << "Enter a line of text: ";
+	std::getline(std::cin, input);
+	std::cout << input << std::endl;
 }

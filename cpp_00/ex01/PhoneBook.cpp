@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebrandt <benoit.brandt@proton.me>         +#+  +:+       +#+        */
+/*   By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:39:09 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/26 19:11:24 by bebrandt         ###   ########.fr       */
+/*   Updated: 2024/11/28 14:58:40 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void	PhoneBook::_setContactAttribute(Contact& contact, bool (Contact::*set)(std:
 	while(std::cin.good() && !isSet)
 	{
 		std::cout << msg << std::endl;
-		if (!std::getline(std::cin >> std::ws, attributeValue))
+		if (!std::getline(std::cin, attributeValue))
 		{
 			if (std::cin.eof())
 				break;
@@ -140,6 +140,7 @@ void	PhoneBook::_setContactAttribute(Contact& contact, bool (Contact::*set)(std:
 				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			}
 		}
+		attributeValue.erase(0, attributeValue.find_first_not_of(" \t\n\r\f\v"));
 		attributeValue.erase(attributeValue.find_last_not_of(" \t\n\r\f\v") + 1);
 		if ((contact.*set)(attributeValue))
 			isSet = true;
@@ -167,36 +168,42 @@ void	PhoneBook::_displayIndexedContacts(void) const
 int	PhoneBook::_askUserContactToDisplay(void) const
 {
 	std::string const	msg {"Choose a contact's index to display its informations:"};
-	std::string const	wrongInput {"Please, your input should contain only numeric characters and should be a valid integer\n"};
+	std::string const	emptyInput {"Please, your input should not be empty\n"};
+	std::string const	wrongInput {"Your input format is incorrect. Please select an index between "};
 	std::string const	indexOutOfRange {"The index you choose is out of Range. Please select an index between "};
+	std::string			input;
 	int					index;
 
 	while(std::cin.good())
 	{
-		std::cout << msg << std::endl;
-		std::cin >> index;
-		if (std::cin.fail())
+		while(std::cin.good())
 		{
-			if (std::cin.eof())
-				break;
+			std::cout << msg << std::endl;
+			if (!std::getline(std::cin, input))
+			{
+				if (std::cin.eof())
+					break;
+				else
+				{
+					std::cin.clear();
+					std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				}
+			}
+			input.erase(0, input.find_first_not_of(" \t\n\r\f\v"));
+			input.erase(input.find_last_not_of(" \t\n\r\f\v") + 1);
+			if (input.length() == 0)
+				std::cout << YELLOW << emptyInput << '\n' << RESET << std::endl;
+			else if (input.length() > 1 || !std::isdigit(input[0]))
+				std::cout << YELLOW << wrongInput << "1 and " << _nbContacts << '\n' << RESET << std::endl;
 			else
 			{
-				std::cin.clear();
-				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-				std::cout << YELLOW << wrongInput << RESET << std::endl;
-				continue;
+				index = (int)input[0] - '0';
+				if ((--index < _nbContacts) && (index >= 0))
+					return (index);
+				else
+					std::cout << YELLOW << indexOutOfRange << "1 and " << _nbContacts << '\n' << RESET << std::endl;
 			}
 		}
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        if (std::cin.gcount() > 1)
-        {
-			std::cout << YELLOW << wrongInput << RESET << std::endl;
-            continue;
-        }
-		if ((--index < _nbContacts) && (index >= 0))
-			return (index);
-		else
-			std::cout << YELLOW << indexOutOfRange << "1 and " << _nbContacts << '\n' << RESET << std::endl;
 	}
 	return (0);
 }
