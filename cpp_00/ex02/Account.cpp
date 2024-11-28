@@ -6,7 +6,7 @@
 /*   By: bebrandt <benoit.brandt@proton.me>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:38:41 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/27 22:32:11 by bebrandt         ###   ########.fr       */
+/*   Updated: 2024/11/27 23:06:24 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ Account::Account(int initial_deposit)
 				<< _amount
 				<< ";created"
 				<< std::endl;
-	_nbAccounts++;
-	_totalAmount += initial_deposit;
+	Account::_nbAccounts++;
+	Account::_totalAmount += initial_deposit;
 }
 
 Account::~Account( void )
@@ -83,11 +83,11 @@ void	Account::makeDeposit( int deposit )
 {
 	int	p_amount {_amount};
 
+	_displayTimestamp();
 	_amount += deposit;
 	_nbDeposits++;
 	Account::_totalNbDeposits++;
 	Account::_totalAmount += deposit;
-	_displayTimestamp();
 	std::cout	<< "index:"
 				<< _accountIndex
 				<< ";p_amount:"
@@ -106,14 +106,14 @@ bool	Account::makeWithdrawal( int withdrawal )
 	int	p_amount {_amount};
 
 	_displayTimestamp();
+	std::cout	<< "index:"
+				<< _accountIndex
+				<< ";p_amount:"
+				<< p_amount
+				<< ";withdrawal:";
 	if (checkAmount() < withdrawal)
 	{
-		std::cout	<< "index:"
-					<< _accountIndex
-					<< ";p_amount:"
-					<< p_amount
-					<< ";withdrawal:refused"
-					<< std::endl;
+		std::cout << "refused" << std::endl;
 		return (false);
 	}
 	else
@@ -122,12 +122,7 @@ bool	Account::makeWithdrawal( int withdrawal )
 		_nbWithdrawals++;
 		Account::_totalNbWithdrawals++;
 		Account::_totalAmount -= withdrawal;
-		std::cout	<< "index:"
-					<< _accountIndex
-					<< ";p_amount:"
-					<< p_amount
-					<< ";withdrawal:"
-					<< withdrawal
+		std::cout	<< withdrawal
 					<< ";amount:"
 					<< _amount
 					<< ";nb_withdrawals:"
