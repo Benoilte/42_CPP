@@ -1,26 +1,12 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    src_inc_in_folder.mk                               :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/11/29 10:08:14 by bebrandt          #+#    #+#              #
-#    Updated: 2024/11/29 14:57:06 by bebrandt         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME 			=	main
 
-NAME 			=	# to_define
-
-SRC_DIR			=	src/
 OBJ_DIR			=	obj/
 DEP_DIR			=	dep/
+SRC_FILES		=	main
 
-SRC_FILES		=	#src_file
+INC				=	.
 
-INC				=	inc/.
-
-SRCS			=	$(addprefix $(SRC_DIR), $(addsuffix .cpp, $(SRC_FILES)))
+SRCS			=	$(addsuffix .cpp, $(SRC_FILES))
 OBJS			=	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 DEPS			=	$(addprefix $(DEP_DIR), $(addsuffix .d, $(SRC_FILES)))
 
@@ -56,7 +42,7 @@ $(OBJ_DIR)%.o:	%.cpp
 				@mkdir -p $(subst $(OBJ_DIR), $(DEP_DIR), $(dir $@))
 				@$(eval COMPILED_COUNT=$(shell echo $$(($(COMPILED_COUNT) + 1))))
 				@printf "\r$(YELLOW)[$(COMPILED_COUNT)/$(TOTAL_FILES)] Compiling $(NAME) files$(DEF_COLOR)"
-				@$(CC) $(COMP_FLAGS) $(DFLAGS) $(DEP_FILE) $(INC_PATHS) $(INC_PATHS) -c $< -o $@
+				@$(CC) $(COMP_FLAGS) $(DFLAGS) $(DEP_FILE) $(INC_PATHS) -c $< -o $@
 
 clean:
 				@$(RM) $(OBJ_DIR) $(DEP_DIR)
