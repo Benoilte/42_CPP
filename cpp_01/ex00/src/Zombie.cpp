@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   Zombie.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebrandt <benoit.brandt@proton.me>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 10:08:08 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/29 10:21:48 by bebrandt         ###   ########.fr       */
+/*   Created: 2024/11/29 10:08:05 by bebrandt          #+#    #+#             */
+/*   Updated: 2024/11/30 10:47:43 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ZOMBIE_HPP
-#define ZOMBIE_HPP
+#include "Zombie.hpp"
 
-#include <string>
-
-class Zombie
+Zombie::Zombie(std::string name) : _name(name)
 {
-	public:
+}
 
-		Zombie();
-		~Zombie();
+Zombie::~Zombie()
+{
+	std::cout << _name << ": Dead again" << std::endl;
+}
 
-		void	announce(void);
-
-	private:
-
-		std::string _name;
-};
-
-
-#endif
+void Zombie::announce(void)
+{
+	std::cout << _name << ": BraiiiiiiinnnzzzZ..." << std::endl;
+}

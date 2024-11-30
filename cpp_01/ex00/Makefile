@@ -1,26 +1,18 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/11/29 10:08:14 by bebrandt          #+#    #+#              #
-#    Updated: 2024/11/29 10:08:15 by bebrandt         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME 			=	zombie
 
-
-
-NAME 			=	megaphone
-
+SRC_DIR			=	src/
 OBJ_DIR			=	obj/
 DEP_DIR			=	dep/
-SRC_FILES		=	megaphone
 
-SRCS			=	$(addsuffix .cpp, $(SRC_FILES))
+SRC_FILES		=	main Zombie newZombie randomChump
+
+INC				=	inc/.
+
+SRCS			=	$(addprefix $(SRC_DIR), $(addsuffix .cpp, $(SRC_FILES)))
 OBJS			=	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 DEPS			=	$(addprefix $(DEP_DIR), $(addsuffix .d, $(SRC_FILES)))
+
+INC_PATHS		=	$(addprefix -I, $(INC))
 
 CC				=	c++
 COMP_FLAGS		=	-Wall -Wextra -Werror -O2
@@ -47,12 +39,12 @@ $(NAME):		$(OBJS)
 				@printf "$(CLEAR_LINE)"
 				@echo "\r$(GREEN)Successfully created executable: $(NAME) $(DEF_COLOR)"
 
-$(OBJ_DIR)%.o:	%.cpp
+$(OBJ_DIR)%.o:	$(SRC_DIR)%.cpp
 				@mkdir -p $(dir $@)
 				@mkdir -p $(subst $(OBJ_DIR), $(DEP_DIR), $(dir $@))
 				@$(eval COMPILED_COUNT=$(shell echo $$(($(COMPILED_COUNT) + 1))))
 				@printf "\r$(YELLOW)[$(COMPILED_COUNT)/$(TOTAL_FILES)] Compiling $(NAME) files$(DEF_COLOR)"
-				@$(CC) $(COMP_FLAGS) $(DFLAGS) $(DEP_FILE) $(INC_PATHS) -c $< -o $@
+				@$(CC) $(COMP_FLAGS) $(DFLAGS) $(DEP_FILE) $(INC_PATHS) $(INC_PATHS) -c $< -o $@
 
 clean:
 				@$(RM) $(OBJ_DIR) $(DEP_DIR)

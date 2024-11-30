@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   randomChump.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebrandt <benoit.brandt@proton.me>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/29 10:08:05 by bebrandt          #+#    #+#             */
-/*   Updated: 2024/11/29 10:21:59 by bebrandt         ###   ########.fr       */
+/*   Created: 2024/11/29 10:08:02 by bebrandt          #+#    #+#             */
+/*   Updated: 2024/11/30 10:39:01 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-Zombie::Zombie()
+void randomChump(std::string name)
 {
-}
+	Zombie	zombie(name);
 
-Zombie::~Zombie()
-{
-}
-
-void Zombie::announce(void)
-{
-    
+	zombie.announce();
 }
