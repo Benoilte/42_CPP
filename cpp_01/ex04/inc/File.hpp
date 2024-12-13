@@ -20,12 +20,12 @@ class File
 		std::string		_fileNameOut;
 		std::ifstream	_in;
 		std::ofstream	_out;
+		int				_occurenceUpdated;
 
-		int	_openAndCheckFileIn(void);
-		int	_openAndCheckFileOut(void);
-		void	_replaceWord(std::string &s1, std::string &s2, std::string &line);
+		int				_openAndCheckFileIn(void);
+		int				_openAndCheckFileOut(void);
+		void			_replaceWord(std::string &s1, std::string &s2, std::string &line);
+		void			_printStatus(std::string s1, std::string s2);
 };
-
-
 
 #endif
