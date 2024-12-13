@@ -4,4 +4,5 @@ ex02/main
 ex03/unnecessaryViolence
 ex04/sed
 *.replace
-ex04/harl
+ex05/harl
+ex06/harlFilter

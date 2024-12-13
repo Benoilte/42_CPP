@@ -1,22 +1,10 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    src_inc_in_folder.mk                               :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/11/29 10:08:14 by bebrandt          #+#    #+#              #
-#    Updated: 2024/11/29 14:57:06 by bebrandt         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-NAME 			=	# to_define
+NAME 			=	harlFilter
 
 SRC_DIR			=	src/
 OBJ_DIR			=	obj/
 DEP_DIR			=	dep/
 
-SRC_FILES		=	#src_file
+SRC_FILES		=	main Harl
 
 INC				=	inc/.
 
@@ -27,7 +15,7 @@ DEPS			=	$(addprefix $(DEP_DIR), $(addsuffix .d, $(SRC_FILES)))
 INC_PATHS		=	$(addprefix -I, $(INC))
 
 CC				=	c++
-COMP_FLAGS		=	-Wall -Wextra -Werror -O2
+COMP_FLAGS		=	-Wall -Wextra -Werror -Wno-implicit-fallthrough
 CPP_FLAGS		=	-std=c++98
 DFLAGS			:=	-MMD -MF
 DEP_FILE		=	$(DEP_DIR)$*.d
@@ -51,7 +39,7 @@ $(NAME):		$(OBJS)
 				@printf "$(CLEAR_LINE)"
 				@echo "\r$(GREEN)Successfully created executable: $(NAME) $(DEF_COLOR)"
 
-$(OBJ_DIR)%.o:	%.cpp
+$(OBJ_DIR)%.o:	$(SRC_DIR)%.cpp
 				@mkdir -p $(dir $@)
 				@mkdir -p $(subst $(OBJ_DIR), $(DEP_DIR), $(dir $@))
 				@$(eval COMPILED_COUNT=$(shell echo $$(($(COMPILED_COUNT) + 1))))
