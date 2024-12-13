@@ -1,10 +1,10 @@
-NAME 			=	placeholder_name
+NAME 			=	harl
 
 SRC_DIR			=	src/
 OBJ_DIR			=	obj/
 DEP_DIR			=	dep/
 
-SRC_FILES		=	placeholder_src_file
+SRC_FILES		=	main Harl
 
 INC				=	inc/.
 
