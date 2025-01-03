@@ -38,17 +38,8 @@ Fixed const Point::getY(void) const
 	return _y;
 }
 
-bool Point::bsp(Point const a, Point const b, Point const c, Point const point)
-{
-	(void)a;
-	(void)b;
-	(void)c;
-	(void)point;
-	return (false);
-}
-
 std::ostream& operator<<(std::ostream &out, Point const &rhs)
 {
 	out << rhs.getX() << " ; " << rhs.getY();
-	return out; 
+	return out;
 }
