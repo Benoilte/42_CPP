@@ -1,20 +1,36 @@
 #include "Fixed.hpp"
 #include <iostream>
 
-int	main(void)
+void	testFromSubject(void)
 {
 	Fixed a;
 	Fixed b( a );
 	Fixed c;
 
-	// test given by the subject
 	c = b;
+
 	std::cout << a.getRawBits() << std::endl;
 	std::cout << b.getRawBits() << std::endl;
+	std::cout << c.getRawBits() << std::endl;
+}
 
-	// personnal test
-	b.setRawBits(42);
-	std::cout << b.getRawBits() << std::endl;
+void	testSimple(void)
+{
+	Fixed a;
+
+	std::cout << a.getRawBits() << std::endl;
+	a.setRawBits(42);
+	std::cout << a.getRawBits() << std::endl;
+	a.setRawBits(-42);
+	std::cout << a.getRawBits() << std::endl;
+}
+
+int	main(void)
+{
+	std::cout << "Test from subject: " << std::endl;
+	testFromSubject();
+	std::cout << "\nSimple test: " << std::endl;
+	testSimple();
 	return 0;
 }
 

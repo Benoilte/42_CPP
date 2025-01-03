@@ -3,21 +3,7 @@
 
 # include <iostream>
 
-/*
-Ajoutez à votre classe ces quatre fonctions membres publiques surchargées :
-
-	• Une fonction membre statique min prenant en paramètres deux références sur des
-	nombres à virgule fixe et qui retourne le plus petit d’entre eux.
-
-	• Une fonction membre statique min prenant en paramètres deux références sur des
-	nombres à virgule fixe constants et qui retourne le plus petit d’entre eux.
-
-	• Une fonction membre statique max prenant en paramètres deux références sur des
-	nombres à virgule fixe et qui retourne le plus grand d’entre eux.
-
-	• Une fonction membre statique max prenant en paramètres deux références sur des
-	nombres à virgule fixe constants et qui retourne le plus grand d’entre eux.
-*/
+// Working range from -8388608 to 8388607
 
 class Fixed
 {

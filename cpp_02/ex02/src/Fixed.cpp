@@ -84,11 +84,15 @@ Fixed Fixed::operator/(const Fixed &rhs) const
 	return Fixed(this->toFloat() / rhs.toFloat());
 }
 
+// increment by 1/256
+
 Fixed Fixed::operator++()
 {
 	*this = Fixed(this->toFloat() + 0.00390625f);
 	return *this;
 }
+
+// increment by 1/256
 
 Fixed Fixed::operator++(int)
 {
@@ -98,11 +102,15 @@ Fixed Fixed::operator++(int)
 	return tmp;
 }
 
+// decrement by 1/256
+
 Fixed Fixed::operator--()
 {
 	*this = Fixed(this->toFloat() - 0.00390625f);
 	return *this;
 }
+
+// decrement by 1/256
 
 Fixed Fixed::operator--(int)
 {

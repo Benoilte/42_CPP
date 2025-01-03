@@ -3,6 +3,8 @@
 
 # include <iostream>
 
+// Working range from -8388608 to 8388607
+
 class Fixed
 {
 	public:
