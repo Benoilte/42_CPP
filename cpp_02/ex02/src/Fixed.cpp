@@ -170,10 +170,7 @@ Fixed const& Fixed::max(const Fixed &a, const Fixed &b)
 
 std::ostream& operator<<(std::ostream &out, Fixed const &rhs)
 {
-	if (rhs.toFloat() - rhs.toInt() == 0)
-		out << rhs.toInt();
-	else
-		out << rhs.toFloat();
+	out << rhs.toFloat();
 
 	return out;
 }
