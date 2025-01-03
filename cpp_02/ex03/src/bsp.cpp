@@ -1,4 +1,4 @@
-# include "Point.hpp"
+# include "bsp.hpp"
 
 /*
 	1. Check position relative to each edge
