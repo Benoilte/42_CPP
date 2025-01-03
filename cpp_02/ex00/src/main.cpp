@@ -29,7 +29,7 @@ int	main(void)
 {
 	std::cout << "Test from subject: " << std::endl;
 	testFromSubject();
-	std::cout << "\nSimple test: " << std::endl;
+	std::cout << "\nTest simple: " << std::endl;
 	testSimple();
 	return 0;
 }
