@@ -4,7 +4,7 @@ SRC_DIR			=	src/
 OBJ_DIR			=	obj/
 DEP_DIR			=	dep/
 
-SRC_FILES		=	main Fixed Point
+SRC_FILES		=	main bsp Fixed Point
 
 INC				=	inc/.
 

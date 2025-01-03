@@ -3,17 +3,14 @@
 Point::Point() : _x(0), _y(0)
 {
     /*Constructor*/
-	std::cout << "Point Default Constructor called" << std::endl;
 }
 
 Point::Point(const Point &src) : _x(src.getX()), _y(src.getY())
 {
-	std::cout << "Point copy constructor called" << std::endl;
 }
 
 Point::Point(float const a, float const b) : _x(a), _y(b)
 {
-	std::cout << "Point Parametrized Constructor called" << std::endl;
 }
 
 Point::~Point()
