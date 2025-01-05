@@ -17,6 +17,16 @@ void	displayMsgPointOut(Point const p)
 
 int	main(void)
 {
+	Point test1(1.5f, 2.5f);
+	Point test2(test1);
+	Point test3;
+
+	test3 = test1;
+
+	std::cout << "test1: " << test1 << std::endl;
+	std::cout << "test2: " << test2 << std::endl;
+	std::cout << "test3: " << test3 << std::endl;
+
 	Point a1(1, 1), b1(5, 1), c1(3, 4), p1(3, 2), p2(6, 2), p3(3, 4);
 	displayTest(a1, b1, c1);
 	bsp(a1, b1, c1, p1) ? displayMsgPointIn(p1) : displayMsgPointOut(p1); // IN
@@ -40,7 +50,7 @@ int	main(void)
 	bsp(a3, b3, c3, p9) ? displayMsgPointIn(p9) : displayMsgPointOut(p9); // OUT (on edge BC)
 
 	std::cout << std::endl;
-	
+
 	Point a4(2, 1), b4(6, 1), c4(4, 5), p10(4, 2.5), p11(2, 6), p12(3, 3);
 	displayTest(a4, b4, c4);
 	bsp(a4, b4, c4, p10) ? displayMsgPointIn(p10) : displayMsgPointOut(p10); // IN
