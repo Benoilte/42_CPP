@@ -3,8 +3,7 @@
 ClapTrap::ClapTrap() 
 : _name("anonymous"), _hitPoints(10), _energyPoints(10), _attackDamage(0)
 {
-    std::cout << "Default constructor is called" << std::endl;
-	std::cout << *this << std::endl;
+    std::cout << "Clap Trap Default constructor is called" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap &src)
@@ -17,13 +16,12 @@ ClapTrap::ClapTrap(const ClapTrap &src)
 ClapTrap::ClapTrap(const std::string name) 
 : _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0)
 {
-	std::cout << "Parametrized constructor is called" << std::endl;
-	std::cout << *this << std::endl;
+	std::cout << "Clap Trap Parametrized constructor is called" << std::endl;
 }
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << "Destructor is called: ClapTrap " << _name << " is destroy" << std::endl;
+	std::cout << "Clap Trap Destructor is called: " << _name << " is destroy" << std::endl;
 }
 
 ClapTrap& ClapTrap::operator=(const ClapTrap &rhs)
@@ -61,7 +59,8 @@ int ClapTrap::getAttackDamage(void) const
 
 void ClapTrap::attack(const std::string& target)
 {
-	std::cout << "ClapTrap " << _name << " attacks " << target << " , causing " << 1 << " points of damage!" << std::endl;
+	std::cout << "ClapTrap " << _name << " attacks " << target << " , causing " << _attackDamage << " points of damage!" << std::endl;
+	_energyPoints--;
 }
 
 void ClapTrap::takeDamage(unsigned int amount)
@@ -71,11 +70,21 @@ void ClapTrap::takeDamage(unsigned int amount)
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
+	if (_energyPoints == 0)
+	{
+		std::cout << "ClapTrap " << _name << " cannot repair itself, it has no hit points or energy points left ";
+	}
+	if (_hitPoints == 0)
+	{
+		std::cout << "ClapTrap " << _name << " cannot repair itself, it has no hit points or energy points left ";
+	}
 	std::cout << "ClapTrap " << _name << " repaired itself by " << amount << " points of hit!" << std::endl;
+	_hitPoints++;
+	_energyPoints--;
 }
 
 std::ostream& operator<<(std::ostream &out, ClapTrap const &rhs)
 {
-	out << "ClapTrap " << rhs.getName() << " Hit points: " << rhs.getHitPoints() << " Energy points: " << rhs.getEnergyPoints() << " Attack damage: " << rhs.getAttackDamage();
+	out << rhs.getName() << ":\tHit points: " << rhs.getHitPoints() << "\tEnergy points: " << rhs.getEnergyPoints();
 	return out; 
 }
