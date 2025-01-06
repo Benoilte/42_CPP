@@ -61,14 +61,14 @@ void ClapTrap::attack(const std::string& target)
 {
 	if (ActionCanBePerfomed("attacks someone"))
 	{
-		std::cout << "ClapTrap " << _name << " attacks " << target << ", causing " << _attackDamage << " points of damage!" << std::endl;
+		std::cout << MAGENTA << "ClapTrap " << _name << " attacks " << target << ", causing " << _attackDamage << " points of damage!" << RESET << std::endl;
 		_energyPoints--;
 	}
 }
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
-	std::cout << "ClapTrap " << _name << " lose " << amount << " points of hit!" << std::endl;
+	std::cout << CYAN << "ClapTrap " << _name << " lose " << amount << " points of hit!" << RESET << std::endl;
 	_hitPoints -= amount;
 }
 
@@ -76,22 +76,22 @@ void ClapTrap::beRepaired(unsigned int amount)
 {
 	if (ActionCanBePerfomed("repair itself"))
 	{
-		std::cout << "ClapTrap " << _name << " repaired itself by " << amount << " points of hit!" << std::endl;
+		std::cout << GREEN << "ClapTrap " << _name << " repaired itself by " << amount << " points of hit!" << RESET << std::endl;
 		_hitPoints++;
 		_energyPoints--;
-	}
+	}	
 }
 
 bool ClapTrap::ActionCanBePerfomed(std::string const &action)
 {
 	if (_energyPoints <= 0)
 	{
-		std::cout << "ClapTrap " << _name << " cannot " << action <<", it has no energy points left" << std::endl;
+		std::cout << RED << "ClapTrap " << _name << " cannot " << action <<", it has no energy points left" << RESET << std::endl;
 		return false;
 	}
 	if (_hitPoints <= 0)
 	{
-		std::cout << "ClapTrap " << _name << " cannot " << action <<", it has no hit points left" << std::endl;
+		std::cout << RED << "ClapTrap " << _name << " cannot " << action <<", it has no hit points left" << RESET << std::endl;
 		return false;
 	}
 	return true;
@@ -99,6 +99,6 @@ bool ClapTrap::ActionCanBePerfomed(std::string const &action)
 
 std::ostream& operator<<(std::ostream &out, ClapTrap const &rhs)
 {
-	out << rhs.getName() << ":\tHit points: " << rhs.getHitPoints() << "\tEnergy points: " << rhs.getEnergyPoints();
+	out << YELLOW << rhs.getName() << ":\tHit points: " << rhs.getHitPoints() << "\tEnergy points: " << rhs.getEnergyPoints() << RESET;
 	return out;
 }
