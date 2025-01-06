@@ -132,7 +132,7 @@ int	main(int argc, char **argv)
 				break;
 
 			case '2':
-				std::cout << "test 1:" << std::endl;
+				std::cout << "test 2:" << std::endl;
 				test2();
 				break;
 			
