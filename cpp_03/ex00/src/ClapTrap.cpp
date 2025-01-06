@@ -1,6 +1,6 @@
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap() 
+ClapTrap::ClapTrap()
 : _name("anonymous"), _hitPoints(10), _energyPoints(10), _attackDamage(0)
 {
     std::cout << "Clap Trap Default constructor is called" << std::endl;
@@ -13,7 +13,7 @@ ClapTrap::ClapTrap(const ClapTrap &src)
 	return ;
 }
 
-ClapTrap::ClapTrap(const std::string name) 
+ClapTrap::ClapTrap(const std::string name)
 : _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0)
 {
 	std::cout << "Clap Trap Parametrized constructor is called" << std::endl;
@@ -33,7 +33,7 @@ ClapTrap& ClapTrap::operator=(const ClapTrap &rhs)
 		this->_energyPoints = rhs.getEnergyPoints();
 		this->_attackDamage = rhs.getAttackDamage();
 	}
-	
+
 	return *this;
 }
 
@@ -59,32 +59,46 @@ int ClapTrap::getAttackDamage(void) const
 
 void ClapTrap::attack(const std::string& target)
 {
-	std::cout << "ClapTrap " << _name << " attacks " << target << " , causing " << _attackDamage << " points of damage!" << std::endl;
-	_energyPoints--;
+	if (ActionCanBePerfomed("attacks someone"))
+	{
+		std::cout << "ClapTrap " << _name << " attacks " << target << ", causing " << _attackDamage << " points of damage!" << std::endl;
+		_energyPoints--;
+	}
 }
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
 	std::cout << "ClapTrap " << _name << " lose " << amount << " points of hit!" << std::endl;
+	_hitPoints -= amount;
 }
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
-	if (_energyPoints == 0)
+	if (ActionCanBePerfomed("repair itself"))
 	{
-		std::cout << "ClapTrap " << _name << " cannot repair itself, it has no hit points or energy points left ";
+		std::cout << "ClapTrap " << _name << " repaired itself by " << amount << " points of hit!" << std::endl;
+		_hitPoints++;
+		_energyPoints--;
 	}
-	if (_hitPoints == 0)
+}
+
+bool ClapTrap::ActionCanBePerfomed(std::string const &action)
+{
+	if (_energyPoints <= 0)
 	{
-		std::cout << "ClapTrap " << _name << " cannot repair itself, it has no hit points or energy points left ";
+		std::cout << "ClapTrap " << _name << " cannot " << action <<", it has no energy points left" << std::endl;
+		return false;
 	}
-	std::cout << "ClapTrap " << _name << " repaired itself by " << amount << " points of hit!" << std::endl;
-	_hitPoints++;
-	_energyPoints--;
+	if (_hitPoints <= 0)
+	{
+		std::cout << "ClapTrap " << _name << " cannot " << action <<", it has no hit points left" << std::endl;
+		return false;
+	}
+	return true;
 }
 
 std::ostream& operator<<(std::ostream &out, ClapTrap const &rhs)
 {
 	out << rhs.getName() << ":\tHit points: " << rhs.getHitPoints() << "\tEnergy points: " << rhs.getEnergyPoints();
-	return out; 
+	return out;
 }

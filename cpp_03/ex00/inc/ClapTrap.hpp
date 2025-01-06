@@ -25,11 +25,13 @@ class ClapTrap
 
 
 	private:
-	
+
 		std::string _name;
 		int			_hitPoints;
 		int			_energyPoints;
 		int			_attackDamage;
+
+		bool		ActionCanBePerfomed(std::string const &action);
 };
 
 std::ostream	&operator<<(std::ostream &out, ClapTrap const &rhs);
