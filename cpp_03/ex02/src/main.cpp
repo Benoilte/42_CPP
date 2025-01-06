@@ -4,6 +4,7 @@ void	help()
 {
 	std::cout << "Use ./trap 1 to test ClapTrap class" << std::endl;
 	std::cout << "Use ./trap 2 to test ScavTrap class" << std::endl;
+	std::cout << "Use ./trap 3 to test FragTrap class" << std::endl;
 }
 
 void	displayStatus(ClapTrap &self)
