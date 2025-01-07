@@ -18,10 +18,10 @@ class FragTrap : virtual public ClapTrap
 		void highFivesGuys(void);
 
 	protected:
+
 		static const int hitAmount;
 		static const int energyAmount;
 		static const int attackDamageAmount;
-	
 };
 
 #endif

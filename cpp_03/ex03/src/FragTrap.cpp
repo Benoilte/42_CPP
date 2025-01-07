@@ -6,17 +6,17 @@ const int FragTrap::attackDamageAmount = 30;
 
 FragTrap::FragTrap()
 {
-    std::cout << "FragTrap Default constructor is called" << std::endl;
+    std::cout << "FragTrap Default constructor is called: " << _name << " is created" << std::endl;
 }
 
 FragTrap::FragTrap(const FragTrap &src) : ClapTrap(src)
 {
-	std::cout << "FragTrap Copy constructor is called" << std::endl;
+	std::cout << "FragTrap Copy constructor is called: " << _name << " is copied" << std::endl;
 }
 
 FragTrap::FragTrap(const std::string name) : ClapTrap(name, hitAmount, energyAmount, attackDamageAmount)
 {
-	std::cout << "FragTrap Parametrized constructor is called" << std::endl;
+	std::cout << "FragTrap Parametrized constructor is called: " << _name << " is created" << std::endl;
 }
 
 FragTrap::~FragTrap()
@@ -27,12 +27,7 @@ FragTrap::~FragTrap()
 FragTrap& FragTrap::operator=(const FragTrap &rhs)
 {
 	if (this != &rhs)
-	{
-		this->_name = rhs.getName();
-		this->_hitPoints = rhs.getHitPoints();
-		this->_energyPoints = rhs.getEnergyPoints();
-		this->_attackDamage = rhs.getAttackDamage();
-	}
+		ClapTrap::operator=(rhs);
 
 	return *this;
 }

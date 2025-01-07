@@ -2,18 +2,18 @@
 
 DiamondTrap::DiamondTrap()
 {
-    std::cout << "DiamondTrap Default constructor is called" << std::endl;
+    std::cout << "DiamondTrap Default constructor is called: " << _name << " is created" << std::endl;
 }
 
 DiamondTrap::DiamondTrap(const DiamondTrap &src) : ClapTrap(src), ScavTrap(src), FragTrap(src)
 {
-	std::cout << "DiamondTrap Copy constructor is called" << std::endl;
+	std::cout << "DiamondTrap Copy constructor is called: " << _name << " is copied" << std::endl;
 }
 
-DiamondTrap::DiamondTrap(const std::string name) 
+DiamondTrap::DiamondTrap(const std::string name)
 : ClapTrap(name + "_clap_name", FragTrap::hitAmount, ScavTrap::energyAmount, FragTrap::attackDamageAmount), ScavTrap(name), FragTrap(name), _name(name)
 {
-	std::cout << "DiamondTrap Parametrized constructor is called" << std::endl;
+	std::cout << "DiamondTrap Parametrized constructor is called: " << _name << " is created" << std::endl;
 }
 
 DiamondTrap::~DiamondTrap()
@@ -23,7 +23,9 @@ DiamondTrap::~DiamondTrap()
 
 DiamondTrap& DiamondTrap::operator=(const DiamondTrap &rhs)
 {
-	(void)rhs;
+	if (this != &rhs)
+		ClapTrap::operator=(rhs);
+
 	return *this;
 }
 

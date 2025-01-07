@@ -19,10 +19,10 @@ class ScavTrap : virtual public ClapTrap
 		void 		guardGate(void);
 
 	protected:
+
 		static const int hitAmount;
 		static const int energyAmount;
 		static const int attackDamageAmount;
-	
 };
 
 #endif
