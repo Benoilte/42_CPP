@@ -2,6 +2,7 @@
 
 void	help()
 {
+	std::cout << "Use ./trap 0 to test Copy constructor and overload assignement" << std::endl;
 	std::cout << "Use ./trap 1 to test ClapTrap class" << std::endl;
 	std::cout << "Use ./trap 2 to test ScavTrap class" << std::endl;
 	std::cout << "Use ./trap 3 to test FragTrap class" << std::endl;
@@ -10,6 +11,42 @@ void	help()
 void	displayStatus(ClapTrap &self)
 {
 	std::cout << self.getName() << "'s status:\t\t" << self << std::endl;
+}
+
+void	test0(void)
+{
+	FragTrap john("John");
+
+	// Display status after john's creation
+	std::cout << std::endl;
+	std::cout << "Display status after john's creation:" << std::endl;
+	displayStatus(john);
+	std::cout << john.getName() << "'s attack damage:\t" << john.getAttackDamage() << std::endl;
+	std::cout << std::endl;
+
+	// repair itself and copy john copy 1 with copy constructor
+	john.beRepaired(2);
+	FragTrap johnCopy1(john);
+
+	// Display status after johnCopy1's creation and copy
+	std::cout << std::endl;
+	std::cout << "Display status after johnCopy1's creation and copy:" << std::endl;
+	displayStatus(johnCopy1);
+	std::cout << johnCopy1.getName() << "'s attack damage:\t" << johnCopy1.getAttackDamage() << std::endl;
+	std::cout << std::endl;
+
+	// repair itself and copy john copy 2 with overload assignement
+	john.beRepaired(2);
+	FragTrap johnCopy2;
+	johnCopy2 = john;
+
+	// Display status after johnCopy2's creation and copy
+	std::cout << std::endl;
+	std::cout << "Display status after johnCopy2's creation and copy:" << std::endl;
+	displayStatus(johnCopy2);
+	std::cout << johnCopy2.getName() << "'s attack damage:\t" << johnCopy2.getAttackDamage() << std::endl;
+	std::cout << std::endl;
+
 }
 
 void	test1(void)
@@ -185,6 +222,11 @@ int	main(int argc, char **argv)
 	{
 		switch (argv[1][0])
 		{
+			case '0':
+				std::cout << "test 0:" << std::endl;
+				test0();
+				break;
+
 			case '1':
 				std::cout << "test 1:" << std::endl;
 				test1();

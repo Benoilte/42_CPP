@@ -1,22 +1,31 @@
 #include "ClapTrap.hpp"
 
+const int ClapTrap::hitAmount = 10;
+const int ClapTrap::energyAmount = 10;
+const int ClapTrap::attackDamageAmount = 0;
+
 ClapTrap::ClapTrap()
-: _name("anonymous"), _hitPoints(10), _energyPoints(10), _attackDamage(0)
+: _name("anonymous"), _hitPoints(hitAmount), _energyPoints(energyAmount), _attackDamage(attackDamageAmount)
 {
-    std::cout << "Clap Trap Default constructor is called" << std::endl;
+    std::cout << "ClapTrap Default constructor is called: " << _name << " is created" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap &src)
+: _name(src.getName()), _hitPoints(src.getHitPoints()), _energyPoints(src.getEnergyPoints()), _attackDamage(src.getAttackDamage())
 {
-	*this = src;
-
-	return ;
+	std::cout << "ClapTrap Copy constructor is called: " << _name << " is copied" << std::endl;
 }
 
 ClapTrap::ClapTrap(const std::string name)
-: _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0)
+: _name(name), _hitPoints(hitAmount), _energyPoints(energyAmount), _attackDamage(attackDamageAmount)
 {
-	std::cout << "Clap Trap Parametrized constructor is called" << std::endl;
+	std::cout << "ClapTrap Parametrized constructor is called: " << _name << " is created" << std::endl;
+}
+
+ClapTrap::ClapTrap(const std::string name, int hitPoints, int energyPoints, int attackDamage)
+: _name(name), _hitPoints(hitPoints), _energyPoints(energyPoints), _attackDamage(attackDamage)
+{
+	std::cout << "Protected Clap Trap Parametrized constructor is called: " << _name << " is created" << std::endl;
 }
 
 ClapTrap::~ClapTrap()
@@ -77,15 +86,9 @@ void ClapTrap::beRepaired(unsigned int amount)
 	if (ActionCanBePerfomed("repair itself"))
 	{
 		std::cout << GREEN << "ClapTrap " << _name << " repaired itself by " << amount << " points of hit!" << RESET << std::endl;
-		_hitPoints++;
+		_hitPoints += amount;
 		_energyPoints--;
 	}	
-}
-
-ClapTrap::ClapTrap(const std::string name, int hitPoints, int energyPoints, int attackDamage)
-: _name(name), _hitPoints(hitPoints), _energyPoints(energyPoints), _attackDamage(attackDamage)
-{
-	std::cout << "Protected Clap Trap Parametrized constructor is called" << std::endl;
 }
 
 bool ClapTrap::ActionCanBePerfomed(std::string const &action)

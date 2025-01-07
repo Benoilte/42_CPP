@@ -24,7 +24,6 @@ class ClapTrap
 		void 		takeDamage(unsigned int amount);
 		void 		beRepaired(unsigned int amount);
 
-
 	protected:
 
 		ClapTrap(const std::string name, int hitPoints, int energyPoints, int attackDamage);
@@ -35,6 +34,12 @@ class ClapTrap
 		int			_attackDamage;
 
 		bool		ActionCanBePerfomed(std::string const &action);
+
+	private:
+	
+		static const int hitAmount;
+		static const int energyAmount;
+		static const int attackDamageAmount;
 };
 
 std::ostream	&operator<<(std::ostream &out, ClapTrap const &rhs);

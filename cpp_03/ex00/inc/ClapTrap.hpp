@@ -24,13 +24,16 @@ class ClapTrap
 		void 		takeDamage(unsigned int amount);
 		void 		beRepaired(unsigned int amount);
 
-
 	private:
 
 		std::string _name;
 		int			_hitPoints;
 		int			_energyPoints;
 		int			_attackDamage;
+
+		static const int hitAmount;
+		static const int energyAmount;
+		static const int attackDamageAmount;
 
 		bool		ActionCanBePerfomed(std::string const &action);
 };

@@ -18,6 +18,10 @@ class FragTrap : public ClapTrap
 		void highFivesGuys(void);
 
 	private:
+
+		static const int hitAmount;
+		static const int energyAmount;
+		static const int attackDamageAmount;
 	
 };
 

@@ -20,6 +20,10 @@ class ScavTrap : public ClapTrap
 		void 		guardGate(void);
 
 	private:
+
+		static const int hitAmount;
+		static const int energyAmount;
+		static const int attackDamageAmount;
 	
 };
 
