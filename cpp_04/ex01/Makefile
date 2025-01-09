@@ -1,10 +1,10 @@
-NAME 			=	CPP04
+NAME 			=	checkYourAnimals
 
 SRC_DIR			=	src/
 OBJ_DIR			=	obj/
 DEP_DIR			=	dep/
 
-SRC_FILES		=	main Animal Dog Cat
+SRC_FILES		=	main Animal Dog Cat WrongAnimal WrongCat Brain
 
 INC				=	inc/.
 
@@ -15,7 +15,7 @@ DEPS			=	$(addprefix $(DEP_DIR), $(addsuffix .d, $(SRC_FILES)))
 INC_PATHS		=	$(addprefix -I, $(INC))
 
 CC				=	c++
-COMP_FLAGS		=	-Wall -Wextra -Werror -O2
+COMP_FLAGS		=	-Wall -Wextra -Werror
 CPP_FLAGS		=	-std=c++98
 DFLAGS			:=	-MMD -MF
 DEP_FILE		=	$(DEP_DIR)$*.d
