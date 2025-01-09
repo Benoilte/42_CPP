@@ -2,12 +2,12 @@
 
 Brain::Brain()
 {
-    std::cout << "Brain default constructor is called" << std::endl;
+    std::cout << GREEN << "Brain default constructor is called" << RESET << std::endl;
 }
 
 Brain::Brain(const Brain &t_src)
 {
-	std::cout << "Brain copy constructor is called" << std::endl;
+    std::cout << GREEN << "Brain copy constructor is called" << RESET << std::endl;
 	*this = t_src;
 
 	return ;
@@ -15,7 +15,7 @@ Brain::Brain(const Brain &t_src)
 
 Brain::~Brain()
 {
-	std::cout << "Brain destructor is called" << std::endl;
+	std::cout << GREEN << "Brain destructor is called" << RESET << std::endl;
 }
 
 Brain& Brain::operator=(const Brain &t_rhs)

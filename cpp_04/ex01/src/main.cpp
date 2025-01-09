@@ -5,7 +5,7 @@ void	help()
 	std::cout << "Available command: " << std::endl;
 	std::cout << "'./checkYourAnimals 0': test Copy constructor and overload assignement" << std::endl;
 	std::cout << "'./checkYourAnimals 1': test example from previous exercise" << std::endl;
-	// std::cout << "'./checkYourAnimals 2': test WrongAnimal and Wrong cat" << std::endl;
+	std::cout << "'./checkYourAnimals 2': test an Array of animals" << std::endl;
 	// std::cout << "'./checkYourAnimals 3': test pointer type same as class type" << std::endl;
 }
 
@@ -89,22 +89,62 @@ void test1(void)
 	delete cat;
 }
 
-// void test2(void)
-// {
-// 	const WrongAnimal* meta = new WrongAnimal();
-// 	const WrongAnimal* wrongCat = new WrongCat();
+void test2(void)
+{
+	Animal	*animals[6];
+	Animal	*cat = new Cat();	
+	Animal	*dog = new Dog();	
 
-// 	std::cout << std::endl;
-// 	std::cout << wrongCat->getType() << " " << std::endl;
-// 	std::cout << std::endl;
+	// set dog ideas
+	dog->setIdea(0, "I'm hungry!");
+	dog->setIdea(1, "I want to eat a cat!");
+	dog->setIdea(2, "Is time to eat, right ?");
+	dog->setIdea(3, "I want to eat an army of cat!");
 
-// 	wrongCat->makeSound();	//will output the animal sound!
-// 	meta->makeSound();		//will output the animal sound!
-// 	std::cout << std::endl;
+	// set cat ideas
+	cat->setIdea(0, "Please let me sleep");
+	cat->setIdea(1, "Oh noooo I don't like this dog!");
+	cat->setIdea(2, "I'm going to sleep on the couch!");
+	cat->setIdea(3, "Oh its looks suny outside, I'm going to sleep under the sun!");
 
-// 	delete meta;
-// 	delete wrongCat;
-// }
+	// set a new cat or dog with a coopy constructor
+	for (int i = 0; i < 6; i++)
+	{
+		if (i % 2 == 0)
+			animals[i] = new Cat(*((Cat *)cat));
+		else
+			animals[i] = new Dog(*((Dog *)dog));
+	}
+
+	// update third idea of cat in position 2
+	animals[2]->setIdea(3, "Its raining outside.. Couch is soooo confortable to sleep!");
+	// add a fourth idea of dog in position 3
+	animals[3]->setIdea(4, "I will die of starvation!");
+
+	std::cout << std::endl;
+	for (int i = 0; i < 6; i++)
+	{
+		std::cout << i << ": " << animals[i]->getType() << " - " << animals[i]->getBrainPtr() << std::endl;
+		animals[i]->displayIdeas();
+		animals[i]->makeSound();
+		std::cout << std::endl;
+	}
+
+	// copy dog in position 3 into dog in position 1;
+	std::cout << YELLOW << "copy dog in position 3 into dog in position 1: " << RESET << std::endl;
+	animals[1] = animals[3];
+	std::cout << animals[1]->getType() << " - " << animals[1]->getBrainPtr() << std::endl;
+	animals[1]->displayIdeas();
+	animals[1]->makeSound();
+	std::cout << std::endl;
+
+	for (int i = 0; i < 6; i++)
+	{
+		delete animals[i];
+	}
+	delete cat;
+	delete dog;
+}
 
 // void test3(void)
 // {
@@ -140,10 +180,10 @@ int	main(int argc, char **argv)
 				test1();
 				break;
 
-			// case '2':
-			// 	std::cout << "test 2:" << std::endl;
-			// 	test2();
-			// 	break;
+			case '2':
+				std::cout << "test 2:" << std::endl;
+				test2();
+				break;
 
 			// case '3':
 			// 	std::cout << "test 3:" << std::endl;

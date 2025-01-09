@@ -17,6 +17,25 @@ Animal::Animal(const std::string &t_type) : m_type(t_type)
 	std::cout << "Animal protected constructor is called" << std::endl;
 }
 
+void Animal::displayIdeas() const
+{
+	for (int i = 0; i < 100; i++)
+	{
+		if (!m_brain->getIdeas(i).empty())
+			std::cout << i << ": " << m_brain->getIdeas(i) << std::endl;
+	}	
+}
+
+void Animal::setIdea(unsigned int t_pos, std::string t_idea)
+{
+	m_brain->setIdeas(t_pos, t_idea);
+}
+
+Brain* Animal::getBrainPtr(void)
+{
+	return m_brain;
+}
+
 Animal::~Animal()
 {
 	std::cout << "Animal destructor is called" << std::endl;

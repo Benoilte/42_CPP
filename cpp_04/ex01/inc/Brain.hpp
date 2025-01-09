@@ -2,6 +2,7 @@
 #define BRAIN_HPP
 
 # include <iostream>
+#include "colors.hpp"
 
 class Brain
 {
