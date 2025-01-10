@@ -20,14 +20,8 @@ Dog::~Dog()
 
 Dog& Dog::operator=(const Dog &t_rhs)
 {
-	std::cout << RED << "Dog operator assignement is called" << RESET << std::endl;
 	if (this != &t_rhs)
-	{
 		Animal::operator=(t_rhs);
-		delete m_brain;
-		m_brain = new Brain();
-		*m_brain = *t_rhs.m_brain;
-	}
 	return *this;
 
 }

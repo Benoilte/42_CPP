@@ -21,12 +21,7 @@ Cat::~Cat()
 Cat& Cat::operator=(const Cat &t_rhs)
 {
 	if (this != &t_rhs)
-	{
 		Animal::operator=(t_rhs);
-		delete m_brain;
-		m_brain = new Brain();
-		*m_brain = *t_rhs.m_brain;
-	}
 	return *this;
 }
 

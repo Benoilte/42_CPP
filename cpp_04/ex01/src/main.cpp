@@ -92,8 +92,8 @@ void test1(void)
 void test2(void)
 {
 	Animal	*animals[6];
-	Animal	*cat = new Cat();	
-	Animal	*dog = new Dog();	
+	Animal	*cat = new Cat();
+	Animal	*dog = new Dog();
 
 	// set dog ideas
 	dog->setIdea(0, "I'm hungry!");
@@ -132,7 +132,7 @@ void test2(void)
 
 	// copy dog in position 3 into dog in position 1;
 	std::cout << YELLOW << "copy dog in position 3 into dog in position 1: " << RESET << std::endl;
-	animals[1] = animals[3];
+	*animals[1] = *animals[3];
 	std::cout << animals[1]->getType() << " - " << animals[1]->getBrainPtr() << std::endl;
 	animals[1]->displayIdeas();
 	animals[1]->makeSound();
