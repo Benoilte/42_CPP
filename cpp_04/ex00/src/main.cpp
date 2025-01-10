@@ -74,7 +74,7 @@ void test2(void)
 void test3(void)
 {
 	const Dog* dog = new Dog();
-	const Animal* cat = new Cat();
+	const Cat* cat = new Cat();
 
 	std::cout << std::endl;
 	std::cout << dog->getType() << " " << std::endl;

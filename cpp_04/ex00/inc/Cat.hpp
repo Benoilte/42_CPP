@@ -3,6 +3,7 @@
 
 # include <iostream>
 #include "Animal.hpp"
+#include "colors.hpp"
 
 class Cat : public Animal
 {

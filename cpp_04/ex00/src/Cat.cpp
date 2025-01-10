@@ -2,17 +2,17 @@
 
 Cat::Cat() : Animal("Cat")
 {
-	std::cout << "Cat default constructor is called" << std::endl;
+	std::cout << YELLOW << "Cat default constructor is called" << RESET << std::endl;
 }
 
 Cat::Cat(const Cat &t_src) : Animal(t_src)
 {
-	std::cout << "Cat copy constructor is called" << std::endl;
+	std::cout << YELLOW << "Cat copy constructor is called" << RESET << std::endl;
 }
 
 Cat::~Cat()
 {
-	std::cout << "Cat destructor is called" << std::endl;
+	std::cout << YELLOW << "Cat destructor is called" << RESET << std::endl;
 }
 
 Cat& Cat::operator=(const Cat &t_rhs)
