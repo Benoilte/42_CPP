@@ -9,7 +9,6 @@ class IMateriaSource
 	public:
 
 		IMateriaSource();
-		// IMateriaSource(int const t_n);
 		IMateriaSource(const IMateriaSource &t_src);
 		virtual ~IMateriaSource();
 

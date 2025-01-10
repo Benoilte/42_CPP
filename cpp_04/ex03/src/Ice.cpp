@@ -29,12 +29,12 @@ AMateria* Ice::clone() const
 	return (new Ice());
 }
 
-void AMateria::use(ICharacter& target)
+void Ice::use(ICharacter& target)
 {
 	std::cout << "* shoots an ice bolt at " << target.getName() << " *";
 }
 // std::ostream& operator<<(std::ostream &t_out, Ice const &t_rhs)
 // {
 // 	t_out << t_rhs.getFoo();
-// 	return t_out; 
+// 	return t_out;
 // }
