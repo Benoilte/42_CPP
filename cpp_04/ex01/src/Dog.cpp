@@ -14,8 +14,8 @@ Dog::Dog(const Dog &t_src)  : Animal(t_src)
 
 Dog::~Dog()
 {
-	std::cout << CYAN << "Dog destructor is called" << RESET << std::endl;
 	delete m_brain;
+	std::cout << CYAN << "Dog destructor is called" << RESET << std::endl;
 }
 
 Dog& Dog::operator=(const Dog &t_rhs)

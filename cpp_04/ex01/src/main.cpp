@@ -45,10 +45,6 @@ void test0(void)
 	Dog		dog2(dog1);
 	Cat		cat2(cat1);
 
-	std::cout << std::endl;
-	std::cout << dog2.getType() << " " << std::endl;
-	std::cout << cat2.getType() << " " << std::endl;
-	std::cout << std::endl;
 
 	// display dog2 ideas
 	std::cout << "dog2's ideas: " << std::endl;
@@ -60,10 +56,16 @@ void test0(void)
 	cat2.displayIdeas();
 	std::cout << std::endl;
 
-	animal.makeSound();
+	std::cout << std::endl;
+	std::cout << animal.getType() << "\t";
+	animal.makeSound();	// will output the animal song!
+	std::cout << dog1.getType() << "\t";
 	dog1.makeSound();	//will output the dog sound!
-	dog2.makeSound();	//will output the dog sound!
+	std::cout << cat1.getType() << "\t";
 	cat1.makeSound();	//will output the cat sound!
+	std::cout << dog2.getType() << "\t";
+	dog2.makeSound();	//will output the dog sound!
+	std::cout << cat2.getType() << "\t";
 	cat2.makeSound();	//will output the cat sound!
 	std::cout << std::endl;
 }
@@ -75,13 +77,12 @@ void test1(void)
 	const Animal* cat = new Cat();
 
 	std::cout << std::endl;
-	std::cout << dog->getType() << " " << std::endl;
-	std::cout << cat->getType() << " " << std::endl;
-	std::cout << std::endl;
-
-	cat->makeSound();	//will output the cat sound!
-	dog->makeSound();	//will output the dog sound!
+	std::cout << meta->getType() << "\t";
 	meta->makeSound();	//will output the animal sound!
+	std::cout << dog->getType() << "\t";
+	dog->makeSound();	//will output the dog sound!
+	std::cout << cat->getType() << "\t";
+	cat->makeSound();	//will output the cat sound!
 	std::cout << std::endl;
 
 	delete meta;

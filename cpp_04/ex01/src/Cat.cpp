@@ -14,8 +14,8 @@ Cat::Cat(const Cat &t_src) : Animal(t_src)
 
 Cat::~Cat()
 {
-	std::cout << YELLOW << "Cat destructor is called" << RESET << std::endl;
 	delete m_brain;
+	std::cout << YELLOW << "Cat destructor is called" << RESET << std::endl;
 }
 
 Cat& Cat::operator=(const Cat &t_rhs)

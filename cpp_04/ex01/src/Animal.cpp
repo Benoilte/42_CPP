@@ -8,6 +8,8 @@ Animal::Animal()
 }
 
 Animal::Animal(const Animal &t_src)
+: 	m_type("Animal"),
+	m_brain(NULL)
 {
 	std::cout << "Animal copy constructor is called" << std::endl;
 	*this = t_src;
