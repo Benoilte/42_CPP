@@ -12,8 +12,6 @@ class IMateriaSource
 		IMateriaSource(const IMateriaSource &t_src);
 		virtual ~IMateriaSource();
 
-		// IMateriaSource	&operator=(const IMateriaSource &t_rhs);
-
 		virtual void learnMateria(AMateria* t_materia) = 0;
 		virtual AMateria* createMateria(std::string const & type) = 0;
 

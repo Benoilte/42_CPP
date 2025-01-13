@@ -3,12 +3,15 @@
 
 # include <iostream>
 # include "IMateriaSource.hpp"
+# include "colors.hpp"
 
 class MateriaSource : public IMateriaSource
 {
 	private:
 
-		AMateria	*m_memory[4];
+		static const int	m_memorySize;
+
+		AMateria			*m_memory[4];
 
 	public:
 
@@ -18,8 +21,10 @@ class MateriaSource : public IMateriaSource
 
 		MateriaSource	&operator=(const MateriaSource &t_rhs);
 
-		virtual void learnMateria(AMateria* t_materia);
-		virtual AMateria* createMateria(std::string const & type);
+		virtual void		learnMateria(AMateria* t_materia);
+		virtual AMateria	*createMateria(std::string const & type);
+
+		static	void		displayMateriaSources(const MateriaSource &m1, const MateriaSource &cm2);
 
 };
 

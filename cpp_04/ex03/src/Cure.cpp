@@ -8,7 +8,6 @@ Cure::Cure() : AMateria("cure")
 Cure::Cure(const Cure &t_src) : AMateria(t_src)
 {
 	*this = t_src;
-
 	return ;
 }
 
@@ -29,13 +28,8 @@ AMateria* Cure::clone() const
 	return (new Cure());
 }
 
-void Cure::use(ICharacter& target)
+void Cure::use(ICharacter& t_target)
 {
-	std::cout << "* heals " << target.getName() << "’s wounds *";
+	std::cout << "* heals " << t_target.getName() << "’s wounds *" << std::endl;
 }
 
-// std::ostream& operator<<(std::ostream &t_out, Cure const &t_rhs)
-// {
-// 	t_out << t_rhs.getFoo();
-// 	return t_out;
-// }

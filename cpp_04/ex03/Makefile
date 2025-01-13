@@ -1,10 +1,10 @@
-NAME 			=	interface
+NAME 			=	interfaces
 
 SRC_DIR			=	src/
 OBJ_DIR			=	obj/
 DEP_DIR			=	dep/
 
-SRC_FILES		=	main AMateria ICharacter IMateriaSource MateriaSource Ice Cure
+SRC_FILES		=	main AMateria ICharacter Character IMateriaSource MateriaSource Ice Cure Fire
 
 INC				=	inc/.
 
@@ -15,7 +15,7 @@ DEPS			=	$(addprefix $(DEP_DIR), $(addsuffix .d, $(SRC_FILES)))
 INC_PATHS		=	$(addprefix -I, $(INC))
 
 CC				=	c++
-COMP_FLAGS		=	-Wall -Wextra -Werror -O2
+COMP_FLAGS		=	-Wall -Wextra -Werror -g
 CPP_FLAGS		=	-std=c++98
 DFLAGS			:=	-MMD -MF
 DEP_FILE		=	$(DEP_DIR)$*.d

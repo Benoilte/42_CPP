@@ -9,7 +9,6 @@ class ICharacter
 	public:
 
 		ICharacter();
-		// ICharacter(int const t_n);
 		ICharacter(const ICharacter &t_src);
 		virtual ~ICharacter();
 
@@ -17,8 +16,6 @@ class ICharacter
 		virtual void				equip(AMateria* t_materia) = 0;
 		virtual void				unequip(int t_idx) = 0;
 		virtual void				use(int t_idx, ICharacter& t_target) = 0;
-
-		// ICharacter	&operator=(const ICharacter &t_rhs);
 
 };
 
