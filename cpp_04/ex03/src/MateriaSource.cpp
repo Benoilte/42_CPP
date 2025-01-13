@@ -69,12 +69,12 @@ void MateriaSource::displayMateriaSources(const MateriaSource &m1, const Materia
 	{
 		std::cout << i << ": "; 
 		if (m1.m_memory[i] != NULL)
-			std::cout << "m1: " << m1.m_memory[i]->getType() << "\t- " << (m1.m_memory + i) << std::endl;
-		else 
+			std::cout << "m1: " << m1.m_memory[i]->getType() << "\t- " << (m1.m_memory[i]) << std::endl;
+		else
 			std::cout << "m1: " << "null" << std::endl;
 		if (m2.m_memory[i] != NULL)
-			std::cout << "   m2: " << m2.m_memory[i]->getType() << "\t- " << (m2.m_memory + i) << std::endl;
-		else 
+			std::cout << "   m2: " << m2.m_memory[i]->getType() << "\t- " << (m2.m_memory[i]) << std::endl;
+		else
 			std::cout << "   m2: " << "null" << std::endl;
 		std::cout << std::endl;
 	}

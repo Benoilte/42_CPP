@@ -111,10 +111,10 @@ void Character::displayCharacters(const Character &c1)
 	std::cout << "Display characters inventory: " << std::endl;
 	for (unsigned int i = 0; i < size; i++)
 	{
-		std::cout << i << ": "; 
+		std::cout << i << ": ";
 		if (c1.m_inventory[i] != NULL)
-			std::cout << "c1: " << c1.m_inventory[i]->getType() << "\t- " << (c1.m_inventory + i) << std::endl;
-		else 
+			std::cout << "c1: " << c1.m_inventory[i]->getType() << "\t- " << (c1.m_inventory[i]) << std::endl;
+		else
 			std::cout << "c1: " << "null" << std::endl;
 		std::cout << std::endl;
 	}
@@ -122,10 +122,10 @@ void Character::displayCharacters(const Character &c1)
 		std::cout << "Display characters unused materia: " << std::endl;
 	for (unsigned int i = 0; i < c1.m_unusedSize; i++)
 	{
-		std::cout << i << ": "; 
+		std::cout << i << ": ";
 		if (i < c1.m_unusedSize)
-			std::cout << "c1: " << c1.m_unused[i]->getType() << "\t- " << (c1.m_unused + i) << std::endl;
-		else 
+			std::cout << "c1: " << c1.m_unused[i]->getType() << "\t- " << (c1.m_unused[i]) << std::endl;
+		else
 			std::cout << "c1: " << "null" << std::endl;
 		std::cout << std::endl;
 	}
@@ -140,14 +140,14 @@ void Character::displayCharacters(const Character &c1, const Character &c2)
 	std::cout << "Display characters inventory: " << std::endl;
 	for (unsigned int i = 0; i < size; i++)
 	{
-		std::cout << i << ": "; 
+		std::cout << i << ": ";
 		if (c1.m_inventory[i] != NULL)
-			std::cout << "c1: " << c1.m_inventory[i]->getType() << "\t- " << (c1.m_inventory + i) << std::endl;
-		else 
+			std::cout << "c1: " << c1.m_inventory[i]->getType() << "\t- " << (c1.m_inventory[i]) << std::endl;
+		else
 			std::cout << "c1: " << "null" << std::endl;
 		if (c2.m_inventory[i] != NULL)
-			std::cout << "   c2: " << c2.m_inventory[i]->getType() << "\t- " << (c2.m_inventory + i) << std::endl;
-		else 
+			std::cout << "   c2: " << c2.m_inventory[i]->getType() << "\t- " << (c2.m_inventory[i]) << std::endl;
+		else
 			std::cout << "   c2: " << "null" << std::endl;
 		std::cout << std::endl;
 	}
@@ -156,14 +156,14 @@ void Character::displayCharacters(const Character &c1, const Character &c2)
 		std::cout << "Display characters unused materia: " << std::endl;
 	for (unsigned int i = 0; i < size; i++)
 	{
-		std::cout << i << ": "; 
+		std::cout << i << ": ";
 		if (i < c1.m_unusedSize)
-			std::cout << "c1: " << c1.m_unused[i]->getType() << "\t- " << (c1.m_unused + i) << std::endl;
-		else 
+			std::cout << "c1: " << c1.m_unused[i]->getType() << "\t- " << (c1.m_unused[i]) << std::endl;
+		else
 			std::cout << "c1: " << "null" << std::endl;
 		if (i < c2.m_unusedSize)
-			std::cout << "   c2: " << c2.m_unused[i]->getType() << "\t- " << (c2.m_unused + i) << std::endl;
-		else 
+			std::cout << "   c2: " << c2.m_unused[i]->getType() << "\t- " << (c2.m_unused[i]) << std::endl;
+		else
 			std::cout << "   c2: " << "null" << std::endl;
 		std::cout << std::endl;
 	}
