@@ -15,7 +15,7 @@ DEPS			=	$(addprefix $(DEP_DIR), $(addsuffix .d, $(SRC_FILES)))
 INC_PATHS		=	$(addprefix -I, $(INC))
 
 CC				=	c++
-COMP_FLAGS		=	-Wall -Wextra -Werror -g
+COMP_FLAGS		=	-Wall -Wextra -Werror
 CPP_FLAGS		=	-std=c++98
 DFLAGS			:=	-MMD -MF
 DEP_FILE		=	$(DEP_DIR)$*.d

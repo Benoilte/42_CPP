@@ -197,6 +197,9 @@ void	test4(void)
 	ICharacter* ben = new Character("me");
 	AMateria* tmp;
 
+	std::cout << CYAN << "\nTry to create unexisting materia and equip ben" << RESET << std::endl;
+	tmp = src->createMateria("wood");
+	ben->equip(tmp);
 	std::cout << CYAN << "\nEquip ben with 5 materia. The last one (fire) will be set as unused" << RESET << std::endl;
 	tmp = src->createMateria("ice");
 	ben->equip(tmp);

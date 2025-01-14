@@ -4,9 +4,9 @@ void	help()
 {
 	std::cout << "Available command: " << std::endl;
 	std::cout << "'./checkYourAnimals 0': test Copy constructor and overload assignement" << std::endl;
-	std::cout << "'./checkYourAnimals 1': test given from subdogect" << std::endl;
-	std::cout << "'./checkYourAnimals 2': test WrongAnimal and Wrong cat" << std::endl;
-	std::cout << "'./checkYourAnimals 3': test pointer type same as class type" << std::endl;
+	std::cout << "'./checkYourAnimals 1': test given from subject" << std::endl;
+	std::cout << "'./checkYourAnimals 2': test WrongAnimal and WrongCat class" << std::endl;
+	std::cout << "'./checkYourAnimals 3': test as the subject. With Dog and Cat pointer" << std::endl;
 }
 
 void test0(void)
@@ -46,7 +46,7 @@ void test1(void)
 
 	cat->makeSound();	//will output the cat sound!
 	dog->makeSound();	//will output the dog sound!
-	meta->makeSound();	//will output the animal sound!
+	meta->makeSound();	//will output the default animal sound!
 	std::cout << std::endl;
 
 	delete meta;
