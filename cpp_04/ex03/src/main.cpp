@@ -187,9 +187,12 @@ void	test4(void)
 {
 	IMateriaSource* src = new MateriaSource();
 
+	std::cout << CYAN << "\nlearn 5 Materia int src MateriaSource the last one (ice) won't be added and directly deleted" << RESET << std::endl;
 	src->learnMateria(new Ice());
 	src->learnMateria(new Cure());
 	src->learnMateria(new Fire());
+	src->learnMateria(new Cure());
+	src->learnMateria(new Ice());
 
 	ICharacter* ben = new Character("me");
 	AMateria* tmp;

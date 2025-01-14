@@ -44,7 +44,9 @@ void MateriaSource::learnMateria(AMateria* t_materia)
 			return;
 		}
 	}
-	std::cout << "materia memory reached its maximum capacity: " << m_memorySize << std::endl;
+	std::cout	<< "materia memory reached its maximum capacity: " 
+				<< m_memorySize << "\t" << t_materia->getType() 
+				<< " materia will be destroy" << std::endl;
 	delete t_materia;
 }
 
