@@ -3,10 +3,11 @@
 void	help(void)
 {
 	std::cout << "Available command: " << std::endl;
-	std::cout << "'./Interfaces 0': test AMateria class with Ice and Cure implementing clone function" << std::endl;
-	std::cout << "'./Interfaces 1': test given from subject" << std::endl;
-	std::cout << "'./Interfaces 2': test Character copy constructor and overlad assignement operator" << std::endl;
-	std::cout << "'./Interfaces 3': test MateriaSource copy constructor and overlad assignement operator" << std::endl;
+	std::cout << "'./Interfaces 0': test AMateria class: copy constructor and overlad assignement operator and clone function" << std::endl;
+	std::cout << "'./Interfaces 1': test Character class: copy constructor and overlad assignement operator" << std::endl;
+	std::cout << "'./Interfaces 2': test MateriaSource class: copy constructor and overlad assignement operator" << std::endl;
+	std::cout << "'./Interfaces 3': test given from subject" << std::endl;
+	std::cout << "'./Interfaces 4': test different characters capacity" << std::endl;
 }
 
 void	test0(void)
@@ -15,17 +16,28 @@ void	test0(void)
 	AMateria *cure = new Cure();
 	AMateria *fire = new Fire();
 
-	std::cout << "ice type: " << &ice << " - " << ice->getType() << std::endl;
-	std::cout << "cure type: " << &cure << " - " << cure->getType() << std::endl;
-	std::cout << "cure type: " << &fire << " - " << fire->getType() << std::endl;
+	std::cout << "ice type:\t" << ice->getType() << " - " << &ice << std::endl;
+	std::cout << "cure type:\t" << cure->getType() << " - " << &cure << std::endl;
+	std::cout << "cure type:\t" << fire->getType() << " - " << &fire << std::endl;
 
-	std::cout << YELLOW << "\nClone Ice, Cure and Fire class" << RESET << std::endl;
+	std::cout << YELLOW << "\nClone Ice, Cure and Fire class:" << RESET << std::endl;
 	AMateria *ice_cloned = ice->clone();
 	AMateria *cure_cloned = cure->clone();
 	AMateria *fire_cloned = fire->clone();
-	std::cout << "ice_cloned type: " << &ice_cloned << " - " << ice_cloned->getType() << std::endl;
-	std::cout << "cure_cloned type: " << &cure_cloned << " - " << cure_cloned->getType() << std::endl;
-	std::cout << "fire_cloned type: " << &fire_cloned << " - " << fire_cloned->getType() << std::endl;
+	std::cout << "ice_cloned type:\t" << ice_cloned->getType() << " - " << &ice_cloned << std::endl;
+	std::cout << "cure_cloned type:\t" << cure_cloned->getType() << " - " << &cure_cloned << std::endl;
+	std::cout << "fire_cloned type:\t" << fire_cloned->getType() << " - " << &fire_cloned << std::endl;
+
+	std::cout << YELLOW << "\nCopy Ice into Ice_copy with overload assignement:" << RESET << std::endl;
+	AMateria *ice_copy = new Ice();
+	*(Ice *)ice_copy = *(Ice *)ice;
+	std::cout << "ice type:\t" << ice->getType() << " - " << &ice << std::endl;
+	std::cout << "ice_copy type:\t" << ice_copy->getType() << " - " << &ice_copy << std::endl;
+
+	std::cout << YELLOW << "\nCopy Cure into Cure_copy with copy constructor:" << RESET << std::endl;
+	AMateria *cure_copy = new Cure(*(Cure *)cure);
+	std::cout << "cure type:\t" << cure->getType() << " - " << &cure << std::endl;
+	std::cout << "cure_copy type:\t" << cure_copy->getType() << " - " << &cure_copy << std::endl;
 
 	delete ice;
 	delete cure;
@@ -33,38 +45,11 @@ void	test0(void)
 	delete ice_cloned;
 	delete cure_cloned;
 	delete fire_cloned;
+	delete ice_copy;
+	delete cure_copy;
 }
 
 void	test1(void)
-{
-	IMateriaSource* src = new MateriaSource();
-
-	src->learnMateria(new Ice());
-	src->learnMateria(new Cure());
-	src->learnMateria(new Fire());
-
-	ICharacter* me = new Character("me");
-	AMateria* tmp;
-
-	tmp = src->createMateria("ice");
-	me->equip(tmp);
-	tmp = src->createMateria("cure");
-	me->equip(tmp);
-	tmp = src->createMateria("fire");
-	me->equip(tmp);
-
-	ICharacter* bob = new Character("bob");
-
-	me->use(0, *bob);
-	me->use(1, *bob);
-	me->use(2, *bob);
-
-	delete bob;
-	delete me;
-	delete src;
-}
-
-void	test2(void)
 {
 	IMateriaSource* src = new MateriaSource();
 
@@ -122,10 +107,11 @@ void	test2(void)
 
 	std::cout << std::endl;
 
-	std::cout << CYAN << "unequip second Materia of bob and display it" << RESET << std::endl;
+	std::cout << CYAN << "unequip second Materia of bob and copy bob into joe" << RESET << std::endl;
 	Character::displayCharacters(*(Character *)bob);
 	bob->unequip(2);
-	Character::displayCharacters(*(Character *)bob);
+	*(Character *)joe = *(Character *)bob;
+	Character::displayCharacters(*(Character *)bob, *(Character *)joe);
 
 	delete bob;
 	delete bob_copy;
@@ -135,7 +121,7 @@ void	test2(void)
 	delete src;
 }
 
-void	test3(void)
+void	test2(void)
 {
 	IMateriaSource* src1 = new MateriaSource();
 
@@ -167,6 +153,82 @@ void	test3(void)
 	delete src3;
 }
 
+void	test3(void)
+{
+	IMateriaSource* src = new MateriaSource();
+
+	src->learnMateria(new Ice());
+	src->learnMateria(new Cure());
+	src->learnMateria(new Fire());
+
+	ICharacter* ben = new Character("me");
+	AMateria* tmp;
+
+	tmp = src->createMateria("ice");
+	ben->equip(tmp);
+	tmp = src->createMateria("cure");
+	ben->equip(tmp);
+	tmp = src->createMateria("fire");
+	ben->equip(tmp);
+
+
+	ICharacter* bob = new Character("bob");
+
+	ben->use(0, *bob);
+	ben->use(1, *bob);
+	ben->use(2, *bob);
+
+	delete bob;
+	delete ben;
+	delete src;
+}
+
+void	test4(void)
+{
+	IMateriaSource* src = new MateriaSource();
+
+	src->learnMateria(new Ice());
+	src->learnMateria(new Cure());
+	src->learnMateria(new Fire());
+
+	ICharacter* ben = new Character("me");
+	AMateria* tmp;
+
+	std::cout << CYAN << "\nEquip ben with 5 materia. The last one (fire) will be set as unused" << RESET << std::endl;
+	tmp = src->createMateria("ice");
+	ben->equip(tmp);
+	tmp = src->createMateria("cure");
+	ben->equip(tmp);
+	tmp = src->createMateria("fire");
+	ben->equip(tmp);
+	tmp = src->createMateria("ice");
+	ben->equip(tmp);
+	tmp = src->createMateria("fire");
+	ben->equip(tmp);
+	Character::displayCharacters(*(Character *)ben);
+
+	std::cout << CYAN << "\nCreate bob and use the three first materia of ben with bob as target" << RESET << std::endl;
+	ICharacter* bob = new Character("bob");
+	ben->use(0, *bob);
+	ben->use(1, *bob);
+	ben->use(2, *bob);
+
+	std::cout << CYAN << "\nUnequip position 1 (cure materia) of ben and try to use this materia" << RESET << std::endl;
+	ben->unequip(1);
+	ben->use(1, *bob);
+	Character::displayCharacters(*(Character *)ben);
+
+	std::cout << CYAN << "\nEquip ben with an additional fire and us it" << RESET << std::endl;
+	tmp = src->createMateria("fire");
+	ben->equip(tmp);
+	ben->use(1, *bob);
+	Character::displayCharacters(*(Character *)ben);
+
+	delete bob;
+	delete ben;
+	delete src;
+}
+
 int	main(int argc, char **argv)
 {
 	if ((argc == 2) && ((std::string)argv[1]).size() == 1)
@@ -191,6 +253,11 @@ int	main(int argc, char **argv)
 			case '3':
 				std::cout << "test 3:" << std::endl;
 				test3();
+				break;
+
+			case '4':
+				std::cout << "test 4:" << std::endl;
+				test4();
 				break;
 
 			default:

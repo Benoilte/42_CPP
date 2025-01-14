@@ -5,7 +5,7 @@ AMateria::AMateria()
 	/*Constructor*/
 }
 
-AMateria::AMateria(const AMateria &t_src)
+AMateria::AMateria(const AMateria &t_src) : m_type(t_src.getType())
 {
 	(void)t_src;
 }

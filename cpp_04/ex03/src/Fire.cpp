@@ -30,5 +30,5 @@ AMateria* Fire::clone() const
 
 void Fire::use(ICharacter& t_target)
 {
-	std::cout << "* shoots an fire ball at " << t_target.getName() << " *" << std::endl;
+	std::cout << "* shoots a fire ball at " << t_target.getName() << " *" << std::endl;
 }
