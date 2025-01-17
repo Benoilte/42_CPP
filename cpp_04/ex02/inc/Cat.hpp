@@ -3,6 +3,7 @@
 
 # include <iostream>
 #include "AAnimal.hpp"
+#include "Brain.hpp"
 #include "colors.hpp"
 
 class Cat : public AAnimal
@@ -16,9 +17,13 @@ class Cat : public AAnimal
 		Cat	&operator=(const Cat &rhs);
 
 		void	makeSound() const;
+		void	displayIdeas() const;
+		void	setIdea(unsigned int t_pos, std::string t_idea);
+		Brain	*getBrainPtr(void);
 
 	private:
 
+		Brain		*m_brain;
 };
 
 #endif

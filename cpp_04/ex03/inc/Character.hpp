@@ -11,11 +11,12 @@ class Character : public ICharacter
 	private:
 
 		static const int	m_inventorySize;
+		static AMateria		**m_unused;
+		static unsigned int	m_unusedSize;
+		static unsigned int	m_characterCount;
 
 		std::string const	m_name;
 		AMateria			*m_inventory[4];
-		AMateria			**m_unused;
-		unsigned int		m_unusedSize;
 
 	public:
 
@@ -34,6 +35,7 @@ class Character : public ICharacter
 
 		static	void				displayCharacters(const Character &c1);
 		static	void				displayCharacters(const Character &c1, const Character &c2);
+		static	void				displayUnusedMateria();
 };
 
 #endif

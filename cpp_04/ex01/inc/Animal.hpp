@@ -16,9 +16,9 @@ class Animal
 
 		std::string		getType() const;
 		virtual void	makeSound() const;
-		virtual void			displayIdeas() const;
-		virtual void			setIdea(unsigned int t_pos, std::string t_idea);
-		virtual Brain			*getBrainPtr(void);
+		virtual void	displayIdeas() const;
+		virtual void	setIdea(unsigned int t_pos, std::string t_idea);
+		virtual Brain	*getBrainPtr(void);
 
 	protected:
 

@@ -18,6 +18,7 @@ class Brain
 		void				setIdeas(unsigned int t_pos, std::string t_idea);
 
 	private:
+
 		std::string	m_ideas[100];
 	
 };

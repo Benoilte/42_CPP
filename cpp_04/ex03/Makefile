@@ -4,7 +4,7 @@ SRC_DIR			=	src/
 OBJ_DIR			=	obj/
 DEP_DIR			=	dep/
 
-SRC_FILES		=	main AMateria ICharacter Character IMateriaSource MateriaSource Ice Cure Fire
+SRC_FILES		=	main AMateria Character MateriaSource Ice Cure Fire
 
 INC				=	inc/.
 

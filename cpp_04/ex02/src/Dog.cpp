@@ -14,19 +14,41 @@ Dog::Dog(const Dog &t_src)  : AAnimal(t_src)
 
 Dog::~Dog()
 {
-	delete m_brain;
+	if (m_brain != NULL)
+		delete m_brain;
 	std::cout << CYAN << "Dog destructor is called" << RESET << std::endl;
 }
 
 Dog& Dog::operator=(const Dog &t_rhs)
 {
 	if (this != &t_rhs)
+	{
 		AAnimal::operator=(t_rhs);
+		*m_brain = *t_rhs.m_brain;
+	}
 	return *this;
-
 }
 
 void Dog::makeSound() const
 {
 	std::cout << "Wouaff" << std::endl;
+}
+
+void Dog::displayIdeas() const
+{
+	for (int i = 0; i < 100; i++)
+	{
+		if (!m_brain->getIdeas(i).empty())
+			std::cout << i << ": " << m_brain->getIdeas(i) << std::endl;
+	}
+}
+
+void Dog::setIdea(unsigned int t_pos, std::string t_idea)
+{
+	m_brain->setIdeas(t_pos, t_idea);
+}
+
+Brain* Dog::getBrainPtr(void)
+{
+	return m_brain;
 }

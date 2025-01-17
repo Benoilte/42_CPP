@@ -83,6 +83,7 @@ void	test1(void)
 	*(Character *)bob = *(Character *)ben;
 	Character::displayCharacters(*(Character *)ben, *(Character *)bob);
 
+	Character::displayUnusedMateria();
 	std::cout << std::endl;
 
 	std::cout << CYAN << "create 'joe' character with 0 materia in this inventory and 0 unused materia\n";
@@ -93,18 +94,19 @@ void	test1(void)
 	*(Character *)ben = *(Character *)joe;
 	Character::displayCharacters(*(Character *)ben, *(Character *)joe);
 
+	Character::displayUnusedMateria();
 	std::cout << std::endl;
 
 	std::cout << CYAN << "create 'bob_copy' character with copy constructor" << RESET << std::endl;
 	ICharacter* bob_copy = new Character((*(Character *)bob));
 	Character::displayCharacters(*(Character *)bob_copy, *(Character *)bob);
-
+	Character::displayUnusedMateria();
 	std::cout << std::endl;
 
 	std::cout << CYAN << "create 'joe_copy' character with copy constructor" << RESET << std::endl;
 	ICharacter* joe_copy = new Character((*(Character *)joe));
 	Character::displayCharacters(*(Character *)joe_copy, *(Character *)joe);
-
+	Character::displayUnusedMateria();
 	std::cout << std::endl;
 
 	std::cout << CYAN << "unequip second Materia of bob and copy bob into joe" << RESET << std::endl;
@@ -112,6 +114,7 @@ void	test1(void)
 	bob->unequip(2);
 	*(Character *)joe = *(Character *)bob;
 	Character::displayCharacters(*(Character *)bob, *(Character *)joe);
+	Character::displayUnusedMateria();
 
 	delete bob;
 	delete bob_copy;
@@ -125,6 +128,7 @@ void	test2(void)
 {
 	IMateriaSource* src1 = new MateriaSource();
 
+	std::cout << CYAN << "learn 5 Materia to src1 MateriaSource. The fith will be destroy (Cure)" << RESET << std::endl;
 	src1->learnMateria(new Ice());
 	src1->learnMateria(new Cure());
 	src1->learnMateria(new Fire());
@@ -194,10 +198,10 @@ void	test4(void)
 	src->learnMateria(new Cure());
 	src->learnMateria(new Ice());
 
-	ICharacter* ben = new Character("me");
+	ICharacter* ben = new Character("ben");
 	AMateria* tmp;
 
-	std::cout << CYAN << "\nTry to create unexisting materia and equip ben" << RESET << std::endl;
+	std::cout << CYAN << "\nTry to create unexisting materia and equip ben. (Nothing should happen)" << RESET << std::endl;
 	tmp = src->createMateria("wood");
 	ben->equip(tmp);
 	std::cout << CYAN << "\nEquip ben with 5 materia. The last one (fire) will be set as unused" << RESET << std::endl;
@@ -212,6 +216,7 @@ void	test4(void)
 	tmp = src->createMateria("fire");
 	ben->equip(tmp);
 	Character::displayCharacters(*(Character *)ben);
+	Character::displayUnusedMateria();
 
 	std::cout << CYAN << "\nCreate bob and use the three first materia of ben with bob as target" << RESET << std::endl;
 	ICharacter* bob = new Character("bob");
@@ -223,12 +228,14 @@ void	test4(void)
 	ben->unequip(1);
 	ben->use(1, *bob);
 	Character::displayCharacters(*(Character *)ben);
+	Character::displayUnusedMateria();
 
 	std::cout << CYAN << "\nEquip ben with an additional fire and us it" << RESET << std::endl;
 	tmp = src->createMateria("fire");
 	ben->equip(tmp);
 	ben->use(1, *bob);
 	Character::displayCharacters(*(Character *)ben);
+	Character::displayUnusedMateria();
 
 	delete bob;
 	delete ben;
