@@ -1,13 +1,13 @@
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat() 
-: 	m_name("Anonymous"), 
+Bureaucrat::Bureaucrat()
+: 	m_name("Anonymous"),
 	m_grade(150)
 {
     /*Constructor*/
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &t_src) 
+Bureaucrat::Bureaucrat(const Bureaucrat &t_src)
 :	m_name(t_src.m_name)
 {
 	*this = t_src;
@@ -15,7 +15,7 @@ Bureaucrat::Bureaucrat(const Bureaucrat &t_src)
 	return ;
 }
 
-Bureaucrat::Bureaucrat(const std::string t_name, int t_grade) 
+Bureaucrat::Bureaucrat(const std::string t_name, int t_grade)
 : 	m_name(t_name),
 	m_grade(150)
 {
@@ -36,7 +36,7 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat &t_rhs)
 {
 	if (this != &t_rhs)
 		this->m_grade = t_rhs.getGrade();
-	
+
 	return *this;
 }
 
@@ -50,7 +50,7 @@ void Bureaucrat::decrementGrade() { m_grade++; }
 
 const char	*Bureaucrat::GradeTooHighException::what() const throw()
 {
-	std::cout << this->what() << std::endl;
+	// std::cout << this->what() << std::endl;
 	return "Grade reach too high value";
 }
 
@@ -62,5 +62,5 @@ const char	*Bureaucrat::GradeTooLowException::what() const throw()
 std::ostream& operator<<(std::ostream &t_out, Bureaucrat const &t_rhs)
 {
 	t_out << t_rhs.getName() << ", bureaucrat grade " << t_rhs.getGrade();
-	return t_out; 
+	return t_out;
 }
