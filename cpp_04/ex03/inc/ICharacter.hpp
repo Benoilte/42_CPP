@@ -8,9 +8,7 @@ class ICharacter
 {
 	public:
 
-		ICharacter();
-		ICharacter(const ICharacter &t_src);
-		virtual ~ICharacter();
+		virtual ~ICharacter() {};
 
 		virtual std::string const	&getName() const = 0;
 		virtual void				equip(AMateria* t_materia) = 0;
