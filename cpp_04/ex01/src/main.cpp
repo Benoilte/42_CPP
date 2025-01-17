@@ -15,28 +15,20 @@ void test0(void)
 	Dog		dog1;
 	Cat		cat1;
 
-	// display their type
-	std::cout << std::endl;
-	std::cout << animal.getType() << " " << std::endl;
-	std::cout << dog1.getType() << " " << std::endl;
-	std::cout << cat1.getType() << " " << std::endl;
-	std::cout << std::endl;
-
 	// set dog1 ideas
 	dog1.setIdea(0, "I'm hungry!");
 	dog1.setIdea(1, "I want to eat a cat!");
 
 	// display dog1 ideas
-	std::cout << "dog1's ideas: " << std::endl;
+	std::cout << YELLOW << "\ndog1's ideas: " << RESET << std::endl;
 	dog1.displayIdeas();
-	std::cout << std::endl;
 
 	// set cat1 ideas
 	cat1.setIdea(0, "Please let me sleep");
-	cat1.setIdea(1, "Oh noooo i don't like this dog!");
+	cat1.setIdea(1, "Oh noooo I don't like this dog!");
 
 	// display cat1 ideas
-	std::cout << "cat1's ideas: " << std::endl;
+	std::cout << YELLOW << "cat1's ideas: " << RESET << std::endl;
 	cat1.displayIdeas();
 	std::cout << std::endl;
 
@@ -45,25 +37,43 @@ void test0(void)
 	Cat		cat2(cat1);
 
 	// display dog2 ideas
-	std::cout << "\ndog2's ideas: " << std::endl;
+	std::cout << YELLOW << "\ndog2's ideas: " << RESET << std::endl;
 	dog2.displayIdeas();
-	std::cout << std::endl;
 
 	// display cat2 ideas
-	std::cout << "cat2's ideas: " << std::endl;
+	std::cout << YELLOW << "cat2's ideas: " << RESET << std::endl;
 	cat2.displayIdeas();
 	std::cout << std::endl;
 
+	std::cout << CYAN << "Update dog2 and cat2 idea" << RESET << std::endl;
+	dog2.setIdea(0, "I don't want to eat anymore");
+	cat2.setIdea(1, "My best friend is a dog!");
+
+	// display dog1 ideas
+	std::cout << YELLOW << "\ndog1's ideas: " << RESET << std::endl;
+	dog1.displayIdeas();
+
+	// display dog2 ideas
+	std::cout << YELLOW << "dog2's ideas: " << RESET << std::endl;
+	dog2.displayIdeas();
 	std::cout << std::endl;
-	std::cout << animal.getType() << "\t" << "Brain existence: " << animal.getBrainPtr() << "\t\t";
-	animal.makeSound();	// will output the animal song!
-	std::cout << dog1.getType() << "\t" << "Brain existence: " << dog1.getBrainPtr() << "\t";
+
+	// display cat1 ideas
+	std::cout << YELLOW << "cat1's ideas: " << RESET << std::endl;
+	cat1.displayIdeas();
+
+	// display cat2 ideas
+	std::cout << YELLOW << "cat2's ideas: " << RESET << std::endl;
+	cat2.displayIdeas();
+
+	std::cout << std::endl;
+	std::cout << dog1.getType() << "1\t" << "Brain existence: " << dog1.getBrainPtr() << "\t";
 	dog1.makeSound();	//will output the dog sound!
-	std::cout << cat1.getType() << "\t" << "Brain existence: " << cat1.getBrainPtr() << "\t";
-	cat1.makeSound();	//will output the cat sound!
-	std::cout << dog2.getType() << "\t" << "Brain existence: " << dog2.getBrainPtr() << "\t";
+	std::cout << dog2.getType() << "2\t" << "Brain existence: " << dog2.getBrainPtr() << "\t";
 	dog2.makeSound();	//will output the dog sound!
-	std::cout << cat2.getType() << "\t" << "Brain existence: " << cat2.getBrainPtr() << "\t";
+	std::cout << cat1.getType() << "1\t" << "Brain existence: " << cat1.getBrainPtr() << "\t";
+	cat1.makeSound();	//will output the cat sound!
+	std::cout << cat2.getType() << "2\t" << "Brain existence: " << cat2.getBrainPtr() << "\t";
 	cat2.makeSound();	//will output the cat sound!
 	std::cout << std::endl;
 
@@ -73,18 +83,30 @@ void test0(void)
 
 	// display cat1 ideas
 	std::cout << std::endl;
-	std::cout << "cat1's ideas: " << std::endl;
+	std::cout << YELLOW << "cat1's ideas: " << RESET << std::endl;
 	cat1.displayIdeas();
-	std::cout << std::endl;
 
 	// display cat3 ideas
-	std::cout << "cat3's ideas: " << std::endl;
+	std::cout << YELLOW << "cat3's ideas: " << RESET << std::endl;
 	cat3.displayIdeas();
 	std::cout << std::endl;
 
-	std::cout << cat1.getType() << "\t" << "Brain existence: " << cat1.getBrainPtr() << "\t";
+	std::cout << CYAN << "Update cat3 idea" << RESET << std::endl;
+	cat3.setIdea(1, "I like Lasagna!");
+
+	// display cat1 ideas
+	std::cout << std::endl;
+	std::cout << YELLOW << "cat1's ideas: " << RESET << std::endl;
+	cat1.displayIdeas();
+
+	// display cat3 ideas
+	std::cout << YELLOW << "cat3's ideas: " << RESET << std::endl;
+	cat3.displayIdeas();
+	std::cout << std::endl;
+
+	std::cout << cat1.getType() << "1\t" << "Brain existence: " << cat1.getBrainPtr() << "\t";
 	cat1.makeSound();	//will output the cat sound!
-	std::cout << cat3.getType() << "\t" << "Brain existence: " << cat3.getBrainPtr() << "\t";
+	std::cout << cat3.getType() << "3\t" << "Brain existence: " << cat3.getBrainPtr() << "\t";
 	cat3.makeSound();	//will output the cat sound!
 	std::cout << std::endl;
 }
@@ -153,10 +175,15 @@ void test2(void)
 
 	// copy dog in position 3 into dog in position 1;
 	std::cout << YELLOW << "copy dog in position 3 into dog in position 1: " << RESET << std::endl;
-	*animals[1] = *animals[3];
+	*(Dog *)animals[1] = *(Dog *)animals[3];
 	std::cout << MAGENTA << 1 << ": "  << animals[1]->getType() << " Brain existence: " << animals[1]->getBrainPtr() << RESET << std::endl;
 	animals[1]->displayIdeas();
 	animals[1]->makeSound();
+	std::cout << std::endl;
+	animals[3]->setIdea(4, "I will be a magician!");
+	std::cout << MAGENTA << 3 << ": "  << animals[3]->getType() << " Brain existence: " << animals[3]->getBrainPtr() << RESET << std::endl;
+	animals[3]->displayIdeas();
+	animals[3]->makeSound();
 	std::cout << std::endl;
 
 	for (int i = 0; i < 6; i++)
