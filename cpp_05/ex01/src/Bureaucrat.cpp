@@ -46,7 +46,7 @@ int Bureaucrat::getGrade(void) const { return m_grade; }
 
 void Bureaucrat::incrementGrade()
 {
-	m_grade--; 
+	m_grade--;
 	if (m_grade < 1)
 		throw Bureaucrat::GradeTooHighException();
 }
@@ -63,11 +63,16 @@ void Bureaucrat::signForm(Form &t_form)
 	try
 	{
 		t_form.beSigned(*this);
-		std::cout << this->getName() << " signed form: " << t_form.getName() << std::endl;
+		std::cout	<< this->getName()
+					<< " signed form "
+					<< t_form.getName() << std::endl;
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << this->getName() << "  couldn’t sign form " << t_form.getName() << ":\t" << e.what() << std::endl;
+		std::cerr	<< this->getName()
+					<< "  couldn’t sign form "
+					<< t_form.getName() << ":\t"
+					<< e.what() << std::endl;
 	}
 }
 
@@ -76,11 +81,16 @@ void Bureaucrat::executeForm(Form &t_form)
 	try
 	{
 		t_form.beExectuted(*this);
-		std::cout << this->getName() << " execute form: " << t_form.getName() << std::endl;
+		std::cout	<< this->getName()
+					<< " execute form "
+					<< t_form.getName() << std::endl;
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << this->getName() << "  couldn’t execute form " << t_form.getName() << ":\t" << e.what() << std::endl;
+		std::cerr	<< this->getName()
+					<< "  couldn’t execute form "
+					<< t_form.getName() << ":\t"
+					<< e.what() << std::endl;
 	}
 }
 

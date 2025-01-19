@@ -3,16 +3,17 @@
 void	help()
 {
 	std::cout << "Available command: " << std::endl;
-	std::cout << "'./nightmareOffices 1': Raise Too high exception with constructor" << std::endl;
-	std::cout << "'./nightmareOffices 2': Raise Too high exception with increment function" << std::endl;
-	std::cout << "'./nightmareOffices 3': Raise Too low exception with constructor" << std::endl;
-	std::cout << "'./nightmareOffices 4': Raise Too low exception with decrement function" << std::endl;
+	std::cout << "'./nightmareOffices 1': Throw Too high exception with constructor" << std::endl;
+	std::cout << "'./nightmareOffices 2': Throw Too high exception with increment function" << std::endl;
+	std::cout << "'./nightmareOffices 3': Throw Too low exception with constructor" << std::endl;
+	std::cout << "'./nightmareOffices 4': Throw Too low exception with decrement function" << std::endl;
+	std::cout << "'./nightmareOffices 5': Test working case function without throwing exception" << std::endl;
 }
 
 void test1(void)
 {
 	std::cout << "test 1:" << std::endl;
-	
+
 	std::cout << YELLOW << "Instantiate a bureaucrat with grade 0" << RESET << std::endl;
 	Bureaucrat	yan("yan", 0);
 }
@@ -52,7 +53,7 @@ void test4(void)
 void test5(void)
 {
 	std::cout << "test 5:" << std::endl;
-	
+
 	std::cout << YELLOW << "Instantiate a bureaucrat 'joe' with grade 42" << RESET << std::endl;
 	Bureaucrat	joe("joe", 42);
 	std::cout << joe << std::endl;

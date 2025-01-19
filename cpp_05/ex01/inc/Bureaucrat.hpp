@@ -3,15 +3,16 @@
 
 # include <iostream>
 # include <stdexcept>
-# include "Form.hpp"
-# include "colors.hpp"
 
 class Form;
+
+# include "Form.hpp"
+# include "colors.hpp"
 
 class Bureaucrat
 {
 	private:
-	
+
 		// PRIVATE ATTRIBUTE //
 
 		const std::string	m_name;

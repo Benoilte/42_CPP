@@ -1,6 +1,6 @@
 #include "Form.hpp"
 
-Form::Form() : 
+Form::Form() :
 	m_name("default"),
 	m_isSigned(false),
 	m_requireGradeToSigne(42),
@@ -18,7 +18,7 @@ Form::Form(const Form &t_src) :
 	/*Copy Constructor*/
 }
 
-Form::Form(const std::string t_name, int t_gradeToSigned, int t_gradeToExecute) : 
+Form::Form(const std::string t_name, int t_gradeToSigned, int t_gradeToExecute) :
 	m_name(t_name),
 	m_isSigned(false),
 	m_requireGradeToSigne(t_gradeToSigned),
@@ -36,29 +36,17 @@ Form& Form::operator=(const Form &t_rhs)
 {
 	if (this != &t_rhs)
 		this->m_isSigned = t_rhs.getIsSigned();
-	
+
 	return *this;
 }
 
-const std::string Form::getName(void) const
-{
-	return m_name;
-}
+const std::string Form::getName(void) const { return m_name; }
 
-int Form::getIsSigned(void) const
-{
-	return m_isSigned;
-}
+int Form::getIsSigned(void) const { return m_isSigned; }
 
-int Form::getRequireGradeToSigne(void) const
-{
-	return m_requireGradeToSigne;
-}
+int Form::getRequireGradeToSigne(void) const { return m_requireGradeToSigne; }
 
-int Form::getRequireGradeToExecute(void) const
-{
-	return m_requireGradeToExecute;
-}
+int Form::getRequireGradeToExecute(void) const { return m_requireGradeToExecute; }
 
 void Form::beSigned(Bureaucrat &t_signer)
 {
@@ -90,7 +78,7 @@ std::ostream& operator<<(std::ostream &t_out, Form const &t_rhs)
 			<< t_rhs.getRequireGradeToExecute()
 			<< " - Form signed: "
 			<< verboseSigned;
-	return t_out; 
+	return t_out;
 }
 
 const char	*Form::GradeTooLowException::what() const throw()

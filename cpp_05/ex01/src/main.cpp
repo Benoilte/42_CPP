@@ -5,23 +5,23 @@ void	help()
 	std::cout << "Available command: " << std::endl;
 	std::cout << "'./nightmareOffices 1': Throw Too low exception to signed a form" << std::endl;
 	std::cout << "'./nightmareOffices 2': Throw Too low exception to execute a form" << std::endl;
-	// std::cout << "'./nightmareOffices 3': Throw Too low exception with constructor" << std::endl;
+	std::cout << "'./nightmareOffices 3': Test working case function without throwing exception" << std::endl;
 	// std::cout << "'./nightmareOffices 4': Throw Too low exception with decrement function" << std::endl;
 }
 
 void test1(void)
 {
 	std::cout << "test 1:" << std::endl;
-	
+
 	std::cout << YELLOW << "Instantiate a bureaucrat 'Yan' with grade 42" << RESET << std::endl;
 	Bureaucrat	yan("Yan", 42);
 	std::cout << yan << std::endl;
-	std::cout << YELLOW << "Instantiate a Form 'A' with a requirement grade of 24 to be signed" << RESET << std::endl;
+	std::cout << YELLOW << "Instantiate a Form 'A' with a signing requirement grade of 24" << RESET << std::endl;
 	Form	formA("A", 24, 29);
 	std::cout << formA << std::endl;
 	std::cout << YELLOW << "Yan try to sign form 'A'" << RESET << std::endl;
 	yan.signForm(formA);
-	std::cout << YELLOW << "Display Form 'A' stay unchanged" << RESET << std::endl;
+	std::cout << YELLOW << "Display Form 'A' (it should not be signed)" << RESET << std::endl;
 	std::cout << formA << std::endl;
 }
 
@@ -32,21 +32,32 @@ void test2(void)
 	std::cout << YELLOW << "Instantiate a bureaucrat 'Yan' with grade 42" << RESET << std::endl;
 	Bureaucrat	yan("Yan", 42);
 	std::cout << yan << std::endl;
-	std::cout << YELLOW << "Instantiate a Form 'A' with a requirement grade of 29 to be executed" << RESET << std::endl;
+	std::cout << YELLOW << "Instantiate a Form 'A' with an execution requirement grade of 29" << RESET << std::endl;
 	Form	formA("A", 24, 29);
 	std::cout << formA << std::endl;
 	std::cout << YELLOW << "Yan try to execute form 'A'" << RESET << std::endl;
-	yan.signForm(formA);
+	yan.executeForm(formA);
+	std::cout << YELLOW << "Display Form 'A' (it should not be signed)" << RESET << std::endl;
 	std::cout << formA << std::endl;
 }
 
-// void test3(void)
-// {
-// 	std::cout << "test 3:" << std::endl;
+void test3(void)
+{
+	std::cout << "test 3:" << std::endl;
 
-// 	std::cout << YELLOW << "Instantiate a bureaucrat with grade 151" << RESET << std::endl;
-// 	Bureaucrat	tom("tom", 151);
-// }
+	std::cout << YELLOW << "Instantiate a bureaucrat 'Yan' with grade 20" << RESET << std::endl;
+	Bureaucrat	yan("Yan", 20);
+	std::cout << yan << std::endl;
+	std::cout << YELLOW << "Instantiate a Form 'A' with a signing requirement grade of 24 and an execution requirement grade of 29" << RESET << std::endl;
+	Form	formA("A", 24, 29);
+	std::cout << formA << std::endl;
+	std::cout << YELLOW << "Yan try to sign form 'A'" << RESET << std::endl;
+	yan.signForm(formA);
+	std::cout << YELLOW << "Yan try to execute form 'A'" << RESET << std::endl;
+	yan.executeForm(formA);
+	std::cout << YELLOW << "Display Form 'A' (it should be signed)" << RESET << std::endl;
+	std::cout << formA << std::endl;
+}
 
 // void test4(void)
 // {
@@ -63,7 +74,7 @@ void test2(void)
 // void test5(void)
 // {
 // 	std::cout << "test 5:" << std::endl;
-	
+
 // 	std::cout << YELLOW << "Instantiate a bureaucrat 'joe' with grade 42" << RESET << std::endl;
 // 	Bureaucrat	joe("joe", 42);
 // 	std::cout << joe << std::endl;
@@ -92,9 +103,9 @@ int	main(int argc, char **argv)
 					test2();
 					break;
 
-				// case '3':
-				// 	test3();
-				// 	break;
+				case '3':
+					test3();
+					break;
 
 				// case '4':
 				// 	test4();
