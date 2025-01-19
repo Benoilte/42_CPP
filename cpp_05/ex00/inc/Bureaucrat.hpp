@@ -4,6 +4,7 @@
 # include <iostream>
 # include <stdexcept>
 
+
 class Bureaucrat
 {
 	private:
@@ -16,6 +17,20 @@ class Bureaucrat
 		// PRIVATE MEMBER FUNCTION //
 
 	public:
+
+		// EXCEPTION //
+
+		class GradeTooHighException : public std::exception
+		{
+			public:
+				virtual const char	*what() const throw();
+		};
+
+		class GradeTooLowException : public std::exception
+		{
+			public:
+				virtual const char	*what() const throw();
+		};
 
 		// CONSTRUCTOR //
 
@@ -42,20 +57,6 @@ class Bureaucrat
 
 		void		incrementGrade();
 		void		decrementGrade();
-
-		// EXCEPTION //
-
-		class GradeTooHighException : public std::exception
-		{
-			public:
-				virtual const char	*what() const throw();
-		};
-
-		class GradeTooLowException : public std::exception
-		{
-			public:
-				virtual const char	*what() const throw();
-		};
 
 };
 
