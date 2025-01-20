@@ -57,6 +57,24 @@ void test3(void)
 	yan.executeForm(formA);
 	std::cout << YELLOW << "Display Form 'A' (it should be signed)" << RESET << std::endl;
 	std::cout << formA << std::endl;
+
+	std::cout << std::endl;
+
+	std::cout << YELLOW << "Instantiate a bureaucrat 'Joe' with grade 25" << RESET << std::endl;
+	Bureaucrat	joe("Joe", 25);
+	std::cout << joe << std::endl;
+	std::cout << YELLOW << "increment joe's grade by 1" << RESET << std::endl;
+	joe.incrementGrade();
+	std::cout << joe << std::endl;
+	std::cout << YELLOW << "Instantiate a Form 'B' with a signing requirement grade of 24 and an execution requirement grade of 29" << RESET << std::endl;
+	Form	formB("B", 24, 29);
+	std::cout << formB << std::endl;
+	std::cout << YELLOW << "Joe try to sign form 'B'" << RESET << std::endl;
+	joe.signForm(formB);
+	std::cout << YELLOW << "Joe try to execute form 'B'" << RESET << std::endl;
+	joe.executeForm(formB);
+	std::cout << YELLOW << "Display Form 'B' (it should be signed)" << RESET << std::endl;
+	std::cout << formB << std::endl;
 }
 
 // void test4(void)
