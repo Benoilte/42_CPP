@@ -8,7 +8,7 @@
 class PresidentialPardonForm : public AForm
 {
 	private:
-		
+
 		// PRIVATE STATIC ATTRIBUTE //
 
 		static int	m_signatureGrade;
@@ -20,11 +20,13 @@ class PresidentialPardonForm : public AForm
 
 		// PRIVATE MEMBER FUNCTION //
 
+		// PRIVATE CONSTRUCTOR //
+		PresidentialPardonForm();
+
 	public:
 
 		// CONSTRUCTOR //
 
-		PresidentialPardonForm();
 		PresidentialPardonForm(const std::string t_target);
 		PresidentialPardonForm(const PresidentialPardonForm &t_src);
 
@@ -44,8 +46,7 @@ class PresidentialPardonForm : public AForm
 
 		// PUBLIC MEMBER FUNCTION //
 
-		virtual void		beSigned(Bureaucrat &t_signer);
-		virtual void		beExectuted(Bureaucrat &t_executer);
+		virtual void		execute(Bureaucrat &t_executer) const;
 
 };
 

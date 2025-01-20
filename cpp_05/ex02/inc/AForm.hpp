@@ -12,7 +12,7 @@ class	Bureaucrat;
 class AForm
 {
 	private:
-	
+
 		// PRIVATE ATTRIBUTE //
 
 		const std::string	m_name;
@@ -25,6 +25,12 @@ class AForm
 		// EXCEPTION //
 
 		class GradeTooLowException : public std::exception
+		{
+			public:
+				virtual const char	*what() const throw();
+		};
+
+		class FormIsNotSigned : public std::exception
 		{
 			public:
 				virtual const char	*what() const throw();
@@ -68,8 +74,9 @@ class AForm
 
 		// PUBLIC MEMBER FUNCTION //
 
-		virtual void		beSigned(Bureaucrat &t_signer) = 0;
-		virtual void		beExectuted(Bureaucrat &t_executer) = 0;
+		virtual void		beSigned(Bureaucrat &t_signer);
+		virtual void		beExectuted(Bureaucrat &t_executor, AForm const &t_form) const;
+		virtual void		execute(Bureaucrat &t_executor) const = 0;
 
 };
 

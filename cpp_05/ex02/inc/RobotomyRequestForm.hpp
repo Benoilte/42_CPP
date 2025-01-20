@@ -8,7 +8,7 @@
 class RobotomyRequestForm : public AForm
 {
 	private:
-		
+
 		// PRIVATE STATIC ATTRIBUTE //
 
 		static int	m_signatureGrade;
@@ -20,11 +20,13 @@ class RobotomyRequestForm : public AForm
 
 		// PRIVATE MEMBER FUNCTION //
 
+		// PRIVATE CONSTRUCTOR //
+		RobotomyRequestForm();
+
 	public:
 
 		// CONSTRUCTOR //
 
-		RobotomyRequestForm();
 		RobotomyRequestForm(const std::string t_target);
 		RobotomyRequestForm(const RobotomyRequestForm &t_src);
 
@@ -43,6 +45,8 @@ class RobotomyRequestForm : public AForm
 		// SETTER //
 
 		// PUBLIC MEMBER FUNCTION //
+
+		virtual void		execute(Bureaucrat &t_executer) const;
 
 };
 

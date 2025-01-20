@@ -57,10 +57,14 @@ void AForm::beSigned(Bureaucrat &t_signer)
 	}
 }
 
-void AForm::beExectuted(Bureaucrat &t_executer)
+void AForm::beExectuted(Bureaucrat &t_executor, AForm const &t_form) const
 {
-	if (t_executer.getGrade() <= getRequireGradeToExecute()) {
-		m_isSigned = true;
+	if (t_executor.getGrade() <= getRequireGradeToExecute()) {
+		if (t_form.getIsSigned()) {
+			return ;
+		} else {
+			throw AForm::FormIsNotSigned();
+		}
 	} else {
 		throw AForm::GradeTooLowException();
 	}
@@ -83,5 +87,10 @@ std::ostream& operator<<(std::ostream &t_out, AForm const &t_rhs)
 
 const char	*AForm::GradeTooLowException::what() const throw()
 {
-	return "Bureaucrat's grade is too low";
+	return "Error: Bureaucrat's grade is too low";
+}
+
+const char	*AForm::FormIsNotSigned::what() const throw()
+{
+	return "Error: Form is not signed";
 }

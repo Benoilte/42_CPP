@@ -3,9 +3,9 @@
 void	help()
 {
 	std::cout << "Available command: " << std::endl;
-	std::cout << "'./nightmareOffices 1': Throw Too low exception to signed a form" << std::endl;
-	std::cout << "'./nightmareOffices 2': Throw Too low exception to execute a form" << std::endl;
-	std::cout << "'./nightmareOffices 3': Test working case function without throwing exception" << std::endl;
+	std::cout << "'./nightmareOffices 1': Test and display three different form" << std::endl;
+	std::cout << "'./nightmareOffices 2': Test Presidential Pardon Form" << std::endl;
+	// std::cout << "'./nightmareOffices 3': Test working case function without throwing exception" << std::endl;
 	// std::cout << "'./nightmareOffices 4': Throw Too low exception with decrement function" << std::endl;
 }
 
@@ -13,33 +13,67 @@ void test1(void)
 {
 	std::cout << "test 1:" << std::endl;
 
-	std::cout << YELLOW << "Instantiate a bureaucrat 'Yan' with grade 42" << RESET << std::endl;
-	Bureaucrat	yan("Yan", 42);
-	std::cout << yan << std::endl;
-	// std::cout << YELLOW << "Instantiate a Form 'A' with a signing requirement grade of 24" << RESET << std::endl;
-	// AForm	formA("A", 24, 29);
-	// std::cout << formA << std::endl;
-	// std::cout << YELLOW << "Yan try to sign form 'A'" << RESET << std::endl;
-	// yan.signForm(formA);
-	// std::cout << YELLOW << "Display Form 'A' (it should not be signed)" << RESET << std::endl;
-	// std::cout << formA << std::endl;
+	std::cout << YELLOW << "Instantiate a Shrubbery Creation Form with target 'home'" << RESET << std::endl;
+	ShrubberyCreationForm	shrub("home");
+	std::cout << shrub << std::endl;
+
+	std::cout << YELLOW << "Instantiate a Robotomy Request Form with target 'bender'" << RESET << std::endl;
+	RobotomyRequestForm	robReq("bender");
+	std::cout << robReq << std::endl;
+
+	std::cout << YELLOW << "Instantiate a Presidential Pardon Form with target 'tmp'" << RESET << std::endl;
+	PresidentialPardonForm	pres("tmp");
+	std::cout << pres << std::endl;
 }
 
-// void test2(void)
-// {
-// 	std::cout << "test 2:" << std::endl;
+void test2(void)
+{
+	std::cout << "test 2:\n" << std::endl;
 
-// 	std::cout << YELLOW << "Instantiate a bureaucrat 'Yan' with grade 42" << RESET << std::endl;
-// 	Bureaucrat	yan("Yan", 42);
-// 	std::cout << yan << std::endl;
-// 	std::cout << YELLOW << "Instantiate a Form 'A' with an execution requirement grade of 29" << RESET << std::endl;
-// 	AForm	formA("A", 24, 29);
-// 	std::cout << formA << std::endl;
-// 	std::cout << YELLOW << "Yan try to execute form 'A'" << RESET << std::endl;
-// 	yan.executeForm(formA);
-// 	std::cout << YELLOW << "Display Form 'A' (it should not be signed)" << RESET << std::endl;
-// 	std::cout << formA << std::endl;
-// }
+	std::cout << YELLOW << "Instantiate a bureaucrat 'Ben' with grade 42" << RESET << std::endl;
+	Bureaucrat	ben("Ben", 42);
+	std::cout << ben << std::endl;
+	std::cout << std::endl;
+
+	std::cout << YELLOW << "Instantiate a bureaucrat 'Yan' with grade 20" << RESET << std::endl;
+	Bureaucrat	yan("Yan", 20);
+	std::cout << yan << std::endl;
+	std::cout << std::endl;
+
+	std::cout << YELLOW << "Instantiate a bureaucrat 'Joe' with grade 6" << RESET << std::endl;
+	Bureaucrat	joe("Joe", 6);
+	std::cout << joe << std::endl;
+	std::cout << YELLOW << "increment joe's grade by 1" << RESET << std::endl;
+	joe.incrementGrade();
+	std::cout << joe << std::endl;
+	std::cout << std::endl;
+
+	std::cout << YELLOW << "Instantiate a Presidential Pardon Form with target 'tmp'" << RESET << std::endl;
+	PresidentialPardonForm	pres("tmp");
+	std::cout << pres << std::endl;
+	std::cout << std::endl;
+
+	std::cout << YELLOW << "Ben try to sign form 'Presidential Pardon Form'" << RESET << std::endl;
+	ben.signForm(pres);
+	std::cout << std::endl;
+
+	std::cout << YELLOW << "Joe try to execute form 'Presidential Pardon Form'" << RESET << std::endl;
+	joe.executeForm(pres);
+	std::cout << std::endl;
+
+	std::cout << YELLOW << "Yan try to sign form 'Presidential Pardon Form'" << RESET << std::endl;
+	yan.signForm(pres);
+	std::cout << std::endl;
+
+	std::cout << YELLOW << "Yan try to execute form 'Presidential Pardon Form'" << RESET << std::endl;
+	yan.executeForm(pres);
+	std::cout << std::endl;
+
+	std::cout << YELLOW << "Joe try to execute form 'Presidential Pardon Form'" << RESET << std::endl;
+	joe.executeForm(pres);
+	std::cout << std::endl;
+
+}
 
 // void test3(void)
 // {
@@ -117,9 +151,9 @@ int	main(int argc, char **argv)
 					test1();
 					break;
 
-				// case '2':
-				// 	test2();
-				// 	break;
+				case '2':
+					test2();
+					break;
 
 				// case '3':
 				// 	test3();

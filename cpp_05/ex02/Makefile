@@ -4,7 +4,7 @@ SRC_DIR			=	src/
 OBJ_DIR			=	obj/
 DEP_DIR			=	dep/
 
-SRC_FILES		=	main Bureaucrat Form
+SRC_FILES		=	main Bureaucrat AForm ShrubberyCreationForm RobotomyRequestForm PresidentialPardonForm
 
 INC				=	inc/.
 

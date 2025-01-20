@@ -8,7 +8,7 @@
 class ShrubberyCreationForm : public AForm
 {
 	private:
-	
+
 		// PRIVATE STATIC ATTRIBUTE //
 
 		static int	m_signatureGrade;
@@ -20,11 +20,13 @@ class ShrubberyCreationForm : public AForm
 
 		// PRIVATE MEMBER FUNCTION //
 
+		// PRIVATE CONSTRUCTOR //
+		ShrubberyCreationForm();
+
 	public:
 
 		// CONSTRUCTOR //
 
-		ShrubberyCreationForm();
 		ShrubberyCreationForm(const std::string t_target);
 		ShrubberyCreationForm(const ShrubberyCreationForm &t_src);
 
@@ -43,6 +45,8 @@ class ShrubberyCreationForm : public AForm
 		// SETTER //
 
 		// PUBLIC MEMBER FUNCTION //
+
+		virtual void		execute(Bureaucrat &t_executer) const;
 
 };
 
