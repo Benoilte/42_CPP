@@ -78,7 +78,7 @@ void ShrubberyCreationForm::execute(Bureaucrat &t_executor) const
 
 const char	*ShrubberyCreationForm::FileNotOpen::what() const throw()
 {
-	return "Error: Shrubbery cannot be created";
+	return "Error: Shrubbery file cannot be created";
 }
 
 // std::ostream& operator<<(std::ostream &t_out, ShrubberyCreationForm const &t_rhs)

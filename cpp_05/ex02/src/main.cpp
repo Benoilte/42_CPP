@@ -7,6 +7,7 @@ void	help()
 	std::cout << "'./nightmareOffices 2': Test Shrubbery Creation Form" << std::endl;
 	std::cout << "'./nightmareOffices 3': Test Robotomy Request Form" << std::endl;
 	std::cout << "'./nightmareOffices 4': Test Presidential Pardon Form" << std::endl;
+	std::cout << "'./nightmareOffices 5': Test Shrubbery Creation Form failed" << std::endl;
 }
 
 void test1(void)
@@ -177,69 +178,28 @@ void test4(void)
 	std::cout << std::endl;
 }
 
-// void test3(void)
-// {
-// 	std::cout << "test 3:" << std::endl;
+void test5(void)
+{
+	std::cout << "test 5:" << std::endl;
 
-// 	std::cout << YELLOW << "Instantiate a bureaucrat 'Yan' with grade 20" << RESET << std::endl;
-// 	Bureaucrat	yan("Yan", 20);
-// 	std::cout << yan << std::endl;
-// 	std::cout << YELLOW << "Instantiate a Form 'A' with a signing requirement grade of 24 and an execution requirement grade of 29" << RESET << std::endl;
-// 	AForm	formA("A", 24, 29);
-// 	std::cout << formA << std::endl;
-// 	std::cout << YELLOW << "Yan try to sign form 'A'" << RESET << std::endl;
-// 	yan.signForm(formA);
-// 	std::cout << YELLOW << "Yan try to execute form 'A'" << RESET << std::endl;
-// 	yan.executeForm(formA);
-// 	std::cout << YELLOW << "Display Form 'A' (it should be signed)" << RESET << std::endl;
-// 	std::cout << formA << std::endl;
+	std::cout << YELLOW << "Instantiate a bureaucrat 'Joe' with grade 8" << RESET << std::endl;
+	Bureaucrat	joe("Joe", 8);
+	std::cout << joe << std::endl;
 
-// 	std::cout << std::endl;
+	std::cout << YELLOW << "Instantiate a Shrubbery Creation Form with target 'fail'" << RESET << std::endl;
+	std::cout << CYAN << "First You should create a 'fail_shrubbery' folder ( make fclean; mkdir fail_shrubbery; make )" << RESET << std::endl;
+	ShrubberyCreationForm	shrub("fail");
+	std::cout << shrub << std::endl;
+	std::cout << std::endl;
 
-// 	std::cout << YELLOW << "Instantiate a bureaucrat 'Joe' with grade 25" << RESET << std::endl;
-// 	Bureaucrat	joe("Joe", 25);
-// 	std::cout << joe << std::endl;
-// 	std::cout << YELLOW << "increment joe's grade by 1" << RESET << std::endl;
-// 	joe.incrementGrade();
-// 	std::cout << joe << std::endl;
-// 	std::cout << YELLOW << "Instantiate a Form 'B' with a signing requirement grade of 24 and an execution requirement grade of 29" << RESET << std::endl;
-// 	AForm	formB("B", 24, 29);
-// 	std::cout << formB << std::endl;
-// 	std::cout << YELLOW << "Joe try to sign form 'B'" << RESET << std::endl;
-// 	joe.signForm(formB);
-// 	std::cout << YELLOW << "Joe try to execute form 'B'" << RESET << std::endl;
-// 	joe.executeForm(formB);
-// 	std::cout << YELLOW << "Display Form 'B' (it should be signed)" << RESET << std::endl;
-// 	std::cout << formB << std::endl;
-// }
+	std::cout << YELLOW << "Joe sign the Form'" << RESET << std::endl;
+	joe.signForm(shrub);
+	std::cout << std::endl;
 
-// void test4(void)
-// {
-// 	std::cout << "test 4:" << std::endl;
-
-// 	std::cout << YELLOW << "Instantiate a bureaucrat 'yan' with grade 150" << RESET << std::endl;
-// 	Bureaucrat	yan("yan", 150);
-// 	std::cout << yan << std::endl;
-// 	std::cout << YELLOW << "decrement yan's grade by 1" << RESET << std::endl;
-// 	yan.decrementGrade();
-// 	std::cout << yan << std::endl;
-// }
-
-// void test5(void)
-// {
-// 	std::cout << "test 5:" << std::endl;
-
-// 	std::cout << YELLOW << "Instantiate a bureaucrat 'joe' with grade 42" << RESET << std::endl;
-// 	Bureaucrat	joe("joe", 42);
-// 	std::cout << joe << std::endl;
-// 	std::cout << YELLOW << "increment joe's grade by 2" << RESET << std::endl;
-// 	joe.incrementGrade();
-// 	joe.incrementGrade();
-// 	std::cout << joe << std::endl;
-// 	std::cout << YELLOW << "decrement joe's grade by 1" << RESET << std::endl;
-// 	joe.decrementGrade();
-// 	std::cout << joe << std::endl;
-// }
+	std::cout << YELLOW << "Joe execute the Form'" << RESET << std::endl;
+	joe.executeForm(shrub);
+	std::cout << std::endl;
+}
 
 int	main(int argc, char **argv)
 {
@@ -265,9 +225,9 @@ int	main(int argc, char **argv)
 					test4();
 					break;
 
-				// case '5':
-				// 	test5();
-				// 	break;
+				case '5':
+					test5();
+					break;
 
 				default:
 					help();

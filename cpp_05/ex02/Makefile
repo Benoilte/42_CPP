@@ -20,6 +20,7 @@ CPP_FLAGS		=	-std=c++98
 DFLAGS			:=	-MMD -MF
 DEP_FILE		=	$(DEP_DIR)$*.d
 RM				:=	rm -rf
+SHRUBBERY_FILES	= *_shrubbery
 
 DEF_COLOR		=	\033[0;39m
 RED				=	\033[0;91m
@@ -52,6 +53,7 @@ clean:
 
 fclean:			clean
 				@$(RM) $(NAME)
+				@$(RM) $(SHRUBBERY_FILES)
 				@echo "$(YELLOW)fclean complete $(DEF_COLOR)"
 
 re:				fclean
