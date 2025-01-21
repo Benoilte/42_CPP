@@ -6,7 +6,7 @@
 /*   By: bebrandt <benoit.brandt@proton.me>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 14:05:07 by bebrandt          #+#    #+#             */
-/*   Updated: 2025/01/20 18:46:00 by bebrandt         ###   ########.fr       */
+/*   Updated: 2025/01/21 11:44:50 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,8 @@
 #include "PresidentialPardonForm.hpp"
 #include "colors.hpp"
 #include <iostream>
+#include <unistd.h>
+# include <time.h>
+# include <stdlib.h>
 
 #endif

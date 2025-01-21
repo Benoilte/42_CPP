@@ -4,8 +4,8 @@ void	help()
 {
 	std::cout << "Available command: " << std::endl;
 	std::cout << "'./nightmareOffices 1': Test and display three different form" << std::endl;
-	std::cout << "'./nightmareOffices 2': Test Presidential Pardon Form" << std::endl;
-	// std::cout << "'./nightmareOffices 3': Test working case function without throwing exception" << std::endl;
+	std::cout << "'./nightmareOffices 2': Test Robotomy Request Form" << std::endl;
+	std::cout << "'./nightmareOffices 3': Test Presidential Pardon Form" << std::endl;
 	// std::cout << "'./nightmareOffices 4': Throw Too low exception with decrement function" << std::endl;
 }
 
@@ -29,6 +29,60 @@ void test1(void)
 void test2(void)
 {
 	std::cout << "test 2:\n" << std::endl;
+
+	std::cout << YELLOW << "Instantiate a bureaucrat 'Ben' with grade 84" << RESET << std::endl;
+	Bureaucrat	ben("Ben", 84);
+	std::cout << ben << std::endl;
+	std::cout << std::endl;
+
+	std::cout << YELLOW << "Instantiate a bureaucrat 'Yan' with grade 70" << RESET << std::endl;
+	Bureaucrat	yan("Yan", 70);
+	std::cout << yan << std::endl;
+	std::cout << std::endl;
+
+	std::cout << YELLOW << "Instantiate a bureaucrat 'Joe' with grade 46" << RESET << std::endl;
+	Bureaucrat	joe("Joe", 46);
+	std::cout << joe << std::endl;
+	std::cout << YELLOW << "increment joe's grade by 1" << RESET << std::endl;
+	joe.incrementGrade();
+	std::cout << joe << std::endl;
+	std::cout << std::endl;
+
+	std::cout << YELLOW << "Instantiate a Robotomy Request Form with target 'tmp'" << RESET << std::endl;
+	RobotomyRequestForm	rob("tmp");
+	std::cout << rob << std::endl;
+	std::cout << std::endl;
+
+	std::cout << YELLOW << "Ben try to sign form 'Robotomy Request Form'" << RESET << std::endl;
+	ben.signForm(rob);
+	std::cout << std::endl;
+
+	std::cout << YELLOW << "Joe try to execute form 'Robotomy Request Form'" << RESET << std::endl;
+	joe.executeForm(rob);
+	std::cout << std::endl;
+
+	std::cout << YELLOW << "Yan try to sign form 'Robotomy Request Form'" << RESET << std::endl;
+	yan.signForm(rob);
+	std::cout << std::endl;
+
+	std::cout << YELLOW << "Yan try to execute form 'Robotomy Request Form'" << RESET << std::endl;
+	yan.executeForm(rob);
+	std::cout << std::endl;
+
+	for (int i = 0; i < 4; i++)
+	{
+		srand(time(NULL));
+  		sleep((rand() % 2) + 1);
+		std::cout << CYAN << "Joe try to execute form 'Robotomy Request Form'" << RESET << std::endl;
+		joe.executeForm(rob);
+		std::cout << std::endl;
+	}
+
+}
+
+void test3(void)
+{
+	std::cout << "test 3:\n" << std::endl;
 
 	std::cout << YELLOW << "Instantiate a bureaucrat 'Ben' with grade 42" << RESET << std::endl;
 	Bureaucrat	ben("Ben", 42);

@@ -42,9 +42,20 @@ const std::string RobotomyRequestForm::getTarget(void) const
 	return m_target;
 }
 
+/*
+Makes some drilling noises. Then, informs that <target> has been robotomized
+successfully 50% of the time. Otherwise, informs that the robotomy failed.
+*/
+
 void RobotomyRequestForm::execute(Bureaucrat &t_executor) const
 {
-	(void)t_executor;
+	beExectuted(t_executor, *this);
+	std::cout << "Brrrrrrrrrr Brrrrrrrr" << std::endl;
+	srand(time(NULL));
+  	if (rand() % 2)
+		std::cout << m_target  << " has been robotomized successfully" << std::endl;
+	else
+		std::cout << m_target  << " robotomy failed" << std::endl;
 }
 
 // std::ostream& operator<<(std::ostream &t_out, RobotomyRequestForm const &t_rhs)
