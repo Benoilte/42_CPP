@@ -2,7 +2,7 @@
 #define SHRUBBERYCREATIONFORM_HPP
 
 # include <iostream>
-
+# include <fstream>
 # include "AForm.hpp"
 
 class ShrubberyCreationForm : public AForm
@@ -17,11 +17,20 @@ class ShrubberyCreationForm : public AForm
 		// PRIVATE ATTRIBUTE //
 
 		const std::string	m_target;
+		const std::string	m_fileName;
 
 		// PRIVATE MEMBER FUNCTION //
 
 		// PRIVATE CONSTRUCTOR //
 		ShrubberyCreationForm();
+
+		// EXCEPTION //
+
+		class FileNotOpen : public std::exception
+		{
+			public:
+				virtual const char	*what() const throw();
+		};
 
 	public:
 

@@ -4,9 +4,9 @@ void	help()
 {
 	std::cout << "Available command: " << std::endl;
 	std::cout << "'./nightmareOffices 1': Test and display three different form" << std::endl;
-	std::cout << "'./nightmareOffices 2': Test Robotomy Request Form" << std::endl;
-	std::cout << "'./nightmareOffices 3': Test Presidential Pardon Form" << std::endl;
-	// std::cout << "'./nightmareOffices 4': Throw Too low exception with decrement function" << std::endl;
+	std::cout << "'./nightmareOffices 2': Test Shrubbery Creation Form" << std::endl;
+	std::cout << "'./nightmareOffices 3': Test Robotomy Request Form" << std::endl;
+	std::cout << "'./nightmareOffices 4': Test Presidential Pardon Form" << std::endl;
 }
 
 void test1(void)
@@ -27,6 +27,55 @@ void test1(void)
 }
 
 void test2(void)
+{
+	std::cout << "test 3:\n" << std::endl;
+
+	// 145, exec 137
+	std::cout << YELLOW << "Instantiate a bureaucrat 'Ben' with grade 148" << RESET << std::endl;
+	Bureaucrat	ben("Ben", 148);
+	std::cout << ben << std::endl;
+	std::cout << std::endl;
+
+	std::cout << YELLOW << "Instantiate a bureaucrat 'Yan' with grade 140" << RESET << std::endl;
+	Bureaucrat	yan("Yan", 140);
+	std::cout << yan << std::endl;
+	std::cout << std::endl;
+
+	std::cout << YELLOW << "Instantiate a bureaucrat 'Joe' with grade 138" << RESET << std::endl;
+	Bureaucrat	joe("Joe", 138);
+	std::cout << joe << std::endl;
+	std::cout << YELLOW << "increment joe's grade by 1" << RESET << std::endl;
+	joe.incrementGrade();
+	std::cout << joe << std::endl;
+	std::cout << std::endl;
+
+	std::cout << YELLOW << "Instantiate a Shrubbery Creation Form with target 'home'" << RESET << std::endl;
+	ShrubberyCreationForm	shrub("home");
+	std::cout << shrub << std::endl;
+	std::cout << std::endl;
+
+	std::cout << YELLOW << "Ben try to sign form 'Shrubbery Creation Form'" << RESET << std::endl;
+	ben.signForm(shrub);
+	std::cout << std::endl;
+
+	std::cout << YELLOW << "Joe try to execute form 'Shrubbery Creation Form'" << RESET << std::endl;
+	joe.executeForm(shrub);
+	std::cout << std::endl;
+
+	std::cout << YELLOW << "Yan try to sign form 'Shrubbery Creation Form'" << RESET << std::endl;
+	yan.signForm(shrub);
+	std::cout << std::endl;
+
+	std::cout << YELLOW << "Yan try to execute form 'Shrubbery Creation Form'" << RESET << std::endl;
+	yan.executeForm(shrub);
+	std::cout << std::endl;
+
+	std::cout << YELLOW << "Joe try to execute form 'Shrubbery Creation Form'" << RESET << std::endl;
+	joe.executeForm(shrub);
+	std::cout << std::endl;
+}
+
+void test3(void)
 {
 	std::cout << "test 2:\n" << std::endl;
 
@@ -80,7 +129,7 @@ void test2(void)
 
 }
 
-void test3(void)
+void test4(void)
 {
 	std::cout << "test 3:\n" << std::endl;
 
@@ -126,7 +175,6 @@ void test3(void)
 	std::cout << YELLOW << "Joe try to execute form 'Presidential Pardon Form'" << RESET << std::endl;
 	joe.executeForm(pres);
 	std::cout << std::endl;
-
 }
 
 // void test3(void)
@@ -209,13 +257,13 @@ int	main(int argc, char **argv)
 					test2();
 					break;
 
-				// case '3':
-				// 	test3();
-				// 	break;
+				case '3':
+					test3();
+					break;
 
-				// case '4':
-				// 	test4();
-				// 	break;
+				case '4':
+					test4();
+					break;
 
 				// case '5':
 				// 	test5();
