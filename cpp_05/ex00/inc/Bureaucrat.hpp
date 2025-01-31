@@ -18,6 +18,16 @@ class Bureaucrat
 
 	public:
 
+		// CONSTRUCTOR //
+
+		Bureaucrat();
+		Bureaucrat(const std::string t_name, int t_grade);
+		Bureaucrat(const Bureaucrat &t_src);
+
+		// DESTRUCTOR //
+
+		~Bureaucrat();
+
 		// EXCEPTION //
 
 		class GradeTooHighException : public std::exception
@@ -31,16 +41,6 @@ class Bureaucrat
 			public:
 				virtual const char	*what() const throw();
 		};
-
-		// CONSTRUCTOR //
-
-		Bureaucrat();
-		Bureaucrat(const std::string t_name, int t_grade);
-		Bureaucrat(const Bureaucrat &t_src);
-
-		// DESTRUCTOR //
-
-		~Bureaucrat();
 
 		// OPERATOR OVERLOAD //
 

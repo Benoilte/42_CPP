@@ -96,12 +96,12 @@ void Bureaucrat::executeForm(Form &t_form)
 
 const char	*Bureaucrat::GradeTooHighException::what() const throw()
 {
-	return "Grade reach too high value";
+	return "Bureaucrat's grade is too high";
 }
 
 const char	*Bureaucrat::GradeTooLowException::what() const throw()
 {
-	return "Grade reach too low value";
+	return "Bureaucrat's grade is too low";
 }
 
 std::ostream& operator<<(std::ostream &t_out, Bureaucrat const &t_rhs)

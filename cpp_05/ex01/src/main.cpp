@@ -3,15 +3,50 @@
 void	help()
 {
 	std::cout << "Available command: " << std::endl;
-	std::cout << "'./nightmareOffices 1': Throw Too low exception to signed a form" << std::endl;
-	std::cout << "'./nightmareOffices 2': Throw Too low exception to execute a form" << std::endl;
-	std::cout << "'./nightmareOffices 3': Test working case function without throwing exception" << std::endl;
-	// std::cout << "'./nightmareOffices 4': Throw Too low exception with decrement function" << std::endl;
+	std::cout << "'./nightmareOffices 1': Instatiate form with too high required grade to sign" << std::endl;
+	std::cout << "'./nightmareOffices 2': Instatiate form with too low required grade to sign" << std::endl;
+	std::cout << "'./nightmareOffices 3': Instatiate form with too high required grade to execute" << std::endl;
+	std::cout << "'./nightmareOffices 4': Instatiate form with too low required grade to execute" << std::endl;
+	std::cout << "'./nightmareOffices 5': Throw Too low exception to signed a form" << std::endl;
+	std::cout << "'./nightmareOffices 6': Throw Too low exception to execute a form" << std::endl;
+	std::cout << "'./nightmareOffices 7': Test working case function without throwing exception" << std::endl;
 }
 
 void test1(void)
 {
 	std::cout << "test 1:" << std::endl;
+
+	std::cout << YELLOW << "Instantiate a form with required grade to sign at 0" << RESET << std::endl;
+	Form	form("test", 0, 42);
+}
+
+void test2(void)
+{
+	std::cout << "test 2:" << std::endl;
+
+	std::cout << YELLOW << "Instantiate a form with required grade to sign at 151" << RESET << std::endl;
+	Form	form("test", 151, 42);
+}
+
+void test3(void)
+{
+	std::cout << "test 3:" << std::endl;
+
+	std::cout << YELLOW << "Instantiate a form with required grade to execute at 0" << RESET << std::endl;
+	Form	form("test", 42, 0);
+}
+
+void test4(void)
+{
+	std::cout << "test 4:" << std::endl;
+
+	std::cout << YELLOW << "Instantiate a form with required grade to execute at 151" << RESET << std::endl;
+	Form	form("test", 42, 151);
+}
+
+void test5(void)
+{
+	std::cout << "test 5:" << std::endl;
 
 	std::cout << YELLOW << "Instantiate a bureaucrat 'Yan' with grade 42" << RESET << std::endl;
 	Bureaucrat	yan("Yan", 42);
@@ -25,9 +60,9 @@ void test1(void)
 	std::cout << formA << std::endl;
 }
 
-void test2(void)
+void test6(void)
 {
-	std::cout << "test 2:" << std::endl;
+	std::cout << "test 6:" << std::endl;
 
 	std::cout << YELLOW << "Instantiate a bureaucrat 'Yan' with grade 42" << RESET << std::endl;
 	Bureaucrat	yan("Yan", 42);
@@ -41,9 +76,9 @@ void test2(void)
 	std::cout << formA << std::endl;
 }
 
-void test3(void)
+void test7(void)
 {
-	std::cout << "test 3:" << std::endl;
+	std::cout << "test 7:" << std::endl;
 
 	std::cout << YELLOW << "Instantiate a bureaucrat 'Yan' with grade 20" << RESET << std::endl;
 	Bureaucrat	yan("Yan", 20);
@@ -77,34 +112,6 @@ void test3(void)
 	std::cout << formB << std::endl;
 }
 
-// void test4(void)
-// {
-// 	std::cout << "test 4:" << std::endl;
-
-// 	std::cout << YELLOW << "Instantiate a bureaucrat 'yan' with grade 150" << RESET << std::endl;
-// 	Bureaucrat	yan("yan", 150);
-// 	std::cout << yan << std::endl;
-// 	std::cout << YELLOW << "decrement yan's grade by 1" << RESET << std::endl;
-// 	yan.decrementGrade();
-// 	std::cout << yan << std::endl;
-// }
-
-// void test5(void)
-// {
-// 	std::cout << "test 5:" << std::endl;
-
-// 	std::cout << YELLOW << "Instantiate a bureaucrat 'joe' with grade 42" << RESET << std::endl;
-// 	Bureaucrat	joe("joe", 42);
-// 	std::cout << joe << std::endl;
-// 	std::cout << YELLOW << "increment joe's grade by 2" << RESET << std::endl;
-// 	joe.incrementGrade();
-// 	joe.incrementGrade();
-// 	std::cout << joe << std::endl;
-// 	std::cout << YELLOW << "decrement joe's grade by 1" << RESET << std::endl;
-// 	joe.decrementGrade();
-// 	std::cout << joe << std::endl;
-// }
-
 int	main(int argc, char **argv)
 {
 	if ((argc == 2) && ((std::string)argv[1]).size() == 1)
@@ -125,17 +132,24 @@ int	main(int argc, char **argv)
 					test3();
 					break;
 
-				// case '4':
-				// 	test4();
-				// 	break;
+				case '4':
+					test4();
+					break;
 
-				// case '5':
-				// 	test5();
-				// 	break;
+				case '5':
+					test5();
+					break;
+
+				case '6':
+					test6();
+					break;
+
+				case '7':
+					test7();
+					break;
 
 				default:
 					help();
-					break;
 			}
 		}
 		catch(const std::exception& e)

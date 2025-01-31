@@ -15,7 +15,10 @@ Form::Form(const Form &t_src) :
 	m_requireGradeToSigne(t_src.getRequireGradeToSigne()),
 	m_requireGradeToExecute(t_src.getRequireGradeToExecute())
 {
-	/*Copy Constructor*/
+	if ((t_src.getRequireGradeToSigne() < 1) || (t_src.getRequireGradeToExecute() < 1))
+		throw Form::GradeTooHighException();
+	else if ((t_src.getRequireGradeToSigne() > 150) || (t_src.getRequireGradeToExecute() > 150))
+		throw Form::GradeTooLowException();
 }
 
 Form::Form(const std::string t_name, int t_gradeToSigned, int t_gradeToExecute) :
@@ -24,7 +27,10 @@ Form::Form(const std::string t_name, int t_gradeToSigned, int t_gradeToExecute) 
 	m_requireGradeToSigne(t_gradeToSigned),
 	m_requireGradeToExecute(t_gradeToExecute)
 {
-	/*Parametrized Constructor*/
+	if ((t_gradeToSigned < 1) || (t_gradeToExecute < 1))
+		throw Form::GradeTooHighException();
+	else if ((t_gradeToSigned > 150) || (t_gradeToExecute > 150))
+		throw Form::GradeTooLowException();
 }
 
 Form::~Form()
@@ -53,7 +59,7 @@ void Form::beSigned(Bureaucrat &t_signer)
 	if (t_signer.getGrade() <= getRequireGradeToSigne()) {
 		m_isSigned = true;
 	} else {
-		throw Form::GradeTooLowException();
+		throw Bureaucrat::GradeTooLowException();
 	}
 }
 
@@ -62,7 +68,7 @@ void Form::beExectuted(Bureaucrat &t_executer)
 	if (t_executer.getGrade() <= getRequireGradeToExecute()) {
 		m_isSigned = true;
 	} else {
-		throw Form::GradeTooLowException();
+		throw Bureaucrat::GradeTooLowException();
 	}
 }
 
@@ -83,5 +89,10 @@ std::ostream& operator<<(std::ostream &t_out, Form const &t_rhs)
 
 const char	*Form::GradeTooLowException::what() const throw()
 {
-	return "Bureaucrat's grade is too low";
+	return "Form's grade is too low";
+}
+
+const char	*Form::GradeTooHighException::what() const throw()
+{
+	return "Form's grade is too high";
 }
