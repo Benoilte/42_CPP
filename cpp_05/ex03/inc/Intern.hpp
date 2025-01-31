@@ -21,6 +21,14 @@ class Intern
 		AForm	*makeRobotomyRequest(std::string t_target);
 		AForm	*makeShrubberyCreation(std::string t_target);
 
+		// EXCEPTION //
+
+		class FormNotExist : public std::exception
+		{
+			public:
+				virtual const char	*what() const throw();
+		};
+
 	public:
 
 		// CONSTRUCTOR //

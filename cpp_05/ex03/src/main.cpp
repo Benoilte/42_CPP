@@ -15,22 +15,31 @@ void test1(void)
 {
 	std::cout << "test 1:" << std::endl;
 
-	std::cout << YELLOW << "Instantiate a Shrubbery Creation Form with target 'home'" << RESET << std::endl;
-	ShrubberyCreationForm	shrub("home");
-	std::cout << shrub << std::endl;
+	AForm	*form;
+	Intern someRandomIntern;
+
+	std::cout << YELLOW << "Intern create a Shrubbery Creation Form with target 'home'" << RESET << std::endl;
+	form = someRandomIntern.makeForm("shrubbery creation", "home");
+	std::cout << *form << std::endl;
+	delete form;
 
 	std::cout << YELLOW << "Instantiate a Robotomy Request Form with target 'bender'" << RESET << std::endl;
-	RobotomyRequestForm	robReq("bender");
-	std::cout << robReq << std::endl;
+	form = someRandomIntern.makeForm("presidential pardon", "bender");
+	std::cout << *form << std::endl;
+	delete form;
 
 	std::cout << YELLOW << "Instantiate a Presidential Pardon Form with target 'tmp'" << RESET << std::endl;
-	PresidentialPardonForm	pres("tmp");
-	std::cout << pres << std::endl;
+	form = someRandomIntern.makeForm("robotomy request", "tmp");
+	std::cout << *form << std::endl;
+	delete form;
 }
 
 void test2(void)
 {
 	std::cout << "test 3:\n" << std::endl;
+
+	AForm	*form;
+	Intern	someRandomIntern;
 
 	// 145, exec 137
 	std::cout << YELLOW << "Instantiate a bureaucrat 'Ben' with grade 148" << RESET << std::endl;
@@ -52,34 +61,39 @@ void test2(void)
 	std::cout << std::endl;
 
 	std::cout << YELLOW << "Instantiate a Shrubbery Creation Form with target 'home'" << RESET << std::endl;
-	ShrubberyCreationForm	shrub("home");
-	std::cout << shrub << std::endl;
+	form = someRandomIntern.makeForm("shrubbery creation", "home");
+	std::cout << *form << std::endl;
 	std::cout << std::endl;
 
 	std::cout << YELLOW << "Ben try to sign form 'Shrubbery Creation Form'" << RESET << std::endl;
-	ben.signForm(shrub);
+	ben.signForm(*form);
 	std::cout << std::endl;
 
 	std::cout << YELLOW << "Joe try to execute form 'Shrubbery Creation Form'" << RESET << std::endl;
-	joe.executeForm(shrub);
+	joe.executeForm(*form);
 	std::cout << std::endl;
 
 	std::cout << YELLOW << "Yan try to sign form 'Shrubbery Creation Form'" << RESET << std::endl;
-	yan.signForm(shrub);
+	yan.signForm(*form);
 	std::cout << std::endl;
 
 	std::cout << YELLOW << "Yan try to execute form 'Shrubbery Creation Form'" << RESET << std::endl;
-	yan.executeForm(shrub);
+	yan.executeForm(*form);
 	std::cout << std::endl;
 
 	std::cout << YELLOW << "Joe try to execute form 'Shrubbery Creation Form'" << RESET << std::endl;
-	joe.executeForm(shrub);
+	joe.executeForm(*form);
 	std::cout << std::endl;
+
+	delete form;
 }
 
 void test3(void)
 {
 	std::cout << "test 2:\n" << std::endl;
+
+	AForm	*form;
+	Intern	someRandomIntern;
 
 	std::cout << YELLOW << "Instantiate a bureaucrat 'Ben' with grade 84" << RESET << std::endl;
 	Bureaucrat	ben("Ben", 84);
@@ -100,24 +114,24 @@ void test3(void)
 	std::cout << std::endl;
 
 	std::cout << YELLOW << "Instantiate a Robotomy Request Form with target 'tmp'" << RESET << std::endl;
-	RobotomyRequestForm	rob("tmp");
-	std::cout << rob << std::endl;
+	form = someRandomIntern.makeForm("robotomy request", "tmp");
+	std::cout << *form << std::endl;
 	std::cout << std::endl;
 
 	std::cout << YELLOW << "Ben try to sign form 'Robotomy Request Form'" << RESET << std::endl;
-	ben.signForm(rob);
+	ben.signForm(*form);
 	std::cout << std::endl;
 
 	std::cout << YELLOW << "Joe try to execute form 'Robotomy Request Form'" << RESET << std::endl;
-	joe.executeForm(rob);
+	joe.executeForm(*form);
 	std::cout << std::endl;
 
 	std::cout << YELLOW << "Yan try to sign form 'Robotomy Request Form'" << RESET << std::endl;
-	yan.signForm(rob);
+	yan.signForm(*form);
 	std::cout << std::endl;
 
 	std::cout << YELLOW << "Yan try to execute form 'Robotomy Request Form'" << RESET << std::endl;
-	yan.executeForm(rob);
+	yan.executeForm(*form);
 	std::cout << std::endl;
 
 	for (int i = 0; i < 4; i++)
@@ -125,15 +139,19 @@ void test3(void)
 		srand(time(NULL));
   		sleep((rand() % 2) + 1);
 		std::cout << CYAN << "Joe try to execute form 'Robotomy Request Form'" << RESET << std::endl;
-		joe.executeForm(rob);
+		joe.executeForm(*form);
 		std::cout << std::endl;
 	}
 
+	delete form;
 }
 
 void test4(void)
 {
 	std::cout << "test 3:\n" << std::endl;
+
+	AForm	*form;
+	Intern	someRandomIntern;
 
 	std::cout << YELLOW << "Instantiate a bureaucrat 'Ben' with grade 42" << RESET << std::endl;
 	Bureaucrat	ben("Ben", 42);
@@ -154,34 +172,39 @@ void test4(void)
 	std::cout << std::endl;
 
 	std::cout << YELLOW << "Instantiate a Presidential Pardon Form with target 'tmp'" << RESET << std::endl;
-	PresidentialPardonForm	pres("tmp");
-	std::cout << pres << std::endl;
+	form = someRandomIntern.makeForm("presidential pardon", "tmp");
+	std::cout << *form << std::endl;
 	std::cout << std::endl;
 
 	std::cout << YELLOW << "Ben try to sign form 'Presidential Pardon Form'" << RESET << std::endl;
-	ben.signForm(pres);
+	ben.signForm(*form);
 	std::cout << std::endl;
 
 	std::cout << YELLOW << "Joe try to execute form 'Presidential Pardon Form'" << RESET << std::endl;
-	joe.executeForm(pres);
+	joe.executeForm(*form);
 	std::cout << std::endl;
 
 	std::cout << YELLOW << "Yan try to sign form 'Presidential Pardon Form'" << RESET << std::endl;
-	yan.signForm(pres);
+	yan.signForm(*form);
 	std::cout << std::endl;
 
 	std::cout << YELLOW << "Yan try to execute form 'Presidential Pardon Form'" << RESET << std::endl;
-	yan.executeForm(pres);
+	yan.executeForm(*form);
 	std::cout << std::endl;
 
 	std::cout << YELLOW << "Joe try to execute form 'Presidential Pardon Form'" << RESET << std::endl;
-	joe.executeForm(pres);
+	joe.executeForm(*form);
 	std::cout << std::endl;
+
+	delete form;
 }
 
 void test5(void)
 {
 	std::cout << "test 5:" << std::endl;
+
+	AForm	*form;
+	Intern	someRandomIntern;
 
 	std::cout << YELLOW << "Instantiate a bureaucrat 'Joe' with grade 8" << RESET << std::endl;
 	Bureaucrat	joe("Joe", 8);
@@ -189,17 +212,19 @@ void test5(void)
 
 	std::cout << YELLOW << "Instantiate a Shrubbery Creation Form with target 'fail'" << RESET << std::endl;
 	std::cout << CYAN << "First You should create a 'fail_shrubbery' folder ( make fclean; mkdir fail_shrubbery; make )" << RESET << std::endl;
-	ShrubberyCreationForm	shrub("fail");
-	std::cout << shrub << std::endl;
+	form = someRandomIntern.makeForm("shrubbery creation", "fail");
+	std::cout << *form << std::endl;
 	std::cout << std::endl;
 
 	std::cout << YELLOW << "Joe sign the Form'" << RESET << std::endl;
-	joe.signForm(shrub);
+	joe.signForm(*form);
 	std::cout << std::endl;
 
 	std::cout << YELLOW << "Joe execute the Form'" << RESET << std::endl;
-	joe.executeForm(shrub);
+	joe.executeForm(*form);
 	std::cout << std::endl;
+
+	delete form;
 }
 
 void test6(void)
@@ -226,8 +251,7 @@ void test6(void)
 	delete scf;
 
 	unexisting = someRandomIntern.makeForm("unexisting", "Bender");
-	if (unexisting)
-		std::cout << *unexisting << std::endl;
+	std::cout << *unexisting << std::endl;
 	std::cout << std::endl;
 }
 
