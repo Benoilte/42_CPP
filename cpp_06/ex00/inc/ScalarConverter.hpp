@@ -2,10 +2,11 @@
 #define SCALARCONVERTER_HPP
 
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <stdlib.h>
 #include <limits>
-#include <math.h> 
+#include <math.h>
 
 #define INT_LENGTH_MAX 	10
 
@@ -32,14 +33,27 @@ private:
 	// PRIVATE STATIC FUNCTION //
 
 	static void printEmptyStr();
+	static void printInfinity(double t_d);
+
 	static void printChar(double t_d);
+	static void printChar(float t_f);
+	static void printChar(int t_n);
+
 	static void printInteger(double t_d);
+	static void printInteger(float t_f);
 
 	static bool	isInteger(double t_d);
+	static bool	isInteger(float t_f);
 	static bool	isInteger(std::string t_str);
 
-	static void convertInt(std::string t_str);
-	static void convertChar(std::string t_str);
+	static bool	isFloat(double t_d);
+
+	static void convertFromInt(std::string t_str);
+	static void convertFromChar(std::string t_str);
+	static void convertFromFloat(double t_dStr);
+	static void convertFromDouble(double t_dStr);
+
+	static void defineType(std::string t_str);
 
 public:
 	// GETTER //
