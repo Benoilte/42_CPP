@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bebrandt <bebrandt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bebrandt <benoit.brandt@proton.me>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 14:05:07 by bebrandt          #+#    #+#             */
-/*   Updated: 2025/02/07 18:34:29 by bebrandt         ###   ########.fr       */
+/*   Updated: 2025/02/07 19:08:02 by bebrandt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include "colors.hpp"
 
 #include <iostream>
+#include <stdexcept>
 #include <time.h>
 #include <stdlib.h>
 #include <unistd.h>

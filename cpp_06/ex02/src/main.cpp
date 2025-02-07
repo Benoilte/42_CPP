@@ -23,31 +23,58 @@ void identify(Base* p)
 	aPtr = dynamic_cast<A *>(p);
 	if (aPtr != NULL)
 	{
-		std::cout << "p point to object A" << std::endl;
+		std::cout << "pointer p point to object A" << std::endl;
 		return ;
 	}
 
 	bPtr = dynamic_cast<B *>(p);
 	if (bPtr != NULL)
 	{
-		std::cout << "p point to object B" << std::endl;
+		std::cout << "pointer p point to object B" << std::endl;
 		return ;
 	}
 
 	cPtr = dynamic_cast<C *>(p);
 	if (cPtr != NULL)
 	{
-		std::cout << "p point to object C" << std::endl;
+		std::cout << "pointer p point to object C" << std::endl;
 		return ;
 	}
-	
-	std::cout << "p point to unrelated object" << std::endl;
+
+	std::cout << "pointer p point to unrelated object" << std::endl;
 }
 
 void identify(Base& p)
 {
-	(void)p;
-	return ;
+	try
+	{
+		A	&aRef = dynamic_cast<A &>(p);
+		(void)aRef;
+		std::cout << "reference p point to object A" << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		try
+		{
+			B	&bRef = dynamic_cast<B &>(p);
+			(void)bRef;
+			std::cout << "reference p point to object B" << std::endl;
+		}
+		catch(const std::exception& e)
+		{
+			try
+			{
+				C	&cRef = dynamic_cast<C &>(p);
+				(void)cRef;
+				std::cout << "reference p point to object C" << std::endl;
+			}
+			catch(const std::exception& e)
+			{
+				std::cout << "reference p point to unrelated object" << std::endl;
+			}
+		}
+
+	}
 }
 
 void	test1()
@@ -78,17 +105,21 @@ void	test2()
 	std::cout << YELLOW << "test identify function with reference as argument" << RESET << std::endl;
 
 	Base	*basePtr1 = generate();
+	Base	&baseRef1 = *basePtr1;
 	sleep(1);
 	Base	*basePtr2 = generate();
+	Base	&baseRef2 = *basePtr2;
 	sleep(1);
 	Base	*basePtr3 = generate();
+	Base	&baseRef3 = *basePtr3;
 	sleep(1);
 	Base	*basePtr4 = new Base();
+	Base	&baseRef4 = *basePtr4;
 
-	identify(basePtr1);
-	identify(basePtr2);
-	identify(basePtr3);
-	identify(basePtr4);
+	identify(baseRef1);
+	identify(baseRef2);
+	identify(baseRef3);
+	identify(baseRef4);
 
 	delete basePtr1;
 	delete basePtr2;
@@ -102,4 +133,3 @@ int	main(void)
 	test2();
 	return (0);
 }
-
