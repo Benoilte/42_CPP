@@ -35,18 +35,18 @@ private:
 	// PRIVATE STATIC FUNCTION //
 
 	static void printEmptyStr();
-	static void printInfinity(double t_d);
+	static void printImpossibleCharInt();
 
-	static void printChar(double t_d);
-	static void printChar(float t_f);
 	static void printChar(int t_n);
+	static void printChar(float t_f);
+	static void printChar(double t_d);
 
-	static void printInteger(double t_d);
 	static void printInteger(float t_f);
+	static void printInteger(double t_d);
 
-	static bool	isInteger(double t_d);
-	static bool	isInteger(float t_f);
 	static bool	isInteger(std::string t_str);
+	static bool	isInteger(float t_f);
+	static bool	isInteger(double t_d);
 
 	static void convertFromChar(std::string t_str);
 	static void convertFromInt(std::string t_str);
@@ -58,11 +58,11 @@ private:
 public:
 	// GETTER //
 
-	static void convert(std::string t_str);
-
 	// SETTER //
 
 	// PUBLIC MEMBER FUNCTION //
+
+	static void convert(std::string t_str);
 };
 
 #endif

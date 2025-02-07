@@ -31,30 +31,10 @@ void ScalarConverter::printEmptyStr()
 					"double:\tImpossible" << std::endl;
 }
 
-void ScalarConverter::printInfinity(double t_d)
+void ScalarConverter::printImpossibleCharInt()
 {
-	if (t_d == HUGE_VAL)
-	{
-		std::cout <<	"char:\tImpossible\n"
-						"int:\tImpossible\n"
-						"float:\tinff\n"
-						"double:\tinf" << std::endl;
-	}
-	else
-	{
-		std::cout <<	"char:\tImpossible\n"
-						"int:\tImpossible\n"
-						"float:\t-inff\n"
-						"double:\t-inf" << std::endl;
-	}
-}
-
-void ScalarConverter::printChar(double t_d)
-{
-	if ((t_d > 0) && (t_d < 255) && std::isgraph(static_cast<int>(t_d)))
-		std::cout << "char:\t" << static_cast<char>(t_d) << std::endl;
-	else
-		std::cout << "char:\tNot displayable" << std::endl;
+	std::cout <<	"char:\tImpossible\n"
+					"int:\tImpossible" << std::endl;
 }
 
 void ScalarConverter::printChar(int t_n)
@@ -73,12 +53,12 @@ void ScalarConverter::printChar(float t_f)
 		std::cout << "char:\tNot displayable" << std::endl;
 }
 
-void ScalarConverter::printInteger(double t_d)
+void ScalarConverter::printChar(double t_d)
 {
-	if (isInteger(t_d))
-		std::cout << "int:\t" << static_cast<int>(t_d) << std::endl;
+	if ((t_d > 0) && (t_d < 255) && std::isgraph(static_cast<int>(t_d)))
+		std::cout << "char:\t" << static_cast<char>(t_d) << std::endl;
 	else
-		std::cout << "int:\tOut of range" << std::endl;
+		std::cout << "char:\tNot displayable" << std::endl;
 }
 
 void ScalarConverter::printInteger(float t_f)
@@ -89,12 +69,21 @@ void ScalarConverter::printInteger(float t_f)
 		std::cout << "int:\tOut of range" << std::endl;
 }
 
-bool ScalarConverter::isInteger(double t_d)
+void ScalarConverter::printInteger(double t_d)
 {
-	double intMax = static_cast<double>(std::numeric_limits<int>::max());
-	double intMin = static_cast<double>(std::numeric_limits<int>::min());
+	if (isInteger(t_d))
+		std::cout << "int:\t" << static_cast<int>(t_d) << std::endl;
+	else
+		std::cout << "int:\tOut of range" << std::endl;
+}
 
-	return (floor(t_d) >= intMin) && (floor(t_d) <= intMax);
+bool ScalarConverter::isInteger(std::string t_str)
+{
+	long int intConverted = atol(t_str.c_str());
+	long int intMax = static_cast<long int>(std::numeric_limits<int>::max());
+	long int intMin = static_cast<long int>(std::numeric_limits<int>::min());
+
+	return ((intConverted >= intMin) && (intConverted <= intMax));
 }
 
 bool ScalarConverter::isInteger(float t_f)
@@ -105,13 +94,12 @@ bool ScalarConverter::isInteger(float t_f)
 	return (floorf(t_f) >= intMin) && (floorf(t_f) <= intMax);
 }
 
-bool ScalarConverter::isInteger(std::string t_str)
+bool ScalarConverter::isInteger(double t_d)
 {
-	long int intConverted = atol(t_str.c_str());
-	long int intMax = static_cast<long int>(std::numeric_limits<int>::max());
-	long int intMin = static_cast<long int>(std::numeric_limits<int>::min());
+	double intMax = static_cast<double>(std::numeric_limits<int>::max());
+	double intMin = static_cast<double>(std::numeric_limits<int>::min());
 
-	return ((intConverted >= intMin) && (intConverted <= intMax));
+	return (floor(t_d) >= intMin) && (floor(t_d) <= intMax);
 }
 
 void ScalarConverter::convertFromChar(std::string t_str)
@@ -143,11 +131,17 @@ void ScalarConverter::convertFromInt(std::string t_str)
 void ScalarConverter::convertFromFloat(std::string t_str)
 {
 	float	fStr;
+	typedef std::numeric_limits<float> fltLimits;
 
 	std::cout << YELLOW << "Convert from float" << RESET << std::endl;
 	fStr = atof(t_str.c_str());
-	printChar(fStr);
-	printInteger(fStr);
+	if ((fStr == fltLimits::infinity()) || (fStr == -(fltLimits::infinity())) || (fStr != fStr))
+		printImpossibleCharInt();
+	else
+	{
+		printChar(fStr);
+		printInteger(fStr);
+	}
 	std::cout << "float:\t" << fStr << "f" << std::endl;
 	std::cout << "double:\t" << static_cast<double>(fStr) << std::endl;
 	return ;
@@ -159,13 +153,13 @@ void ScalarConverter::convertFromDouble(std::string t_str)
 
 	std::cout << YELLOW << "Convert from double" << RESET << std::endl;
 	dStr = strtod(t_str.c_str(), NULL);
-	if ((dStr == HUGE_VAL) || (dStr == -HUGE_VAL))
+	if ((dStr == HUGE_VAL) || (dStr == -HUGE_VAL) || (dStr != dStr))
+		printImpossibleCharInt();
+	else
 	{
-		printInfinity(dStr);
-		return ;
+		printChar(dStr);
+		printInteger(dStr);
 	}
-	printChar(dStr);
-	printInteger(dStr);
 	std::cout << "float:\t" << static_cast<float>(dStr) << "f" << std::endl;
 	std::cout << "double:\t" << dStr << std::endl;
 	return ;
@@ -180,9 +174,8 @@ void ScalarConverter::defineType(std::string t_str)
 	i = (t_str[0] == '+' || t_str[0] == '-');
 	while (std::isdigit(t_str[i]))
 	{
-		digitSize++;
 		i++;
-		if (digitSize > INT_LENGTH_MAX) break;
+		digitSize++;
 	}
 	inRange = ((digitSize > 0) && (digitSize <= INT_LENGTH_MAX));
 	if (inRange && (t_str[i] != '.') && (t_str[i] != 'f') && isInteger(t_str))
@@ -192,7 +185,7 @@ void ScalarConverter::defineType(std::string t_str)
 		std::cout << std::setprecision(5);
 		while (std::isdigit(t_str[i]) || (t_str[i] == '.'))
 			i++;
-		if (t_str[i] == 'f')
+		if ((t_str.compare(i, 4, "nanf") == 0) || (t_str.compare(i, 4, "inff") == 0) || (t_str[i] == 'f'))
 			convertFromFloat(t_str);
 		else
 			convertFromDouble(t_str);
@@ -207,6 +200,8 @@ void ScalarConverter::convert(std::string t_str)
 	posFirstNotSpaces = t_str.find_first_not_of(" \t\n\r\f\v");
 	t_str.erase(0, posFirstNotSpaces);
 	strSize = t_str.size();
+	std::cout << std::fixed;
+	std::cout << std::setprecision(1);
 	switch (strSize)
 	{
 		case 0:

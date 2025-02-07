@@ -10,8 +10,7 @@ int	main(int argc, char **argv)
 	// ScalarConverter sc;
 	std::string input;
 
-	std::cout << std::fixed;
-	std::cout << std::setprecision(1);
+
 	switch (argc)
 	{
 		case 1:
