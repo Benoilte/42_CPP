@@ -1,5 +1,4 @@
-#include "ScalarConverter.hpp"
-#include <iostream>
+#include "utils.hpp"
 
 void	testDefault(void)
 {

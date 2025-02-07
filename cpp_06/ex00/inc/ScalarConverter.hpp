@@ -8,6 +8,8 @@
 #include <limits>
 #include <math.h>
 
+#include "colors.hpp"
+
 #define INT_LENGTH_MAX 	10
 
 class ScalarConverter
@@ -46,12 +48,10 @@ private:
 	static bool	isInteger(float t_f);
 	static bool	isInteger(std::string t_str);
 
-	static bool	isFloat(double t_d);
-
-	static void convertFromInt(std::string t_str);
 	static void convertFromChar(std::string t_str);
-	static void convertFromFloat(double t_dStr);
-	static void convertFromDouble(double t_dStr);
+	static void convertFromInt(std::string t_str);
+	static void convertFromFloat(std::string t_str);
+	static void convertFromDouble(std::string t_str);
 
 	static void defineType(std::string t_str);
 

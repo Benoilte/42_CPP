@@ -25,68 +25,68 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter &t_rhs)
 
 void ScalarConverter::printEmptyStr()
 {
-	std::cout <<	"char: Impossible\n"
-					"int: Impossible\n"
-					"float: Impossiblef\n"
-					"double: Impossible" << std::endl;
+	std::cout <<	"char:\tImpossible\n"
+					"int:\tImpossible\n"
+					"float:\tImpossiblef\n"
+					"double:\tImpossible" << std::endl;
 }
 
 void ScalarConverter::printInfinity(double t_d)
 {
 	if (t_d == HUGE_VAL)
 	{
-		std::cout <<	"char: Impossible\n"
-						"int: Impossible\n"
-						"float: inff\n"
-						"double: inf" << std::endl;
+		std::cout <<	"char:\tImpossible\n"
+						"int:\tImpossible\n"
+						"float:\tinff\n"
+						"double:\tinf" << std::endl;
 	}
 	else
 	{
-		std::cout <<	"char: Impossible\n"
-						"int: Impossible\n"
-						"float: -inff\n"
-						"double: -inf" << std::endl;
+		std::cout <<	"char:\tImpossible\n"
+						"int:\tImpossible\n"
+						"float:\t-inff\n"
+						"double:\t-inf" << std::endl;
 	}
 }
 
 void ScalarConverter::printChar(double t_d)
 {
 	if ((t_d > 0) && (t_d < 255) && std::isgraph(static_cast<int>(t_d)))
-		std::cout << "char: " << static_cast<char>(t_d) << std::endl;
+		std::cout << "char:\t" << static_cast<char>(t_d) << std::endl;
 	else
-		std::cout << "char: Not displayable" << std::endl;
+		std::cout << "char:\tNot displayable" << std::endl;
 }
 
 void ScalarConverter::printChar(int t_n)
 {
 	if ((t_n > 0) && (t_n < 255) && std::isgraph(t_n))
-		std::cout << "char: " << static_cast<char>(t_n) << std::endl;
+		std::cout << "char:\t" << static_cast<char>(t_n) << std::endl;
 	else
-		std::cout << "char: Not displayable" << std::endl;
+		std::cout << "char:\tNot displayable" << std::endl;
 }
 
 void ScalarConverter::printChar(float t_f)
 {
 	if ((t_f > 0) && (t_f < 255) && std::isgraph(static_cast<int>(t_f)))
-		std::cout << "char: " << static_cast<char>(t_f) << std::endl;
+		std::cout << "char:\t" << static_cast<char>(t_f) << std::endl;
 	else
-		std::cout << "char: Not displayable" << std::endl;
+		std::cout << "char:\tNot displayable" << std::endl;
 }
 
 void ScalarConverter::printInteger(double t_d)
 {
 	if (isInteger(t_d))
-		std::cout << "int: " << static_cast<int>(t_d) << std::endl;
+		std::cout << "int:\t" << static_cast<int>(t_d) << std::endl;
 	else
-		std::cout << "int: Out of range" << std::endl;
+		std::cout << "int:\tOut of range" << std::endl;
 }
 
 void ScalarConverter::printInteger(float t_f)
 {
 	if (isInteger(t_f))
-		std::cout << "int: " << static_cast<int>(t_f) << std::endl;
+		std::cout << "int:\t" << static_cast<int>(t_f) << std::endl;
 	else
-		std::cout << "int: Out of range" << std::endl;
+		std::cout << "int:\tOut of range" << std::endl;
 }
 
 bool ScalarConverter::isInteger(double t_d)
@@ -114,58 +114,68 @@ bool ScalarConverter::isInteger(std::string t_str)
 	return ((intConverted >= intMin) && (intConverted <= intMax));
 }
 
-void ScalarConverter::convertFromInt(std::string t_str)
-{
-	int	iStr;
-
-	iStr = atoi(t_str.c_str());
-	printChar(iStr);
-	std::cout << "int: " << iStr << std::endl;
-	std::cout << "float: " << static_cast<float>(iStr) << "f" << std::endl;
-	std::cout << "double: " << static_cast<double>(iStr) << std::endl;
-	return ;
-}
-
 void ScalarConverter::convertFromChar(std::string t_str)
 {
 	char	c;
 
+	std::cout << YELLOW << "Convert from char" << RESET << std::endl;
 	c = t_str[0];
 	printChar(static_cast<int>(c));
-	std::cout << "int: " << static_cast<int>(c) << std::endl;
-	std::cout << "float: " << static_cast<float>(c) << "f" << std::endl;
-	std::cout << "double: " << static_cast<double>(c) << std::endl;
+	std::cout << "int:\t" << static_cast<int>(c) << std::endl;
+	std::cout << "float:\t" << static_cast<float>(c) << "f" << std::endl;
+	std::cout << "double:\t" << static_cast<double>(c) << std::endl;
 	return ;
 }
 
-void ScalarConverter::convertFromFloat(double t_dStr)
+void ScalarConverter::convertFromInt(std::string t_str)
+{
+	int	iStr;
+
+	std::cout << YELLOW << "Convert from int" << RESET << std::endl;
+	iStr = atoi(t_str.c_str());
+	printChar(iStr);
+	std::cout << "int:\t" << iStr << std::endl;
+	std::cout << "float:\t" << static_cast<float>(iStr) << "f" << std::endl;
+	std::cout << "double:\t" << static_cast<double>(iStr) << std::endl;
+	return ;
+}
+
+void ScalarConverter::convertFromFloat(std::string t_str)
 {
 	float	fStr;
 
-	fStr = static_cast<float>(t_dStr);
+	std::cout << YELLOW << "Convert from float" << RESET << std::endl;
+	fStr = atof(t_str.c_str());
 	printChar(fStr);
 	printInteger(fStr);
-	std::cout << "float: " << fStr << "f" << std::endl;
-	std::cout << "double: " << static_cast<double>(fStr) << std::endl;
+	std::cout << "float:\t" << fStr << "f" << std::endl;
+	std::cout << "double:\t" << static_cast<double>(fStr) << std::endl;
 	return ;
 }
 
-void ScalarConverter::convertFromDouble(double t_dStr)
+void ScalarConverter::convertFromDouble(std::string t_str)
 {
-	printChar(t_dStr);
-	printInteger(t_dStr);
-	std::cout << "float: " << static_cast<float>(t_dStr) << "f" << std::endl;
-	std::cout << "double: " << t_dStr << std::endl;
+	double	dStr;
+
+	std::cout << YELLOW << "Convert from double" << RESET << std::endl;
+	dStr = strtod(t_str.c_str(), NULL);
+	if ((dStr == HUGE_VAL) || (dStr == -HUGE_VAL))
+	{
+		printInfinity(dStr);
+		return ;
+	}
+	printChar(dStr);
+	printInteger(dStr);
+	std::cout << "float:\t" << static_cast<float>(dStr) << "f" << std::endl;
+	std::cout << "double:\t" << dStr << std::endl;
 	return ;
 }
 
 void ScalarConverter::defineType(std::string t_str)
 {
-	int		i;
+	size_t	i;
 	int		digitSize = 0;
 	bool	inRange;
-	double	dStr;
-	char	*pEnd;
 
 	i = (t_str[0] == '+' || t_str[0] == '-');
 	while (std::isdigit(t_str[i]))
@@ -180,13 +190,12 @@ void ScalarConverter::defineType(std::string t_str)
 	else
 	{
 		std::cout << std::setprecision(5);
-		dStr = strtod(t_str.c_str(), &pEnd);
-		if ((dStr == HUGE_VAL) || (dStr == -HUGE_VAL))
-			printInfinity(dStr);
-		else if (pEnd[0] == 'f')
-			convertFromFloat(dStr);
+		while (std::isdigit(t_str[i]) || (t_str[i] == '.'))
+			i++;
+		if (t_str[i] == 'f')
+			convertFromFloat(t_str);
 		else
-			convertFromDouble(dStr);
+			convertFromDouble(t_str);
 	}
 }
 
