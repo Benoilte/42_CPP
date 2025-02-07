@@ -169,7 +169,7 @@ void ScalarConverter::defineType(std::string t_str)
 {
 	size_t	i;
 	int		digitSize = 0;
-	bool	inRange;
+	bool	isInt;
 
 	i = (t_str[0] == '+' || t_str[0] == '-');
 	while (std::isdigit(t_str[i]))
@@ -177,8 +177,8 @@ void ScalarConverter::defineType(std::string t_str)
 		i++;
 		digitSize++;
 	}
-	inRange = ((digitSize > 0) && (digitSize <= INT_LENGTH_MAX));
-	if (inRange && (t_str[i] != '.') && (t_str[i] != 'f') && isInteger(t_str))
+	isInt = ((digitSize > 0) && (digitSize <= INT_LENGTH_MAX) && isInteger(t_str));
+	if (isInt && (t_str[i] != '.') && (t_str[i] != 'f') && !((t_str[0] == '0') && (t_str[1] == 'x')))
 		convertFromInt(t_str);
 	else
 	{
