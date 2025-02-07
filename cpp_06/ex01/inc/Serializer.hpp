@@ -2,23 +2,17 @@
 #define SERIALIZER_HPP
 
 # include <iostream>
+# include <stdint.h>
+
+# include "data.hpp"
 
 class Serializer
 {
 	private:
-	
-		// PRIVATE ATTRIBUTE //
-
-		int	m_foo;
-
-		// PRIVATE MEMBER FUNCTION //
-
-	public:
 
 		// CONSTRUCTOR //
 
 		Serializer();
-		Serializer(int const t_n);
 		Serializer(const Serializer &t_src);
 
 		// DESTRUCTOR //
@@ -28,17 +22,23 @@ class Serializer
 		// OPERATOR OVERLOAD //
 
 		Serializer	&operator=(const Serializer &t_rhs);
+	
+		// PRIVATE ATTRIBUTE //
+
+		// PRIVATE MEMBER FUNCTION //
+
+	public:
 
 		// GETTER //
-
-		int		getFoo(void) const;
 
 		// SETTER //
 
 		// PUBLIC MEMBER FUNCTION //
 
-};
+		// PUBLIC STATIC FUNCTION //
 
-std::ostream	&operator<<(std::ostream &t_out, Serializer const &t_rhs);
+		static uintptr_t	serialize(Data* t_ptr);
+		static Data*		deserialize(uintptr_t t_raw);
+};
 
 #endif

@@ -12,11 +12,6 @@ Serializer::Serializer(const Serializer &t_src)
 	return ;
 }
 
-Serializer::Serializer(int const t_n) : m_foo(t_n)
-{
-	
-}
-
 Serializer::~Serializer()
 {
 	/*Destructor*/
@@ -24,19 +19,16 @@ Serializer::~Serializer()
 
 Serializer& Serializer::operator=(const Serializer &t_rhs)
 {
-	if (this != &t_rhs)
-		this->m_foo = t_rhs.getFoo();
-	
+	(void)t_rhs;
 	return *this;
 }
 
-int Serializer::getFoo(void) const
+uintptr_t Serializer::serialize(Data* t_ptr)
 {
-	return m_foo;
+	return (reinterpret_cast<uintptr_t>(t_ptr));
 }
 
-std::ostream& operator<<(std::ostream &t_out, Serializer const &t_rhs)
+Data* Serializer::deserialize(uintptr_t t_raw)
 {
-	t_out << t_rhs.getFoo();
-	return t_out; 
+	return (reinterpret_cast<Data *>(t_raw));
 }
