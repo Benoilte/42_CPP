@@ -3,8 +3,6 @@
 
 # include <iostream>
 
-class Base;
-
 # include "Base.hpp"
 
 class A : public Base {};
