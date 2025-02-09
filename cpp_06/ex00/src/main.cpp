@@ -32,6 +32,12 @@ void	testDefault(void)
 	std::cout << CYAN << "\n./convert -nanf" << RESET << std::endl;
 	ScalarConverter::convert("-nanf");
 
+	std::cout << CYAN << "\n./convert -a" << RESET << std::endl;
+	ScalarConverter::convert("-a");
+
+	std::cout << CYAN << "\n./convert -42test" << RESET << std::endl;
+	ScalarConverter::convert("-42test");
+
 	std::cout << CYAN << "\n./convert a" << RESET << std::endl;
 	ScalarConverter::convert("a");
 
@@ -52,6 +58,15 @@ void	testDefault(void)
 
 	std::cout << CYAN << "\n./convert +4.2f" << RESET << std::endl;
 	ScalarConverter::convert("+4.2f");
+
+	std::cout << CYAN << "\n./convert -42" << RESET << std::endl;
+	ScalarConverter::convert("-42");
+
+	std::cout << CYAN << "\n./convert -4.2" << RESET << std::endl;
+	ScalarConverter::convert("-4.2");
+
+	std::cout << CYAN << "\n./convert -4.2f" << RESET << std::endl;
+	ScalarConverter::convert("-4.2f");
 
 	std::cout << CYAN << "\n./convert 2147483647" << RESET << std::endl;
 	ScalarConverter::convert("2147483647");
