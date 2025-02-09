@@ -7,11 +7,20 @@ Base* generate(void)
 	srand(time(NULL));
 	random = rand() % 3;
 	if (random == 0)
+	{
+		std::cout << CYAN << "Object A is created" << RESET << std::endl;
 		return (new A());
+	}
 	else if (random == 1)
+	{
+		std::cout << CYAN << "Object B is created" << RESET << std::endl;
 		return (new B());
+	}
 	else
+	{
+		std::cout << CYAN << "Object C is created" << RESET << std::endl;
 		return (new C());
+	}
 }
 
 void identify(Base* p)
