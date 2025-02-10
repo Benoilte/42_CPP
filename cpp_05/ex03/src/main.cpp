@@ -24,24 +24,23 @@ void test1(void)
 	delete form;
 
 	std::cout << YELLOW << "Instantiate a Robotomy Request Form with target 'bender'" << RESET << std::endl;
-	form = someRandomIntern.makeForm("presidential pardon", "bender");
+	form = someRandomIntern.makeForm("robotomy request", "tmp");
 	std::cout << *form << std::endl;
 	delete form;
 
 	std::cout << YELLOW << "Instantiate a Presidential Pardon Form with target 'tmp'" << RESET << std::endl;
-	form = someRandomIntern.makeForm("robotomy request", "tmp");
+	form = someRandomIntern.makeForm("presidential pardon", "bender");
 	std::cout << *form << std::endl;
 	delete form;
 }
 
 void test2(void)
 {
-	std::cout << "test 3:\n" << std::endl;
+	std::cout << "test 2:\n" << std::endl;
 
 	AForm	*form;
 	Intern	someRandomIntern;
 
-	// 145, exec 137
 	std::cout << YELLOW << "Instantiate a bureaucrat 'Ben' with grade 148" << RESET << std::endl;
 	Bureaucrat	ben("Ben", 148);
 	std::cout << ben << std::endl;
@@ -90,7 +89,7 @@ void test2(void)
 
 void test3(void)
 {
-	std::cout << "test 2:\n" << std::endl;
+	std::cout << "test 3:\n" << std::endl;
 
 	AForm	*form;
 	Intern	someRandomIntern;
@@ -148,7 +147,7 @@ void test3(void)
 
 void test4(void)
 {
-	std::cout << "test 3:\n" << std::endl;
+	std::cout << "test 4:\n" << std::endl;
 
 	AForm	*form;
 	Intern	someRandomIntern;
@@ -201,7 +200,7 @@ void test4(void)
 
 void test5(void)
 {
-	std::cout << "test 5:" << std::endl;
+	std::cout << "test 5:\n" << std::endl;
 
 	AForm	*form;
 	Intern	someRandomIntern;
@@ -229,27 +228,33 @@ void test5(void)
 
 void test6(void)
 {
+	std::cout << "test 6:\n" << std::endl;
+
 	Intern someRandomIntern;
+	AForm* scf;
 	AForm* rrf;
 	AForm* ppf;
-	AForm* scf;
 	AForm* unexisting;
 
-	rrf = someRandomIntern.makeForm("robotomy request", "Bender");
-	std::cout << *rrf << std::endl;
-	std::cout << std::endl;
-	delete rrf;
-
-	ppf = someRandomIntern.makeForm("presidential pardon", "Bender");
-	std::cout << *ppf << std::endl;
-	std::cout << std::endl;
-	delete ppf;
-
+	std::cout << YELLOW << "Intern create a shrubbery creation form with Bender as target'" << RESET << std::endl;
 	scf = someRandomIntern.makeForm("shrubbery creation", "Bender");
 	std::cout << *scf << std::endl;
 	std::cout << std::endl;
 	delete scf;
 
+	std::cout << YELLOW << "Intern create a robotomy request form with Bender as target'" << RESET << std::endl;
+	rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+	std::cout << *rrf << std::endl;
+	std::cout << std::endl;
+	delete rrf;
+
+	std::cout << YELLOW << "Intern create a presidential pardon form with Bender as target'" << RESET << std::endl;
+	ppf = someRandomIntern.makeForm("presidential pardon", "Bender");
+	std::cout << *ppf << std::endl;
+	std::cout << std::endl;
+	delete ppf;
+
+	std::cout << YELLOW << "Intern create an unexisting form with Bender as target'" << RESET << std::endl;
 	unexisting = someRandomIntern.makeForm("unexisting", "Bender");
 	std::cout << *unexisting << std::endl;
 	std::cout << std::endl;

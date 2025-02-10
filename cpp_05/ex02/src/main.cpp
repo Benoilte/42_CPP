@@ -29,7 +29,7 @@ void test1(void)
 
 void test2(void)
 {
-	std::cout << "test 3:\n" << std::endl;
+	std::cout << "test 2:\n" << std::endl;
 
 	// 145, exec 137
 	std::cout << YELLOW << "Instantiate a bureaucrat 'Ben' with grade 148" << RESET << std::endl;
@@ -78,7 +78,7 @@ void test2(void)
 
 void test3(void)
 {
-	std::cout << "test 2:\n" << std::endl;
+	std::cout << "test 3:\n" << std::endl;
 
 	std::cout << YELLOW << "Instantiate a bureaucrat 'Ben' with grade 84" << RESET << std::endl;
 	Bureaucrat	ben("Ben", 84);
@@ -132,7 +132,7 @@ void test3(void)
 
 void test4(void)
 {
-	std::cout << "test 3:\n" << std::endl;
+	std::cout << "test 4:\n" << std::endl;
 
 	std::cout << YELLOW << "Instantiate a bureaucrat 'Ben' with grade 42" << RESET << std::endl;
 	Bureaucrat	ben("Ben", 42);
@@ -180,7 +180,7 @@ void test4(void)
 
 void test5(void)
 {
-	std::cout << "test 5:" << std::endl;
+	std::cout << "test 5:\n" << std::endl;
 
 	std::cout << YELLOW << "Instantiate a bureaucrat 'Joe' with grade 8" << RESET << std::endl;
 	Bureaucrat	joe("Joe", 8);
