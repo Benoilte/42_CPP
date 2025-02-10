@@ -1,8 +1,5 @@
 #include "PresidentialPardonForm.hpp"
 
-int	PresidentialPardonForm::m_signatureGrade = 25;
-int	PresidentialPardonForm::m_executionGrade = 5;
-
 PresidentialPardonForm::PresidentialPardonForm() :
 	AForm("Presidential_Pardon", m_signatureGrade, m_executionGrade),
 	m_target("noTarget")

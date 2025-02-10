@@ -11,8 +11,8 @@ class PresidentialPardonForm : public AForm
 
 		// PRIVATE STATIC ATTRIBUTE //
 
-		static int	m_signatureGrade;
-		static int	m_executionGrade;
+		const static int	m_signatureGrade = 25;
+		const static int	m_executionGrade = 5;
 
 		// PRIVATE ATTRIBUTE //
 

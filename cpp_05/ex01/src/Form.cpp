@@ -3,8 +3,8 @@
 Form::Form() :
 	m_name("default"),
 	m_isSigned(false),
-	m_requireGradeToSigne(42),
-	m_requireGradeToExecute(42)
+	m_requireGradeToSigne(m_defaultGrade),
+	m_requireGradeToExecute(m_defaultGrade)
 {
     /*Constructor*/
 }
@@ -15,9 +15,9 @@ Form::Form(const Form &t_src) :
 	m_requireGradeToSigne(t_src.getRequireGradeToSigne()),
 	m_requireGradeToExecute(t_src.getRequireGradeToExecute())
 {
-	if ((t_src.getRequireGradeToSigne() < 1) || (t_src.getRequireGradeToExecute() < 1))
+	if ((t_src.getRequireGradeToSigne() < m_maxGrade) || (t_src.getRequireGradeToExecute() < m_maxGrade))
 		throw Form::GradeTooHighException();
-	else if ((t_src.getRequireGradeToSigne() > 150) || (t_src.getRequireGradeToExecute() > 150))
+	else if ((t_src.getRequireGradeToSigne() > m_minGrade) || (t_src.getRequireGradeToExecute() > m_minGrade))
 		throw Form::GradeTooLowException();
 }
 
@@ -27,9 +27,9 @@ Form::Form(const std::string t_name, int t_gradeToSigned, int t_gradeToExecute) 
 	m_requireGradeToSigne(t_gradeToSigned),
 	m_requireGradeToExecute(t_gradeToExecute)
 {
-	if ((t_gradeToSigned < 1) || (t_gradeToExecute < 1))
+	if ((t_gradeToSigned < m_maxGrade) || (t_gradeToExecute < m_maxGrade))
 		throw Form::GradeTooHighException();
-	else if ((t_gradeToSigned > 150) || (t_gradeToExecute > 150))
+	else if ((t_gradeToSigned > m_minGrade) || (t_gradeToExecute > m_minGrade))
 		throw Form::GradeTooLowException();
 }
 

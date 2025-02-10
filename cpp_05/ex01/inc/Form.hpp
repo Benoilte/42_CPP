@@ -12,7 +12,13 @@ class	Bureaucrat;
 class Form
 {
 	private:
-	
+		
+		// STATIC PRIVATE ATTRIBUTE //
+
+		const static int	m_minGrade = 150; 
+		const static int	m_maxGrade = 1;
+		const static int	m_defaultGrade = 42;
+
 		// PRIVATE ATTRIBUTE //
 
 		const std::string	m_name;

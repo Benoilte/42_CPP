@@ -1,8 +1,5 @@
 #include "RobotomyRequestForm.hpp"
 
-int	RobotomyRequestForm::m_signatureGrade = 72;
-int	RobotomyRequestForm::m_executionGrade = 45;
-
 RobotomyRequestForm::RobotomyRequestForm() :
 	AForm("Robotomy_Request", m_signatureGrade, m_executionGrade),
 	m_target("noTarget")

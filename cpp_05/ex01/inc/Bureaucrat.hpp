@@ -12,6 +12,11 @@ class Form;
 class Bureaucrat
 {
 	private:
+	
+		// STATIC PRIVATE ATTRIBUTE //
+
+		const static int	m_minGrade = 150; 
+		const static int	m_maxGrade = 1;
 
 		// PRIVATE ATTRIBUTE //
 

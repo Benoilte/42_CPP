@@ -11,8 +11,8 @@ class ShrubberyCreationForm : public AForm
 
 		// PRIVATE STATIC ATTRIBUTE //
 
-		static int	m_signatureGrade;
-		static int	m_executionGrade;
+		const static int	m_signatureGrade = 145;
+		const static int	m_executionGrade = 137;
 
 		// PRIVATE ATTRIBUTE //
 

@@ -1,8 +1,5 @@
 #include "ShrubberyCreationForm.hpp"
 
-int	ShrubberyCreationForm::m_signatureGrade = 145;
-int	ShrubberyCreationForm::m_executionGrade = 137;
-
 ShrubberyCreationForm::ShrubberyCreationForm() :
 	AForm("Shrubbery_Creation", m_signatureGrade, m_executionGrade),
 	m_target("noTarget"),

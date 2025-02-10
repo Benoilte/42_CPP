@@ -2,7 +2,7 @@
 
 Bureaucrat::Bureaucrat()
 : 	m_name("Anonymous"),
-	m_grade(150)
+	m_grade(m_minGrade)
 {
     /*Constructor*/
 }
@@ -17,11 +17,11 @@ Bureaucrat::Bureaucrat(const Bureaucrat &t_src)
 
 Bureaucrat::Bureaucrat(const std::string t_name, int t_grade)
 : 	m_name(t_name),
-	m_grade(150)
+	m_grade(m_minGrade)
 {
-	if (t_grade < 1)
+	if (t_grade < m_maxGrade)
 		throw Bureaucrat::GradeTooHighException();
-	else if (t_grade > 150)
+	else if (t_grade > m_minGrade)
 		throw Bureaucrat::GradeTooLowException();
 	else
 		m_grade = t_grade;
@@ -47,14 +47,14 @@ int Bureaucrat::getGrade(void) const { return m_grade; }
 void Bureaucrat::incrementGrade()
 {
 	m_grade--; 
-	if (m_grade < 1)
+	if (m_grade < m_maxGrade)
 		throw Bureaucrat::GradeTooHighException();
 }
 
 void Bureaucrat::decrementGrade()
 {
 	m_grade++;
-	if (m_grade > 150)
+	if (m_grade > m_minGrade)
 		throw Bureaucrat::GradeTooLowException();
 }
 

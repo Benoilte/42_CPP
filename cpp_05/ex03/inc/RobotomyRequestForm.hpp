@@ -13,8 +13,8 @@ class RobotomyRequestForm : public AForm
 
 		// PRIVATE STATIC ATTRIBUTE //
 
-		static int	m_signatureGrade;
-		static int	m_executionGrade;
+		const static int	m_signatureGrade = 72;
+		const static int	m_executionGrade = 45;
 
 		// PRIVATE ATTRIBUTE //
 

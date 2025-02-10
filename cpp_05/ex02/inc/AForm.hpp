@@ -12,6 +12,12 @@ class	Bureaucrat;
 class AForm
 {
 	private:
+		
+		// STATIC PRIVATE ATTRIBUTE //
+
+		const static int	m_minGrade = 150; 
+		const static int	m_maxGrade = 1;
+		const static int	m_defaultGrade = 42;
 
 		// PRIVATE ATTRIBUTE //
 
