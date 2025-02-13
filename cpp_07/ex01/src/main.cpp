@@ -1,11 +1,6 @@
 #include "utils.hpp"
 #include <iostream>
 
-void	addTwo(int &n)
-{
-	n += 2;
-}
-
 void	displayInt(int const &n)
 {
 	std::cout << n << std::endl;
@@ -29,7 +24,7 @@ void	RotateLowercase(char &c)
 		c = max - (c - min);
 }
 
-void	testIntArray()
+void	testAddTwoTemplateFunction()
 {
 	int	intArray[3] = {2, 4, 6};
 	size_t	length  = 3;
@@ -42,6 +37,18 @@ void	testIntArray()
 	std::cout << YELLOW << "Function iter is called" << RESET << std::endl;
 	for (size_t i = 0; i < length; i++)
 		std::cout << intArray[i] << " ";
+	std::cout << std::endl;	
+
+	char	charArray[3] = {'a', 'b', 'c'};
+
+	std::cout << CYAN << "Test with array of char and function to add 2" << RESET << std::endl;
+	for (size_t i = 0; i < length; i++)
+		std::cout << charArray[i] << " ";
+	std::cout << std::endl;
+	iter(charArray, length, addTwo);
+	std::cout << YELLOW << "Function iter is called" << RESET << std::endl;
+	for (size_t i = 0; i < length; i++)
+		std::cout << charArray[i] << " ";
 	std::cout << std::endl;	
 }
 
@@ -89,7 +96,7 @@ void	testLowercaseRotate()
 
 int	main(void)
 {
-	testIntArray();
+	testAddTwoTemplateFunction();
 	std::cout << std::endl;
 	testConstIntArray();
 	std::cout << std::endl;
