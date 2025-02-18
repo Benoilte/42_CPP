@@ -100,20 +100,18 @@ class Array
 
 		// PUBLIC MEMBER FUNCTION //
 
-		void			displayElement(void) const
+		bool			empty() const
 		{
-			for (unsigned int i = 0; i < arraySize; i++)
-			{
-				std::cout << i << ": " << elements[i] << std::endl;
-			}
-			
+			return ((arraySize == 0) ? true : false);
 		}
 
 };
 
 template<typename T>
 std::ostream	&operator<<(std::ostream &t_out, Array<T> const &t_rhs){
-	t_out << "print Array element";
+	for (unsigned int i = 0; i < t_rhs.size(); i++)
+		t_out << i << ":\t" << t_rhs[i] << '\n';
+	
 	return t_out;
 }
 
