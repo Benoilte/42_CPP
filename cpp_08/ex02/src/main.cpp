@@ -153,13 +153,58 @@ void	testFromSubjectWithList(void)
 	}
 }
 
+void	testMutantStackWithVector(void)
+{
+	MutantStack<int, std::vector<int> > mstack;
+
+	std::cout << CYAN << "Push 5 and 42 into mstack" << RESET << std::endl;
+	mstack.push(5);
+	mstack.push(42);
+
+	std::cout << CYAN << "\ndisplay last element: Sould be 42" << RESET << std::endl;
+	std::cout << mstack.top() << std::endl;
+
+	std::cout << CYAN << "\nPop last element from mstack" << RESET << std::endl;
+	mstack.pop();
+
+	std::cout << CYAN << "\ndisplay last element: Sould be 5" << RESET << std::endl;
+	std::cout << mstack.top() << std::endl;
+
+	std::cout << CYAN << "\ndisplay mstack size: Sould be 1" << RESET << std::endl;
+	std::cout << mstack.size() << std::endl;
+
+	std::cout << CYAN << "\nPush 3, 48, 1023, 458, 7 into mstack" << RESET << std::endl;
+	mstack.push(3);
+	mstack.push(48);
+	mstack.push(1023);
+	mstack.push(458);
+	mstack.push(7);
+
+	MutantStack<int, std::vector<int> >::iterator it = mstack.begin();
+	MutantStack<int, std::vector<int> >::iterator ite = mstack.end();
+	iterateThroughStack(it, ite, "\nIterate through mstack and display all element");
+
+	MutantStack<int, std::vector<int> >::const_iterator cit = mstack.begin();
+	MutantStack<int, std::vector<int> >::const_iterator cite = mstack.end();
+	iterateThroughStack(cit, cite, "\nDo the same with const iterator");
+
+	MutantStack<int, std::vector<int> >::reverse_iterator rit = mstack.rbegin();
+	MutantStack<int, std::vector<int> >::reverse_iterator rite = mstack.rend();
+	iterateThroughStack(rit, rite, "\nDo the same with reverse iterator");
+
+	MutantStack<int, std::vector<int> >::const_reverse_iterator crit = mstack.rbegin();
+	MutantStack<int, std::vector<int> >::const_reverse_iterator crite = mstack.rend();
+	iterateThroughStack(crit, crite, "\nDo the same with reverse const iterator");
+}
+
 void	help()
 {
 	std::cout << "Available command: " << std::endl;
 	std::cout << "'./mutantAbomination 1': Test MutantStack class" << std::endl;
-	std::cout << "'./mutantAbomination 2': Test MutantStack class" << std::endl;
+	std::cout << "'./mutantAbomination 2': Test copy constructor and assignement of MutantStack class" << std::endl;
 	std::cout << "'./mutantAbomination 3': Test From the subject" << std::endl;
 	std::cout << "'./mutantAbomination 4': Test From the subject replaced by list containers" << std::endl;
+	std::cout << "'./mutantAbomination 5': Test MutantStack class With vector instead of default deque" << std::endl;
 }
 
 int main(int argc, char **argv)
@@ -182,6 +227,10 @@ int main(int argc, char **argv)
 
 				case '4':
 					testFromSubjectWithList();
+					break;
+
+				case '5':
+					testMutantStackWithVector();
 					break;
 
 				default:
