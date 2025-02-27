@@ -147,6 +147,44 @@ void	test5(void)
 	std::cout << "Longest span sp4: " << sp4.longestSpan() << std::endl;
 }
 
+
+void	test6(void)
+{
+	std::cout << YELLOW << "Test6: Test copied span" << RESET << std::endl;
+
+	Span	sp(6);
+
+	sp.addNumber(1);
+	sp.addNumber(2);
+	sp.addNumber(3);
+	sp.addNumber(4);
+
+	std::cout << "\nsp content:\t" << sp << std::endl;
+
+	std::cout << CYAN << "\nCopy sp Span" << RESET << std::endl;
+	Span		spCopy(sp);
+	const Span	spCst(sp);
+	Span		spEq(0);
+
+	spEq = sp;
+	std::cout << "sp content:\t" << sp << std::endl;
+	std::cout << "spCopy content:\t" << spCopy << std::endl;
+	std::cout << "spCst content:\t" << spCst << std::endl;
+	std::cout << "spEq content:\t" << spEq << std::endl;
+
+	std::cout << CYAN << "\nAdd 42 into sp Span" << RESET << std::endl;
+	sp.addNumber(42);
+	std::cout << "sp content:\t" << sp << std::endl;
+	std::cout << "spCopy content:\t" << spCopy << std::endl;
+	std::cout << "spCst content:\t" << spCst << std::endl;
+	std::cout << "spEq content:\t" << spEq << std::endl;
+
+	std::cout << CYAN << "\nDisplay shortest and longest span of spCst" << RESET << std::endl;
+	std::cout << "Shortest span spCst: " << spCst.shortestSpan() << std::endl;
+	std::cout << "Longest span spCst: " << spCst.longestSpan() << std::endl;
+	// spCst.addNumber(8);
+}
+
 void	help()
 {
 	std::cout << "Available command: " << std::endl;
@@ -155,6 +193,7 @@ void	help()
 	std::cout << "'./span 3': Test shortestSpan function" << std::endl;
 	std::cout << "'./span 4': Test longestSpan function" << std::endl;
 	std::cout << "'./span 5': Test span with 10'000 integers" << std::endl;
+	std::cout << "'./span 6': Test copied span" << std::endl;
 }
 
 int main(int argc, char **argv)
@@ -183,6 +222,10 @@ int main(int argc, char **argv)
 
 				case '5':
 					test5();
+					break;
+
+				case '6':
+					test6();
 					break;
 
 				default:
