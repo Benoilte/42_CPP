@@ -19,9 +19,10 @@ class MutantStack : public std::stack<T, U>
 {
 	public:
 
-		typedef typename U::value_type	value_type;
-		typedef typename U::reference	reference;
-		typedef typename U::const_reference	const_reference;
+		typedef typename U::iterator iterator;
+		typedef typename U::const_iterator const_iterator;
+		typedef typename U::reverse_iterator reverse_iterator;
+		typedef typename U::const_reverse_iterator const_reverse_iterator;
 
 		// CONSTRUCTOR //
 
@@ -63,77 +64,21 @@ class MutantStack : public std::stack<T, U>
 
 		// SETTER //
 
-		
-
-		// NESTED ITERATOR CLASS
-
-		class Iterator : public std::iterator<std::forward_iterator_tag, T>
-		{
-			public:
-				
-				Iterator() 
-				{
-					/*Default Constructor*/
-				};
-
-				// Iterator(int const t_n)
-				// {
-
-				// };
-
-				Iterator(const Iterator &t_src)
-				{
-					*this = t_src;
-
-					return ;
-				};
-
-				// DESTRUCTOR //
-
-				~Iterator()
-				{
-					/*Destructor*/
-				};
-
-				// OPERATOR OVERLOAD //
-
-				Iterator	&operator=(const Iterator &t_rhs)
-				{
-					if (this != &t_rhs)
-						std::iterator<std::forward_iterator_tag, T>::operator=(t_rhs);
-			
-					return *this;
-				};
-		};
-
-		typedef Iterator  iterator;
-
-
 		// PUBLIC MEMBER FUNCTION //
 
-		// void push(const value_type& val) 
-		// { 
-		// 	// std::cout << "Yolooo " << val << std::endl;
-		// 	// c.push_back(val);
-		// 	this->c.push_back(val);
-		// 	if (this->size() == 1)
-		// 		head = this->top();
-		// }
+		iterator		begin() { return this->c.begin(); };
+		iterator		end() { return this->c.end(); };
+		const_iterator	begin() const { return this->c.begin(); };
+		const_iterator	end() const { return this->c.end(); };
 
-		// T &getHead(void)
-		// {
-		// 	T	*head = NULL;
-
-		// 	if (!this->empty())
-		// 		head = (&this->top()) - ((this->size() - 1) * sizeof(U));
-		// 	return *head;
-		// }
+		reverse_iterator		rbegin() { return this->c.rbegin(); };
+		reverse_iterator		rend() { return this->c.rend(); };
+		const_reverse_iterator	rbegin() const { return this->c.rbegin(); };
+		const_reverse_iterator	rend() const { return this->c.rend(); };
 
 	private:
 	
 		// PRIVATE ATTRIBUTE //
-
-		// reference	*head;
 
 		// PRIVATE MEMBER FUNCTION //
 };
