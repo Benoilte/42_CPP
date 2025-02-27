@@ -4,7 +4,7 @@ SRC_DIR			=	src/
 OBJ_DIR			=	obj/
 DEP_DIR			=	dep/
 
-SRC_FILES		=	main MutantStack
+SRC_FILES		=	main
 
 INC				=	inc/.
 
