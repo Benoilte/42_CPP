@@ -106,7 +106,7 @@ std::ostream& operator<<(std::ostream &t_out, Span const &t_rhs)
 
 bool Span::isSorted(void) const
 {
-	for (spanConstIt it = m_span.begin(); it != m_span.end(); it++)
+	for (spanConstIt it = m_span.begin(); it != (m_span.end() - 1); it++)
 	{
 		if (*it > *(it + 1))
 			return false;
