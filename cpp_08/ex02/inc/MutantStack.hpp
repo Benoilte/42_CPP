@@ -6,14 +6,6 @@
 # include <deque>
 # include <iterator>
 
-/*
-	typedef typename _Sequence::value_type                value_type;
-	typedef typename _Sequence::reference                 reference;
-	typedef typename _Sequence::const_reference           const_reference;
-	typedef typename _Sequence::size_type                 size_type;
-	typedef          _Sequence                            container_type;
-*/
-
 template< typename T , typename U = std::deque<T> >
 class MutantStack : public std::stack<T, U>
 {
@@ -31,16 +23,9 @@ class MutantStack : public std::stack<T, U>
 			/*Default Constructor*/
 		};
 
-		// MutantStack(int const t_n)
-		// {
-
-		// };
-
 		MutantStack<T, U>(const MutantStack &t_src) : std::stack<T, U>(t_src)
 		{
-			// *this = t_src;
 
-			// return ;
 		};
 
 		// DESTRUCTOR //
@@ -60,10 +45,6 @@ class MutantStack : public std::stack<T, U>
 			return *this;
 		};
 
-		// GETTER //
-
-		// SETTER //
-
 		// PUBLIC MEMBER FUNCTION //
 
 		iterator		begin() { return this->c.begin(); };
@@ -77,12 +58,7 @@ class MutantStack : public std::stack<T, U>
 		const_reverse_iterator	rend() const { return this->c.rend(); };
 
 	private:
-	
-		// PRIVATE ATTRIBUTE //
 
-		// PRIVATE MEMBER FUNCTION //
 };
-
-// std::ostream	&operator<<(std::ostream &t_out, MutantStack const &t_rhs);
 
 #endif

@@ -1,6 +1,6 @@
 #include "Span.hpp"
 
-Span::Span()
+Span::Span() : m_capacity(0)
 {
     /*Constructor*/
 }
@@ -118,13 +118,13 @@ int Span::generateOrderedNumber()
 {
 	static unsigned int		index;
 
-	index = index >= 10000 ? 0 : index;
+	index %= std::numeric_limits<int>::max();
 	return ++index;
 }
 
 int Span::generateRandomNumber()
 {
-	return (std::rand() % 10000000);
+	return (std::rand() % std::numeric_limits<int>::max());
 }
 
 void Span::SpanIsToShort(unsigned int t_n)

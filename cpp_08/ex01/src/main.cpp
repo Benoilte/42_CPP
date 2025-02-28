@@ -112,13 +112,13 @@ void	test5(void)
 {
 	std::cout << YELLOW << "Test5: Test span with 10'000 integers\n" << RESET << std::endl;
 
-	Span	sp1(10000);
+	Span	sp1(15000);
 
 	sp1.fillWithOrderedNumber();
 	std::cout << "Display sp1: " << std::endl;
 	std::cout << CYAN << "Span content: " << sp1 << RESET << std::endl;
 
-	Span	sp2(10000);
+	Span	sp2(15000);
 
 	sp2.filWithRandomNumber();
 	std::cout << "\nDisplay sp2: " << std::endl;
@@ -192,7 +192,7 @@ void	help()
 	std::cout << "'./span 2': Add too many ints into Span" << std::endl;
 	std::cout << "'./span 3': Test shortestSpan function" << std::endl;
 	std::cout << "'./span 4': Test longestSpan function" << std::endl;
-	std::cout << "'./span 5': Test span with 10'000 integers" << std::endl;
+	std::cout << "'./span 5': Test span with 15'000 integers" << std::endl;
 	std::cout << "'./span 6': Test copied span" << std::endl;
 }
 
