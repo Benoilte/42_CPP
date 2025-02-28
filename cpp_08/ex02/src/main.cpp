@@ -57,8 +57,8 @@ void	testCopyMutantStack(void)
 
 	std::cout << CYAN << "Copy different element from mstack and display last one" << RESET << std::endl;
 	std::stack<int> s(mstack);
-	std::stack<int> mstackCopy(mstack);
-	std::stack<int> mstackEquality;
+	MutantStack<int> mstackCopy(mstack);
+	MutantStack<int> mstackEquality;
 	mstackEquality = mstack;
 
 	std::cout << "mstack.top():\t\t" << mstack.top() << std::endl;
