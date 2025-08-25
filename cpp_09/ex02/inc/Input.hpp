@@ -21,6 +21,7 @@ class Input
 		Input	&operator=(const Input &rhs);
 
 		const std::vector<int>	&getInput(void) const;
+		size_t					getInputSize(void) const;
 	
 	private:
 

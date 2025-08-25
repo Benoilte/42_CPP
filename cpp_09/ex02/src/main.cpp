@@ -11,7 +11,12 @@ int	main(int argc, char **argv)
 		if (argc < 2)
 			throw std::runtime_error("Error");
 		Input input(argc, argv);
-		std::cout << "Before : " << input << std::endl;
+		PmergeMe sequence(input.getInput());
+		std::cout << "Before:\t " << sequence << std::endl;
+		// sequence.sort();
+		std::cout << "After:\t " << sequence << std::endl;
+		std::cout << "Time to process a range of " <<  input.getInputSize() << " elements with std::vector:\t " << 0.00031 << " us" << std::endl; // time should be replace by sequence.vectorSortedTime()
+		std::cout << "Time to process a range of " <<  input.getInputSize() << " elements with std::deque:\t " << 0.00014 << " us" << std::endl; // time should be replace by sequence.dequeSortedTime()
 	} catch (const std::exception &e){
 		std::cout << e.what() << std::endl;
 		return -1;

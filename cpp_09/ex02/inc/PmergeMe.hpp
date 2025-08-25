@@ -14,13 +14,18 @@ class PmergeMe
 	
 		PmergeMe();
 		PmergeMe(const std::vector<int>	&vecInput);
-		PmergeMe(const std::deque<int>	&vecInput);
 		PmergeMe(const PmergeMe &other);
 		~PmergeMe();
 		
 		PmergeMe	&operator=(const PmergeMe &rhs);
+
+		const std::vector<int>	&getVecData(void) const;
+		const std::deque<int>	&getDeqData(void) const;
 	
 	private:
+
+		std::vector<int>	m_vecData;
+		std::deque<int>		m_deqData;
 
 };
 

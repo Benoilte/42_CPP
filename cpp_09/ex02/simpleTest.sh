@@ -10,6 +10,21 @@ echo $GREEN"OK "$DEF_COLOR
 
 echo
 
+echo $GREEN"OK "$DEF_COLOR 
+(set -o xtrace; ./PmergeMe 8 7 "42 83" 3)
+
+echo
+
+echo $GREEN"OK "$DEF_COLOR 
+(set -o xtrace; ./PmergeMe 8 7 42 2147483647 83 3)
+
+echo
+
+echo $RED"NOK "$DEF_COLOR 
+(set -o xtrace;  ./PmergeMe -1 2 3)
+
+echo
+
 echo $RED"NOK "$DEF_COLOR 
 (set -o xtrace;  ./PmergeMe 1 2 3 3)
 
@@ -20,11 +35,6 @@ echo $RED"NOK "$DEF_COLOR
 
 echo
 
-echo $GREEN"OK "$DEF_COLOR 
-(set -o xtrace; ./PmergeMe 8 7 "42 83" 3)
-
-echo
-
 echo $RED"NOK "$DEF_COLOR 
 (set -o xtrace; ./PmergeMe 8 7 "42 3 83" 3)
 
@@ -32,3 +42,13 @@ echo
 
 echo $RED"NOK "$DEF_COLOR 
 (set -o xtrace; ./PmergeMe 8 7 "42 a 83" 3)
+
+echo
+
+echo $RED"NOK "$DEF_COLOR 
+(set -o xtrace; ./PmergeMe 8 7 42 2147483648 83 3)
+
+echo
+
+echo $RED"NOK "$DEF_COLOR 
+(set -o xtrace; ./PmergeMe 8 7 42 214748364843567 83 3)

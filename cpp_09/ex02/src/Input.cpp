@@ -38,6 +38,7 @@ Input& Input::operator=(const Input &rhs)
 //  ============| GETTERS |=============
 
 const std::vector<int>	&Input::getInput() const { return m_input; }
+size_t	Input::getInputSize() const { return m_input.size(); }
 
 //  ============| SETTERS |=============
 
