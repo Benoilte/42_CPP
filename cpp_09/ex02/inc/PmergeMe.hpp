@@ -2,6 +2,8 @@
 #define PMERGEME_HPP
 
 # include <iostream>
+# include <vector>
+# include <deque>
 # include <string>
 
 class PmergeMe
@@ -11,7 +13,8 @@ class PmergeMe
 	public:
 	
 		PmergeMe();
-		// PmergeMe();
+		PmergeMe(const std::vector<int>	&vecInput);
+		PmergeMe(const std::deque<int>	&vecInput);
 		PmergeMe(const PmergeMe &other);
 		~PmergeMe();
 		

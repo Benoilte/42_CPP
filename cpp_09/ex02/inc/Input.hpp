@@ -4,7 +4,6 @@
 # include <iostream>
 # include <sstream>
 # include <vector>
-# include <deque>
 # include <string>
 # include <exception>
 
@@ -21,16 +20,14 @@ class Input
 		
 		Input	&operator=(const Input &rhs);
 
-		const std::vector<int>	&getVecInput(void) const;
-		const std::deque<int>	&getDeqInput(void) const;
+		const std::vector<int>	&getInput(void) const;
 	
 	private:
 
-		void				fillContainer(const std::string &str);
-		bool				isDuplicates(const int &n);
+		void				fillInput(const std::string &str);
+		bool				isDuplicate(const int &n);
 
-		std::vector<int>	vecInput;
-		std::deque<int>		deqInput;
+		std::vector<int>	m_input;
 
 };
 
