@@ -115,7 +115,7 @@ void	PmergeMe::swapElementVector(size_t b, size_t a, size_t elementSize)
 
 // typedef std::pair<IPv4, uint16_t> t_socketAddress;
 
-void	PmergeMe::addElementInPendOrMainVector(size_t i, size_t elementSize, int ref, std::vector<t_boundedElement> &container)
+void	PmergeMe::addElementInPendVector(size_t i, size_t elementSize, int ref)
 {
 	t_boundedElement boundedElement;
 
@@ -125,14 +125,27 @@ void	PmergeMe::addElementInPendOrMainVector(size_t i, size_t elementSize, int re
 		elementSize--;
 	}
 	boundedElement.second = ref;
-	container.push_back(boundedElement);
+	m_pendVector.push_back(boundedElement);
 
 }
 
-void	PmergeMe::printPendVector(std::vector<t_boundedElement> &pend)
+void	PmergeMe::addElementInMainVector(size_t i, size_t elementSize, int ref)
+{
+	t_boundedElement boundedElement;
+
+	while (elementSize)
+	{
+		boundedElement.first.push_back(m_vecData[i - (elementSize - 1)]);
+		elementSize--;
+	}
+	boundedElement.second = ref;
+	m_mainVector.push_back(boundedElement);
+}
+
+void	PmergeMe::printPendVector(void)
 {
 	std::cout << "Pend: ";
-	for (std::vector<t_boundedElement>::iterator it = pend.begin(); it != pend.end(); it++)
+	for (std::vector<t_boundedElement>::iterator it = m_pendVector.begin(); it != m_pendVector.end(); it++)
 	{
 		for (std::vector<int>::iterator el = it->first.begin(); el != it->first.end(); el++)
 			std::cout << *el << " ";
@@ -141,10 +154,10 @@ void	PmergeMe::printPendVector(std::vector<t_boundedElement> &pend)
 	std::cout << std::endl;
 }
 
-void	PmergeMe::printMainVector(std::vector<t_boundedElement> &main)
+void	PmergeMe::printMainVector(void)
 {
 	std::cout << "Main: ";
-	for (std::vector<t_boundedElement>::iterator it = main.begin(); it != main.end(); it++)
+	for (std::vector<t_boundedElement>::iterator it = m_mainVector.begin(); it != m_mainVector.end(); it++)
 	{
 		for (std::vector<int>::iterator el = it->first.begin(); el != it->first.end(); el++)
 			std::cout << *el << " ";
@@ -153,27 +166,108 @@ void	PmergeMe::printMainVector(std::vector<t_boundedElement> &main)
 	std::cout << std::endl;
 }
 
-void	PmergeMe::insertElementVector(size_t elementSize)
+void	PmergeMe::initMainAndPendVector(size_t elementSize)
 {
-	std::vector<t_boundedElement> pend;
-	std::vector<t_boundedElement> main;
-
+	m_pendVector.clear();
+	m_mainVector.clear();
 	for (size_t i = elementSize - 1, n = 1; i < m_vecData.size(); i += elementSize, n++)
 	{
 		if (n == 1 || n == 2)
-			addElementInPendOrMainVector(i, elementSize, -1, main);
+			addElementInMainVector(i, elementSize, -1);
 		else if (isOdd(n))
-			addElementInPendOrMainVector(i, elementSize, -1, pend);
+			addElementInPendVector(i, elementSize, -1);
 		else
-			addElementInPendOrMainVector(i, elementSize, pend.size() - 1, main);
+			addElementInMainVector(i, elementSize, m_pendVector.size() - 1);
 	}
-	for (size_t i = 0; i < main.size(); i++)
+	for (size_t i = 0; i < m_mainVector.size(); i++)
 	{
-		if (main[i].second != -1)
-			pend[main[i].second].second = i;
+		if (m_mainVector[i].second != -1)
+			m_pendVector[m_mainVector[i].second].second = i;
 	}
-	printPendVector(pend);
-	printMainVector(main);
+}
+
+int	PmergeMe::binarySearchVector(int n, int lowIndex, int highIndex)
+{
+	// std::cout << "n: " << n << " lowIndex: " << lowIndex << " highIndex: " << highIndex << std::endl;
+	if (highIndex <= lowIndex)
+		return (n > m_mainVector[lowIndex].first.back()) ? lowIndex + 1 : lowIndex;
+
+	int	mid = (lowIndex + highIndex) / 2;
+
+	// if (n == m_mainVector[mid].first.back())
+	// 	return // To determine ;
+
+	if (n > m_mainVector[mid].first.back())
+		return binarySearchVector(n, mid + 1, highIndex);
+
+	return binarySearchVector(n, lowIndex, mid - 1);
+
+}
+
+void	PmergeMe::updateVecData(void)
+{
+	int i = 0;
+
+	for (std::vector<t_boundedElement>::iterator it = m_mainVector.begin(); it != m_mainVector.end(); it++)
+	{
+		for (std::vector<int>::iterator el = it->first.begin(); el != it->first.end(); el++)
+			m_vecData[i++] = *el;
+	}
+}
+
+void	PmergeMe::updateMainVector(int mainIndex)
+{
+	for (std::vector<t_boundedElement>::iterator it = m_mainVector.begin() + mainIndex; it != m_mainVector.end(); it++)
+	{
+		if (it->second != -1)
+			m_pendVector[it->second].second++;
+	}
+}
+
+void	PmergeMe::binaryInsertionSortVector(int pendIndex)
+{
+	// std::cout << "Insert Pend element: ";
+	// for (std::vector<int>::iterator el = m_pendVector[pendIndex].first.begin(); el != m_pendVector[pendIndex].first.end(); el++)
+	// 	std::cout << *el << " ";
+	// std::cout << std::endl;
+
+	// std::cout << "binarySearch" << std::endl;
+	int highIndex = (m_pendVector[pendIndex].second != -1) ? m_pendVector[pendIndex].second : (m_mainVector.size() - 1);
+	int	mainIdex = binarySearchVector(m_pendVector[pendIndex].first.back(), 0, highIndex);
+	// std::cout << "Insert in main at: " << mainIdex << std::endl;
+	m_mainVector.insert(m_mainVector.begin() + mainIdex, m_pendVector[pendIndex]);
+	updateMainVector(mainIdex);
+}
+
+void	PmergeMe::insertPendInMainVector(void)
+{
+	int	previousJacobsthalNumber = 1;
+	int	jacobsthalNumber = 3;
+	int elementToInsert;
+	int pendIndex;
+
+	while (previousJacobsthalNumber - 2 < static_cast<int>(m_pendVector.size() - 1))
+	{
+		if ((jacobsthalNumber - 2) > static_cast<int>(m_pendVector.size() - 1))
+		{
+			pendIndex = m_pendVector.size() - 1;
+			elementToInsert = pendIndex - (previousJacobsthalNumber - 2);
+		}
+		else
+		{
+			pendIndex = jacobsthalNumber - 2;
+			elementToInsert = jacobsthalNumber - previousJacobsthalNumber;
+		}
+
+		while (elementToInsert--)
+		{
+			binaryInsertionSortVector(pendIndex);
+			pendIndex--;
+		}
+		previousJacobsthalNumber = jacobsthalNumber;
+		jacobsthalNumber = ((pow(2, jacobsthalNumber + 1) + pow(-1, jacobsthalNumber)) / 3);
+	}
+
 }
 
 void	PmergeMe::sortVector(void)
@@ -184,7 +278,7 @@ void	PmergeMe::sortVector(void)
 
 	// step 1
 
-	std::cout << "step 1 level: " << m_vecLevel << std::endl;
+	// std::cout << "step 1 level: " << m_vecLevel << std::endl;
 	if (pairSize <  m_vecData.size())
 	{
 		for (size_t b = elementSize - 1, a = pairSize - 1; a < m_vecData.size(); b += pairSize, a += pairSize)
@@ -192,7 +286,7 @@ void	PmergeMe::sortVector(void)
 			if (m_vecData[b] > m_vecData[a])
 				swapElementVector(b, a, elementSize);
 		}
-		std::cout << *this << std::endl;
+		// std::cout << *this << std::endl;
 		m_vecLevel++;
 		sortVector();
 	}
@@ -203,9 +297,13 @@ void	PmergeMe::sortVector(void)
 	}
 
 	// step 2 and 3
-	std::cout << "step 2 level: " << m_vecLevel << std::endl;
-	insertElementVector(elementSize);
-	std::cout << "step 3 level: " << m_vecLevel << std::endl;
+	// std::cout << "step 2 level: " << m_vecLevel << std::endl;
+	initMainAndPendVector(elementSize);
+	// printPendVector();
+	// printMainVector();
+	// std::cout << "step 3 level: " << m_vecLevel << std::endl;
+	insertPendInMainVector();
+	updateVecData();
 	m_vecLevel--;
 }
 

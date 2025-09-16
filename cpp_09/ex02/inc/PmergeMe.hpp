@@ -45,9 +45,11 @@ class PmergeMe
 
 		typedef std::pair<std::vector<int>, int> t_boundedElement;
 
-		std::vector<int>	m_vecData;
-		size_t				m_vecLevel;
-		size_t				m_timeToSortVecData;
+		std::vector<int>				m_vecData;
+		size_t							m_vecLevel;
+		size_t							m_timeToSortVecData;
+		std::vector<t_boundedElement>	m_pendVector;
+		std::vector<t_boundedElement>	m_mainVector;
 
 		std::deque<int>		m_deqData;
 		size_t				m_DeqLevel;
@@ -58,10 +60,16 @@ class PmergeMe
 		bool	isOdd(int n);
 
 		void	swapElementVector(size_t b, size_t a, size_t elementSize);
-		void	insertElementVector(size_t elementSize);
-		void	addElementInPendOrMainVector(size_t i, size_t elementSize, int ref, std::vector<t_boundedElement> &container);
-		void	printPendVector(std::vector<t_boundedElement> &pend);
-		void	printMainVector(std::vector<t_boundedElement> &main);
+		void	initMainAndPendVector(size_t elementSize);
+		void	addElementInPendVector(size_t i, size_t elementSize, int ref);
+		void	addElementInMainVector(size_t i, size_t elementSize, int ref);
+		void	updateVecData(void);
+		void	updateMainVector(int mainIndex);
+		void	insertPendInMainVector(void);
+		int		binarySearchVector(int n, int lowIndex, int highIndex);
+		void	binaryInsertionSortVector(int pendIndex);
+		void	printPendVector(void);
+		void	printMainVector(void);
 
 };
 
