@@ -6,7 +6,8 @@
 # include <deque>
 # include <string>
 # include <sys/time.h>
-# include<cmath>
+# include <cmath>
+# include <utility>
 
 #include <unistd.h>
 
@@ -37,11 +38,12 @@ class PmergeMe
 		void	sort(void);
 
 		void	sortVector(void);
-		void	swapElementVector(size_t b, size_t a, size_t elementSize);
 
 		void	sortDeque(void);
 
 	private:
+
+		typedef std::pair<std::vector<int>, int> t_boundedElement;
 
 		std::vector<int>	m_vecData;
 		size_t				m_vecLevel;
@@ -52,6 +54,14 @@ class PmergeMe
 		size_t				m_timeToSortDeqData;
 
 		struct timeval		m_startTimer;
+
+		bool	isOdd(int n);
+
+		void	swapElementVector(size_t b, size_t a, size_t elementSize);
+		void	insertElementVector(size_t elementSize);
+		void	addElementInPendOrMainVector(size_t i, size_t elementSize, int ref, std::vector<t_boundedElement> &container);
+		void	printPendVector(std::vector<t_boundedElement> &pend);
+		void	printMainVector(std::vector<t_boundedElement> &main);
 
 };
 

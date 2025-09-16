@@ -75,6 +75,15 @@ size_t PmergeMe::elapsedTime(const struct timeval &time)
 	return (t1 - t2);
 }
 
+bool PmergeMe::isOdd(int n)
+{
+
+    if (n & 1)
+        return true;
+    else
+        return false;
+}
+
 void	PmergeMe::sort(void)
 {
 	gettimeofday(&m_startTimer, NULL);
@@ -104,6 +113,69 @@ void	PmergeMe::swapElementVector(size_t b, size_t a, size_t elementSize)
 
 }
 
+// typedef std::pair<IPv4, uint16_t> t_socketAddress;
+
+void	PmergeMe::addElementInPendOrMainVector(size_t i, size_t elementSize, int ref, std::vector<t_boundedElement> &container)
+{
+	t_boundedElement boundedElement;
+
+	while (elementSize)
+	{
+		boundedElement.first.push_back(m_vecData[i - (elementSize - 1)]);
+		elementSize--;
+	}
+	boundedElement.second = ref;
+	container.push_back(boundedElement);
+
+}
+
+void	PmergeMe::printPendVector(std::vector<t_boundedElement> &pend)
+{
+	std::cout << "Pend: ";
+	for (std::vector<t_boundedElement>::iterator it = pend.begin(); it != pend.end(); it++)
+	{
+		for (std::vector<int>::iterator el = it->first.begin(); el != it->first.end(); el++)
+			std::cout << *el << " ";
+		std::cout << " (" << it->second << ") - ";
+	}
+	std::cout << std::endl;
+}
+
+void	PmergeMe::printMainVector(std::vector<t_boundedElement> &main)
+{
+	std::cout << "Main: ";
+	for (std::vector<t_boundedElement>::iterator it = main.begin(); it != main.end(); it++)
+	{
+		for (std::vector<int>::iterator el = it->first.begin(); el != it->first.end(); el++)
+			std::cout << *el << " ";
+		std::cout << " (" << it->second << ") - ";
+	}
+	std::cout << std::endl;
+}
+
+void	PmergeMe::insertElementVector(size_t elementSize)
+{
+	std::vector<t_boundedElement> pend;
+	std::vector<t_boundedElement> main;
+
+	for (size_t i = elementSize - 1, n = 1; i < m_vecData.size(); i += elementSize, n++)
+	{
+		if (n == 1 || n == 2)
+			addElementInPendOrMainVector(i, elementSize, -1, main);
+		else if (isOdd(n))
+			addElementInPendOrMainVector(i, elementSize, -1, pend);
+		else
+			addElementInPendOrMainVector(i, elementSize, pend.size() - 1, main);
+	}
+	for (size_t i = 0; i < main.size(); i++)
+	{
+		if (main[i].second != -1)
+			pend[main[i].second].second = i;
+	}
+	printPendVector(pend);
+	printMainVector(main);
+}
+
 void	PmergeMe::sortVector(void)
 {
 	size_t pairSize = 1 << m_vecLevel;
@@ -131,8 +203,8 @@ void	PmergeMe::sortVector(void)
 	}
 
 	// step 2 and 3
-
 	std::cout << "step 2 level: " << m_vecLevel << std::endl;
+	insertElementVector(elementSize);
 	std::cout << "step 3 level: " << m_vecLevel << std::endl;
 	m_vecLevel--;
 }
