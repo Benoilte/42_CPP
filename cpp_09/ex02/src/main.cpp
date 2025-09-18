@@ -15,8 +15,8 @@ int	main(int argc, char **argv)
 		std::cout << "Before:\t " << sequence << std::endl;
 		sequence.sort();
 		std::cout << "After:\t " << sequence << std::endl;
-		std::cout << "Time to process a range of " <<  sequence.getVecSize() << " elements with std::vector:\t " << sequence.getTimeToSortVecData() << " us" << std::endl; // time should be replace by sequence.vectorSortedTime()
-		std::cout << "Time to process a range of " <<  sequence.getDeqSize() << " elements with std::deque:\t " << sequence.getTimeToSortDeqData() << " us" << std::endl; // time should be replace by sequence.dequeSortedTime()
+		std::cout << "Time to process a range of " <<  sequence.getVecSize() << " elements with std::vector:\t " << sequence.getTimeToSortVecData() << " us" << std::endl;
+		std::cout << "Time to process a range of " <<  sequence.getDeqSize() << " elements with std::deque:\t " << sequence.getTimeToSortDeqData() << " us" << std::endl;
 	} catch (const std::exception &e){
 		std::cout << e.what() << std::endl;
 		return -1;

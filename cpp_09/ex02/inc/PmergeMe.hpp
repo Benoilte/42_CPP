@@ -43,17 +43,25 @@ class PmergeMe
 
 	private:
 
-		typedef std::pair<std::vector<int>, int> t_boundedElement;
+		typedef std::pair<std::vector<int>, int> t_boundedElementVector;
 
-		std::vector<int>				m_vecData;
-		size_t							m_vecLevel;
-		size_t							m_timeToSortVecData;
-		std::vector<t_boundedElement>	m_pendVector;
-		std::vector<t_boundedElement>	m_mainVector;
+		std::vector<int>					m_vecData;
+		size_t								m_vecLevel;
+		size_t								m_timeToSortVecData;
+		std::vector<t_boundedElementVector>	m_pendVector;
+		std::vector<t_boundedElementVector>	m_mainVector;
 
+		typedef struct s_pairNode {
+    		std::vector<int>	element;
+			s_pairNode			*boundedElement;
+		} t_pairNode;
+
+		typedef std::deque<t_pairNode>::iterator dqIt;
 		std::deque<int>		m_deqData;
-		size_t				m_DeqLevel;
+		size_t				m_deqLevel;
 		size_t				m_timeToSortDeqData;
+		std::deque<t_pairNode>	m_pendDeque;
+		std::deque<t_pairNode>	m_mainDeque;
 
 		struct timeval		m_startTimer;
 
@@ -70,6 +78,19 @@ class PmergeMe
 		void	binaryInsertionSortVector(int pendIndex);
 		void	printPendVector(void);
 		void	printMainVector(void);
+
+		int		binarySearchDeque(int n, int lowIndex, int highIndex);
+		int		getMainPairNodeIndex(t_pairNode *boundedElement);
+		void	updateMainDeque(int mainIndex);
+		void	binaryInsertionSortDeque(int pendIndex);
+		void	addElementInPendDeque(size_t i, size_t elementSize, s_pairNode *ref);
+		void	addElementInMainDeque(size_t i, size_t elementSize, s_pairNode *ref);
+		void	insertPendInMainDeque(void);
+		void	initMainAndPendDeque(size_t elementSize);
+		void	swapElementDeque(size_t b, size_t a, size_t elementSize);
+		void	updateDeqData(void);
+		void	printPendDeque(void);
+		void	printMainDeque(void);
 
 };
 
