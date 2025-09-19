@@ -8,8 +8,9 @@
 # include <sys/time.h>
 # include <cmath>
 # include <utility>
+# include <unistd.h>
 
-#include <unistd.h>
+# include "colors.hpp"
 
 class PmergeMe
 {
@@ -27,6 +28,7 @@ class PmergeMe
 		const std::vector<int>	&getVecData(void) const;
 		size_t					getVecSize(void) const;
 		size_t					getTimeToSortVecData(void) const;
+		int						getVecComparisons(void) const;
 
 		const std::deque<int>	&getDeqData(void) const;
 		size_t					getDeqSize(void) const;
@@ -35,13 +37,12 @@ class PmergeMe
 		size_t	getDiffTime(const struct timeval &time1, const struct timeval &time2);
 		size_t	elapsedTime(const struct timeval &time);
 
+		bool	checkAlgo(void);
 		void	sort(void);
 
-		void	sortVector(void);
-
-		void	sortDeque(void);
-
 	private:
+
+		// Vector member
 
 		typedef std::pair<std::vector<int>, int> t_boundedElementVector;
 
@@ -50,6 +51,9 @@ class PmergeMe
 		size_t								m_timeToSortVecData;
 		std::vector<t_boundedElementVector>	m_pendVector;
 		std::vector<t_boundedElementVector>	m_mainVector;
+		int									m_vecComparisons;
+
+		// Deque member
 
 		typedef struct s_pairNode {
     		std::vector<int>	element;
@@ -57,15 +61,21 @@ class PmergeMe
 		} t_pairNode;
 
 		typedef std::deque<t_pairNode>::iterator dqIt;
-		std::deque<int>		m_deqData;
-		size_t				m_deqLevel;
-		size_t				m_timeToSortDeqData;
+
+		std::deque<int>			m_deqData;
+		size_t					m_deqLevel;
+		size_t					m_timeToSortDeqData;
 		std::deque<t_pairNode>	m_pendDeque;
 		std::deque<t_pairNode>	m_mainDeque;
+		int						m_deqComparisons;
+
 
 		struct timeval		m_startTimer;
 
 		bool	isOdd(int n);
+		int		jacobsthal(int n);
+
+		// Merge insertion with vector
 
 		void	swapElementVector(size_t b, size_t a, size_t elementSize);
 		void	initMainAndPendVector(size_t elementSize);
@@ -78,6 +88,9 @@ class PmergeMe
 		void	binaryInsertionSortVector(int pendIndex);
 		void	printPendVector(void);
 		void	printMainVector(void);
+		void	sortVector(void);
+
+		// Merge insertion with deuque
 
 		int		binarySearchDeque(int n, int lowIndex, int highIndex);
 		int		getMainPairNodeIndex(t_pairNode *boundedElement);
@@ -89,9 +102,13 @@ class PmergeMe
 		void	initMainAndPendDeque(size_t elementSize);
 		void	swapElementDeque(size_t b, size_t a, size_t elementSize);
 		void	updateDeqData(void);
+		void	sortDeque(void);
 		void	printPendDeque(void);
 		void	printMainDeque(void);
 
+		bool	checkSequencesEquality(void);
+		bool	checkSequencesAscendentOrder(void);
+		bool	checkMaximumComparison(void);
 };
 
 std::ostream	&operator<<(std::ostream &out, PmergeMe const &rhs);
