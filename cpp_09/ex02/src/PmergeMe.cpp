@@ -187,6 +187,9 @@ void	PmergeMe::initMainAndPendVector(size_t elementSize)
 int	PmergeMe::binarySearchVector(int n, int lowIndex, int highIndex)
 {
 	// std::cout << "n: " << n << " lowIndex: " << lowIndex << " highIndex: " << highIndex << std::endl;
+	// printPendVector();
+	// printMainVector();
+
 	if (highIndex <= lowIndex)
 		return (n > m_mainVector[lowIndex].first.back()) ? lowIndex + 1 : lowIndex;
 
@@ -224,10 +227,10 @@ void	PmergeMe::updateMainVector(int mainIndex)
 void	PmergeMe::binaryInsertionSortVector(int pendIndex)
 {
 	// std::cout << m_pendVector[pendIndex].first.back() << " - " << m_pendVector[pendIndex].second << std::endl;
-	
+
 	int highIndex = (m_pendVector[pendIndex].second != -1) ? (m_pendVector[pendIndex].second - 1) : (m_mainVector.size() - 1);
 	int	mainIndex = binarySearchVector(m_pendVector[pendIndex].first.back(), 0, highIndex);
-	
+
 	m_mainVector.insert(m_mainVector.begin() + mainIndex, m_pendVector[pendIndex]);
 	m_mainVector[mainIndex].second = -1;
 	updateMainVector(mainIndex);
@@ -272,20 +275,20 @@ void	PmergeMe::sortVector(void)
 	// step 1
 
 	// std::cout << "step 1 level: " << m_vecLevel << std::endl;
-	if (pairSize <  m_deqData.size())
+	if (pairSize <  m_vecData.size())
 	{
-		for (size_t b = elementSize - 1, a = pairSize - 1; a < m_deqData.size(); b += pairSize, a += pairSize)
+		for (size_t b = elementSize - 1, a = pairSize - 1; a < m_vecData.size(); b += pairSize, a += pairSize)
 		{
-			if (m_deqData[b] > m_deqData[a])
+			if (m_vecData[b] > m_vecData[a])
 				swapElementVector(b, a, elementSize);
 		}
 		// std::cout << *this << std::endl;
 		m_vecLevel++;
 		sortVector();
 	}
-	else if (m_deqData.size() == 2)
+	else if (m_vecData.size() == 2)
 	{
-		if (m_deqData[0] > m_deqData[1])
+		if (m_vecData[0] > m_vecData[1])
 			swapElementVector(0, 1, 1);
 		return ;
 	}
@@ -310,9 +313,9 @@ void	PmergeMe::sortVector(void)
 
 int	PmergeMe::binarySearchDeque(int n, int lowIndex, int highIndex)
 {
-	std::cout << "n: " << n << " lowIndex: " << lowIndex << " highIndex: " << highIndex << std::endl;
-	printMainDeque();
-	printPendDeque();
+	// std::cout << "n: " << n << " lowIndex: " << lowIndex << " highIndex: " << highIndex << std::endl;
+	// printPendDeque();
+	// printMainDeque();
 
 	if (highIndex <= lowIndex)
 		return (n > m_mainDeque[lowIndex].element.back()) ? lowIndex + 1 : lowIndex;
@@ -350,7 +353,7 @@ void	PmergeMe::binaryInsertionSortDeque(int pendIndex)
 {
 	int	highIndex = (m_pendDeque[pendIndex].boundedElement) ? (getMainPairNodeIndex(m_pendDeque[pendIndex].boundedElement) - 1) : (m_mainDeque.size() - 1);
 	int	mainIndex = binarySearchDeque(m_pendDeque[pendIndex].element.back(), 0, highIndex);
-	
+
 	m_mainDeque.insert(m_mainDeque.begin() + mainIndex, m_pendDeque[pendIndex]);
 	m_mainDeque[mainIndex].boundedElement = NULL;
 	updateMainDeque(mainIndex);
@@ -384,7 +387,6 @@ void	PmergeMe::insertPendInMainDeque(void)
 		previousJacobsthalNumber = jacobsthalNumber;
 		jacobsthalNumber = ((pow(2, jacobsthalNumber + 1) + pow(-1, jacobsthalNumber)) / 3);
 	}
-
 }
 
 void	PmergeMe::addElementInPendDeque(size_t i, size_t elementSize, s_pairNode *ref)
@@ -487,7 +489,6 @@ void	PmergeMe::swapElementDeque(size_t b, size_t a, size_t elementSize)
 		a--;
 		elementSize--;
 	}
-
 }
 
 void	PmergeMe::updateDeqData(void)
@@ -535,16 +536,16 @@ void	PmergeMe::sortDeque(void)
 	}
 
 	// step 2 and 3
-	std::cout << "step 2 level: " << m_deqLevel << std::endl;
+	// std::cout << "step 2 level: " << m_deqLevel << std::endl;
 	initMainAndPendDeque(elementSize);
 	// printPendDeque();
 	// printMainDeque();
 	// std::cout << *this << std::endl;
-	std::cout << "step 3 level: " << m_deqLevel << std::endl;
-	printPendDeque();
+	// std::cout << "step 3 level: " << m_deqLevel << std::endl;
+	// printPendDeque();
 	insertPendInMainDeque();
-	printMainDeque();
-	std::cout << *this << std::endl;
+	// printMainDeque();
+	// std::cout << *this << std::endl;
 	updateDeqData();
 	m_deqLevel--;
 }
