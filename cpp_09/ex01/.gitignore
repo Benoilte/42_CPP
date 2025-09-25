@@ -1,0 +1,5 @@
+./vscode
+*dep/
+*obj/
+PmergeMe
+ford-johnson-tester.py
