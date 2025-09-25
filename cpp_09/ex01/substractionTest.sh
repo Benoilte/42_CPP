@@ -23,10 +23,17 @@ compare() {
     fi
 }
 
-compare "8 9 * 9 - 9 - 9 - 4 - 1 +" "42"
-compare "7 7 * 7 -" "42"
-compare "1 2 * 2 / 2 * 2 4 - +" "0"
-compare "(1 + 1)" "ERROR"
+compare "-11" "ERROR"
+compare "8 2 - -" "ERROR"
+compare "8 1 d -" "ERROR"
+compare "8 f -" "ERROR"
+compare "0 0 -" "0"
+compare "1 1 -" "0"
+compare "8 2 -" "6"
+compare "0 1 -" "-1"
+compare "0 8 - 9 -" "-17"
+compare "0 8 - 0 -" "-8"
+compare "- 1\t1" "ERROR"
 
 echo
 if [ $TOTAL = $SUCCESS ]; then

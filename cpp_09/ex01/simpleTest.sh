@@ -12,44 +12,47 @@ FAILED=0
 
 compare() {
 	TOTAL=$(expr $TOTAL + 1)
-    echo "$EXEC \"$1\"";
+    echo -n "$EXEC \"$1\"";
     OUTPUT=$($EXEC "$1")
     if [ "$OUTPUT" = "$2" ]; then
 		SUCCESS=$(expr $SUCCESS + 1)
-        echo "✅ \"$1\" = $OUTPUT"
+        echo "\t✅ => $OUTPUT"
     else
 		FAILED=$(expr $FAILED + 1)
-        echo "❌ expected $2 but got $OUTPUT"
+        echo "\t❌ expected $2 but got $OUTPUT"
     fi
-    echo
 }
 
 noArg() {
 	TOTAL=$(expr $TOTAL + 1)
-    echo "$EXEC";
+    echo -n "$EXEC ";
     OUTPUT=$($EXEC)
     if [ "$OUTPUT" = "ERROR" ]; then
 		SUCCESS=$(expr $SUCCESS + 1)
-        echo "✅ output = $OUTPUT"
+        echo "\t\t✅ => $OUTPUT"
     else
 		FAILED=$(expr $FAILED + 1)
-        echo "❌ expected ERROR but got $OUTPUT"
+        echo "\t\t❌ expected ERROR but got $OUTPUT"
     fi
-    echo	
 }
 
 noArg
+
 compare "" "ERROR"
+
 compare "+" "ERROR"
 compare "-" "ERROR"
 compare "*" "ERROR"
 compare "/" "ERROR"
+compare "+ 2 8" "ERROR"
+
 compare "28" "ERROR"
 compare "12" "ERROR"
 compare "42" "ERROR"
 compare "2 8" "ERROR"
 compare "1 2" "ERROR"
 compare "4 2" "ERROR"
+
 compare "0" "0"
 compare "1" "1"
 compare "2" "2"
@@ -61,6 +64,7 @@ compare "7" "7"
 compare "8" "8"
 compare "9" "9"
 
+echo
 if [ $TOTAL = $SUCCESS ]; then
 	echo "✅ All test pass $SUCCESS/$TOTAL"
 else

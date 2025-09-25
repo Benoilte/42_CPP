@@ -3,23 +3,44 @@
 
 # include <iostream>
 # include <string>
+# include <cctype>
+# include <cstdlib>
+# include <limits>
+# include <list>
 
 class RPN
 {
 	public:
 
 		RPN();
-		RPN(const std::string &str);
+		RPN(const std::string &input);
 		RPN(const RPN &other);
 		~RPN();
 
 		RPN	&operator=(const RPN &rhs);
 
-		int	compute(void);
+		bool	getSucceed(void) const;
+		int		getResult(void) const;
+		void	compute(void);
 
 	private:
 
-		const std::string m_rpnSequence;
+		class OperationFailed : public std::exception
+		{
+			public:
+				virtual const char	*what() const throw();
+		};
+
+		void	computeStack(const char &token);
+		bool	addOverflow(int lhs, int rhs);
+		bool	subOverflow(int lhs, int rhs);
+		bool	multOverflow(int lhs, int rhs);
+		bool	divOverflow(int lhs, int rhs);
+
+		const std::string	m_rpnSequence;
+		bool				m_succeed;
+		int					m_result;
+		std::list<int>		m_stack;
 
 };
 
