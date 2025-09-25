@@ -5,23 +5,32 @@ RED="\033[0;91m"
 GREEN="\033[0;92m"
 YELLOW="\033[0;93m"
 
-exec="./RPN"
+EXEC="./RPN"
+TOTAL=0
+SUCCESS=0
+FAILED=0
 
 compare() {
-    echo "$exec \"$1\"";
-    output=$($exec "$1")
-    if [ "$output" = "$2" ]; then
-        echo "✅ \"$1\" = $output"
+	TOTAL=$(expr $TOTAL + 1)
+    echo "$EXEC \"$1\"";
+    OUTPUT=$($EXEC "$1")
+    if [ "$OUTPUT" = "$2" ]; then
+		SUCCESS=$(expr $SUCCESS + 1)
+        echo "✅ \"$1\" = $OUTPUT"
     else
-        echo "❌ expected $2 but got $output"
+		FAILED=$(expr $FAILED + 1)
+        echo "❌ expected $2 but got $OUTPUT"
     fi
     echo
 }
 
 compare "8 9 * 9 - 9 - 9 - 4 - 1 +" "42"
-
 compare "7 7 * 7 -" "42"
-
 compare "1 2 * 2 / 2 * 2 4 - +" "0"
-
 compare "(1 + 1)" "ERROR"
+
+if [ $TOTAL = $SUCCESS ]; then
+	echo "✅ All test pass $SUCCESS/$TOTAL"
+else
+	echo "❌ $FAILED/$TOTAL test FAILED"
+fi

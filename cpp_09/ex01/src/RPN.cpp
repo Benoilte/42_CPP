@@ -7,6 +7,11 @@ RPN::RPN()
     //  DEFAULT
 }
 
+RPN::RPN(const std::string &str) : m_rpnSequence(str)
+{
+    //  DEFAULT
+}
+
 RPN::RPN(const RPN &other)
 {
 	*this = other;
@@ -35,6 +40,10 @@ RPN& RPN::operator=(const RPN &rhs)
 
 //  ============| METHODS |=============
 
+int	RPN::compute(void)
+{
+	return 42;
+}
 //  ========| VIRTUAL METHODS |=========
 
 //  ======| EXTERNAL FUNCTIONS |========
@@ -42,5 +51,5 @@ RPN& RPN::operator=(const RPN &rhs)
 std::ostream& operator<<(std::ostream &out, RPN const &rhs)
 {
 	(void)rhs;
-	return out; 
+	return out;
 }
