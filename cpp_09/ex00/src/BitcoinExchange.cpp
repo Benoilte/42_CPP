@@ -3,8 +3,29 @@
 //  ==========| CONSTRUCTORS / DESTRUCTOR |==========
 
 BitcoinExchange::BitcoinExchange()
+: m_inputStr("")
 {
-    //  DEFAULT m_input.open(configFile.c_str(), std::ios::in);
+	char today[11];
+	today[10] = '\0';
+
+	time_t timestamp = time(NULL);
+	struct tm datetime = *localtime(&timestamp);
+
+	strftime(today, 50, "%Y-%m-%d", &datetime);
+	m_todayDate  = today;	
+}
+
+BitcoinExchange::BitcoinExchange(const std::string &input)
+: m_inputStr(input)
+{
+	char today[11];
+	today[10] = '\0';
+
+	time_t timestamp = time(NULL);
+	struct tm datetime = *localtime(&timestamp);
+
+	strftime(today, 50, "%Y-%m-%d", &datetime);
+	m_todayDate  = today;
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &other)
@@ -34,6 +55,30 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange &rhs)
 //  ============| SETTERS |=============
 
 //  ============| METHODS |=============
+
+//  ============| CUSTOM EXCEPTION |=============
+
+BitcoinExchange::BtcException::BtcException() throw()
+: message("")
+{
+	// Custom Exception default Constructor
+}
+
+BitcoinExchange::BtcException::BtcException(const char* msg) throw()
+: message(msg)
+{
+	// Custom Exception Constructor
+}
+
+BitcoinExchange::BtcException::~BtcException() throw()
+{
+	// Custom Exception Constructor
+}
+
+const char	*BitcoinExchange::BtcException::what() const throw()
+{
+	return message.c_str();
+}
 
 //  ========| VIRTUAL METHODS |=========
 
