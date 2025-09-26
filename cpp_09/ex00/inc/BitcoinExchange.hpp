@@ -23,7 +23,7 @@ class BitcoinExchange
 		class BtcException : public std::exception
 		{
 			private:
-				std::string message;
+				std::string m_message;
 
 			public:
 				BtcException() throw();
@@ -32,11 +32,17 @@ class BitcoinExchange
 				virtual const char	*what() const throw();
 		};
 
+		void	init();
+		void	display();
+
 	private:
 
 		std::string		m_todayDate;
 		std::string		m_inputStr;
 		std::ifstream	m_inputFile;
+		std::ifstream	m_dataBaseFile;
+
+		void	initDataBase();
 };
 
 std::ostream	&operator<<(std::ostream &out, BitcoinExchange const &rhs);

@@ -35,7 +35,11 @@ BitcoinExchange::BitcoinExchange(const BitcoinExchange &other)
 
 BitcoinExchange::~BitcoinExchange()
 {
-	//  DEFAULT
+	if (m_dataBaseFile.is_open())
+		m_dataBaseFile.close();
+
+	if (m_inputFile.is_open())
+		m_inputFile.close();
 }
 
 //  =======| OPERATOR OVERLOADS |=======
@@ -56,16 +60,31 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange &rhs)
 
 //  ============| METHODS |=============
 
+void	BitcoinExchange::init(void)
+{
+	m_dataBaseFile.open("data.csv");
+	if (!m_dataBaseFile.is_open())
+		throw BtcException("failed to open data base file");
+
+	m_inputFile.open(m_inputStr.c_str());
+	if (!m_inputFile.is_open())
+		throw BtcException("failed to open input file");
+}
+
+void	BitcoinExchange::display(void)
+{
+
+}
 //  ============| CUSTOM EXCEPTION |=============
 
 BitcoinExchange::BtcException::BtcException() throw()
-: message("")
+: m_message("")
 {
 	// Custom Exception default Constructor
 }
 
 BitcoinExchange::BtcException::BtcException(const char* msg) throw()
-: message(msg)
+: m_message(msg)
 {
 	// Custom Exception Constructor
 }
@@ -77,7 +96,7 @@ BitcoinExchange::BtcException::~BtcException() throw()
 
 const char	*BitcoinExchange::BtcException::what() const throw()
 {
-	return message.c_str();
+	return m_message.c_str();
 }
 
 //  ========| VIRTUAL METHODS |=========

@@ -7,8 +7,9 @@ int	main(int argc, char **argv)
 	{
 		if (argc == 2)
 		{
-			BitcoinExchange btc;
-			BitcoinExchange btc1(argv[1]);
+			BitcoinExchange btc(argv[1]);
+			btc.init();
+			btc.display();
 		}
 		else if (argc < 2)
 			throw BitcoinExchange::BtcException("input file is missing");
