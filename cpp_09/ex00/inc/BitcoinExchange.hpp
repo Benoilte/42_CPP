@@ -8,6 +8,7 @@
 # include <ctime>
 # include <cstdlib>
 # include <exception>
+# include <iterator>
 # include <map>
 
 class BitcoinExchange
@@ -47,12 +48,14 @@ class BitcoinExchange
 		std::map<std::string, float>	m_dateRateMap;
 
 		void	initDataBase();
-		void	parseDate(std::string &line, std::string &date);
+		void	parseDate(std::string &line, std::string &date, const std::string &del);
 		void	validYear(const std::string &date, const int &year);
 		void	validMonth(const std::string &date, const int &month);
 		void	validDay(const std::string &date, const int &year, const int &month, const int &day);
 		bool	isLeapYear(const int &year);
-		void	parseExchangeRate(std::string &line, float &exchangeRate);
+		void	parseValue(std::string &line, float &exchangeRate, const std::string &del);
+		float	computeResult(const std::string &date, const float &value);
+		
 		const std::string	convertToString(const int &n);
 };
 

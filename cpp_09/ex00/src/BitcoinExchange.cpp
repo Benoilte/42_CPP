@@ -62,7 +62,7 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange &rhs)
 
 void	BitcoinExchange::init(void)
 {
-	m_dataBaseFile.open("errorData.csv");
+	m_dataBaseFile.open("data.csv");
 	if (!m_dataBaseFile.is_open())
 		throw BtcException("failed to open data base file");
 
@@ -87,8 +87,8 @@ void	BitcoinExchange::initDataBase(void)
 	{
 		try
 		{
-			parseDate(line, date);
-			parseExchangeRate(line, exchangeRate);
+			parseDate(line, date, ",");
+			parseValue(line, exchangeRate, ",");
 			m_dateRateMap.insert(make_pair(date, exchangeRate));
 		}
 		catch(const BitcoinExchange::BtcException& e)
@@ -104,14 +104,14 @@ void	BitcoinExchange::initDataBase(void)
 	}
 	if (m_dateRateMap.empty())\
 		throw BtcException("Database is empty after initialisation");
-	for (std::map<std::string, float>::iterator it = m_dateRateMap.begin(); it != m_dateRateMap.end(); it++)
-		std::cout << it->first << " => " << it->second << std::endl;
+	// for (std::map<std::string, float>::iterator it = m_dateRateMap.begin(); it != m_dateRateMap.end(); it++)
+	// 	std::cout << it->first << " => " << it->second << std::endl;
 }
 
 // 2009-02-07
-void	BitcoinExchange::parseDate(std::string &line, std::string &date)
+void	BitcoinExchange::parseDate(std::string &line, std::string &date, const std::string &del)
 {
-	date = line.substr(0, line.find(','));
+	date = line.substr(0, line.find(del));
 
 	if (date.size() != 10)
 		throw BtcException("Date size invalid, Expected: yyyy-mm-dd");
@@ -182,26 +182,29 @@ bool	BitcoinExchange::isLeapYear(const int &year)
 			return false;
 }
 
-void	BitcoinExchange::parseExchangeRate(std::string &line, float &exchangeRate)
+void	BitcoinExchange::parseValue(std::string &line, float &value, const std::string &del)
 {
 	std::stringstream	ss;
-	std::string			exchangeRateStr = line.substr(line.find(',') + 1);
+	std::string			valueStr = line.substr(line.find(del) + del.size());
 	size_t				countPoint = 0;
 
-	for (size_t i = 0; i < exchangeRateStr.size(); i++)
+	size_t i = (valueStr[0] == '-') ? 1 : 0;
+	for (; i < valueStr.size(); i++)
 	{
-		if (exchangeRateStr[i] == '.')
+		if (valueStr[i] == '.')
 			countPoint++;
-		else if (!std::isdigit(exchangeRateStr[i]))
-			throw BtcException("Exchange rate invalid format, expected only digit or dot");
+		else if (!std::isdigit(valueStr[i]))
+			throw BtcException("value invalid format, expected only digit or dot");
 	}
 	if (countPoint > 1)
-		throw BtcException("Exchange rate invalid format, too many dot");
+		throw BtcException("value invalid format, too many dot");
 
-	ss << exchangeRateStr;
-	ss >> exchangeRate;
+	ss << valueStr;
+	ss >> value;
 	if (ss.fail())
-		throw BtcException("Exchange rate invalid format");
+		throw BtcException("value invalid format");
+	else if (value < 0)
+		throw BtcException("value is not a positive number");
 }
 
 const std::string		BitcoinExchange::convertToString(const int &n)
@@ -212,9 +215,63 @@ const std::string		BitcoinExchange::convertToString(const int &n)
 	return ss.str();
 }
 
+float	BitcoinExchange::computeResult(const std::string &date, const float &value)
+{
+	if (m_dateRateMap.find(date) != m_dateRateMap.end())
+		return value * m_dateRateMap.at(date);
+
+	std::map<std::string,float>::iterator prevIt = m_dateRateMap.begin();
+
+	for (std::map<std::string,float>::iterator it = m_dateRateMap.begin(); it != m_dateRateMap.end(); prevIt = it++)
+	{
+		if (it->first > date)
+			break ;
+	}
+	return value * prevIt->second;
+}
+
 void	BitcoinExchange::display(void)
 {
+	std::string			line;
+	std::string			date;
+	float				value;
 
+	std::getline(m_inputFile, line);
+	if (line != "date | value")
+		throw BtcException("input title invalid format, Expected: date | value");
+	std::getline(m_inputFile, line);
+	while (!line.empty() || !m_inputFile.eof())
+	{
+		try
+		{
+			parseDate(line, date, " | ");
+			parseValue(line, value, " | ");
+			if (value > 1000)
+				throw BtcException(" too large a number");
+			std::cout << date << " => " << value << " = " << computeResult(date, value) << std::endl;
+		}
+		catch(const BitcoinExchange::BtcException& e)
+		{
+			std::cerr << "Error: " << e.what() << std::endl;
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << "Error: " << e.what() << std::endl;
+		}
+		line.clear();
+		std::getline(m_inputFile, line);
+	}
+	// go through input.txt
+
+	// check if date is valid
+
+	// check if value is valid
+
+	// if date or value is not valid => print corresponding value
+
+	// if date and value is valid compute the value multiplied by exchange rate
+
+	// What if computeValue overflow ?
 }
 
 //  ============| CUSTOM EXCEPTION |=============
