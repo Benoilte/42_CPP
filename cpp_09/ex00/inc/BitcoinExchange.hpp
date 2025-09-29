@@ -8,6 +8,7 @@
 # include <ctime>
 # include <cstdlib>
 # include <exception>
+# include <map>
 
 class BitcoinExchange
 {
@@ -39,10 +40,11 @@ class BitcoinExchange
 
 	private:
 
-		std::string		m_todayDate;
-		std::string		m_inputStr;
-		std::ifstream	m_inputFile;
-		std::ifstream	m_dataBaseFile;
+		std::string						m_todayDate;
+		std::string						m_inputStr;
+		std::ifstream					m_inputFile;
+		std::ifstream					m_dataBaseFile;
+		std::map<std::string, float>	m_dateRateMap;
 
 		void	initDataBase();
 		void	parseDate(std::string &line, std::string &date);

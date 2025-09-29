@@ -89,8 +89,7 @@ void	BitcoinExchange::initDataBase(void)
 		{
 			parseDate(line, date);
 			parseExchangeRate(line, exchangeRate);
-			std::cout << line.substr(0, line.find(',')) << std::endl;
-			line.clear();
+			m_dateRateMap.insert(make_pair(date, exchangeRate));
 		}
 		catch(const BitcoinExchange::BtcException& e)
 		{
@@ -100,8 +99,13 @@ void	BitcoinExchange::initDataBase(void)
 		{
 			std::cerr << "Error: " << e.what() << std::endl;
 		}
+		line.clear();
 		std::getline(m_dataBaseFile, line);
 	}
+	if (m_dateRateMap.empty())\
+		throw BtcException("Database is empty after initialisation");
+	for (std::map<std::string, float>::iterator it = m_dateRateMap.begin(); it != m_dateRateMap.end(); it++)
+		std::cout << it->first << " => " << it->second << std::endl;
 }
 
 // 2009-02-07
@@ -180,9 +184,21 @@ bool	BitcoinExchange::isLeapYear(const int &year)
 
 void	BitcoinExchange::parseExchangeRate(std::string &line, float &exchangeRate)
 {
-	std::stringstream ss;
+	std::stringstream	ss;
+	std::string			exchangeRateStr = line.substr(line.find(',') + 1);
+	size_t				countPoint = 0;
 
-	ss << line.substr(line.find(',') + 1);
+	for (size_t i = 0; i < exchangeRateStr.size(); i++)
+	{
+		if (exchangeRateStr[i] == '.')
+			countPoint++;
+		else if (!std::isdigit(exchangeRateStr[i]))
+			throw BtcException("Exchange rate invalid format, expected only digit or dot");
+	}
+	if (countPoint > 1)
+		throw BtcException("Exchange rate invalid format, too many dot");
+
+	ss << exchangeRateStr;
 	ss >> exchangeRate;
 	if (ss.fail())
 		throw BtcException("Exchange rate invalid format");
