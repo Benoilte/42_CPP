@@ -104,11 +104,8 @@ void	BitcoinExchange::initDataBase(void)
 	}
 	if (m_dateRateMap.empty())\
 		throw BtcException("Database is empty after initialisation");
-	// for (std::map<std::string, float>::iterator it = m_dateRateMap.begin(); it != m_dateRateMap.end(); it++)
-	// 	std::cout << it->first << " => " << it->second << std::endl;
 }
 
-// 2009-02-07
 void	BitcoinExchange::parseDate(std::string &line, std::string &date, const std::string &del)
 {
 	date = line.substr(0, line.find(del));
@@ -161,7 +158,7 @@ void	BitcoinExchange::validDay(const std::string &date, const int &year, const i
 		if (isLeapYear(year))
 			maxDay = 29;
 		else
-			maxDay = 28;  
+			maxDay = 28;
 	}
 	else if ((month == 4) || (month == 6) || (month == 9) || (month == 11))
 		maxDay = 30;
@@ -218,7 +215,11 @@ const std::string		BitcoinExchange::convertToString(const int &n)
 float	BitcoinExchange::computeResult(const std::string &date, const float &value)
 {
 	if (m_dateRateMap.find(date) != m_dateRateMap.end())
+	{
+		if (multOverflow(value, m_dateRateMap.at(date)))
+			throw BtcException("result is a too large a number");
 		return value * m_dateRateMap.at(date);
+	}
 
 	std::map<std::string,float>::iterator prevIt = m_dateRateMap.begin();
 
@@ -227,7 +228,16 @@ float	BitcoinExchange::computeResult(const std::string &date, const float &value
 		if (it->first > date)
 			break ;
 	}
+	if (multOverflow(value, prevIt->second))
+			throw BtcException("result is a too large a number");
 	return value * prevIt->second;
+}
+
+bool BitcoinExchange::multOverflow(const float &lhs, const float &rhs)
+{
+	if (lhs == 0 || rhs == 0) return false;
+
+	return std::abs(lhs) > std::numeric_limits<float>::max() / std::abs(rhs);
 }
 
 void	BitcoinExchange::display(void)
@@ -247,8 +257,9 @@ void	BitcoinExchange::display(void)
 			parseDate(line, date, " | ");
 			parseValue(line, value, " | ");
 			if (value > 1000)
-				throw BtcException(" too large a number");
-			std::cout << date << " => " << value << " = " << computeResult(date, value) << std::endl;
+				throw BtcException("too large a number");
+			float res = computeResult(date, value);
+			std::cout << date << " => " << value << " = " << res << std::endl;
 		}
 		catch(const BitcoinExchange::BtcException& e)
 		{
@@ -261,16 +272,6 @@ void	BitcoinExchange::display(void)
 		line.clear();
 		std::getline(m_inputFile, line);
 	}
-	// go through input.txt
-
-	// check if date is valid
-
-	// check if value is valid
-
-	// if date or value is not valid => print corresponding value
-
-	// if date and value is valid compute the value multiplied by exchange rate
-
 	// What if computeValue overflow ?
 }
 
