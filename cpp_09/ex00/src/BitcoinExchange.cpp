@@ -12,7 +12,7 @@ BitcoinExchange::BitcoinExchange()
 	struct tm datetime = *localtime(&timestamp);
 
 	strftime(today, 50, "%Y-%m-%d", &datetime);
-	m_todayDate  = today;	
+	m_todayDate  = today;
 }
 
 BitcoinExchange::BitcoinExchange(const std::string &input)
@@ -69,12 +69,48 @@ void	BitcoinExchange::init(void)
 	m_inputFile.open(m_inputStr.c_str());
 	if (!m_inputFile.is_open())
 		throw BtcException("failed to open input file");
+
+	initDataBase();
+}
+
+void	BitcoinExchange::initDataBase(void)
+{
+	std::string			line;
+	std::string			date;
+	float				exchangeRate;
+
+	std::getline(m_dataBaseFile, line);
+	if (line != "date,exchange_rate")
+		throw BtcException("Database title does not match: date,exchange_rate");
+	std::getline(m_dataBaseFile, line);
+	while (!m_dataBaseFile.eof())
+	{
+		std::cout << line.substr(0, line.find(',')) << std::endl;
+		parseDate(line, date);
+		parseExchangeRate(line, exchangeRate);
+		std::getline(m_dataBaseFile, line);
+	}
+}
+
+void	BitcoinExchange::parseDate(std::string &line, std::string &date)
+{
+	date = line.substr(0, line.find(','));
+}
+
+void	BitcoinExchange::parseExchangeRate(std::string &line, float &exchangeRate)
+{
+	std::stringstream ss;
+
+	ss << line.substr(line.find(',') + 1);
+	ss >> exchangeRate;
+	if (!ss.good())
 }
 
 void	BitcoinExchange::display(void)
 {
 
 }
+
 //  ============| CUSTOM EXCEPTION |=============
 
 BitcoinExchange::BtcException::BtcException() throw()

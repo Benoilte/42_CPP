@@ -3,6 +3,7 @@
 
 # include <iostream>
 # include <fstream>
+# include <sstream>
 # include <string>
 # include <ctime>
 # include <exception>
@@ -43,6 +44,8 @@ class BitcoinExchange
 		std::ifstream	m_dataBaseFile;
 
 		void	initDataBase();
+		void	parseDate(std::string &line, std::string &date);
+		void	parseExchangeRate(std::string &line, float &exchangeRate);
 };
 
 std::ostream	&operator<<(std::ostream &out, BitcoinExchange const &rhs);
