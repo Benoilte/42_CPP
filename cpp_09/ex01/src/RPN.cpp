@@ -100,32 +100,32 @@ bool RPN::addOverflow(int lhs, int rhs)
 	if (lhs >= 0)
 		return (rhs > (std::numeric_limits<int>::max() - lhs));
 	else
-    	return (rhs < (std::numeric_limits<int>::min() - lhs));
+		return (rhs < (std::numeric_limits<int>::min() - lhs));
 }
 
 bool RPN::subOverflow(int lhs, int rhs)
 {
-    if (rhs <= 0)
-        return (lhs > std::numeric_limits<int>::max() + rhs);
-    else
-        return (lhs < std::numeric_limits<int>::min() + rhs);
+	if (rhs <= 0)
+		return (lhs > std::numeric_limits<int>::max() + rhs);
+	else
+		return (lhs < std::numeric_limits<int>::min() + rhs);
 }
 
 bool RPN::multOverflow(int lhs, int rhs)
 {
 	if (lhs == 0 || rhs == 0) return false;
 
-    if (lhs == std::numeric_limits<int>::min())
-        return ((rhs != 0) && (rhs != 1));
-    if (rhs == std::numeric_limits<int>::min())
-        return ((lhs != 0) && (lhs != 1));
+	if (lhs == std::numeric_limits<int>::min())
+		return ((rhs != 0) && (rhs != 1));
+	if (rhs == std::numeric_limits<int>::min())
+		return ((lhs != 0) && (lhs != 1));
 
-    return std::abs(lhs) > std::numeric_limits<int>::max() / std::abs(rhs);
+	return std::abs(lhs) > std::numeric_limits<int>::max() / std::abs(rhs);
 }
 
 bool RPN::divOverflow(int lhs, int rhs)
 {
-    return (rhs == 0) || ((lhs == std::numeric_limits<int>::min()) && (rhs == -1));
+	return (rhs == 0) || ((lhs == std::numeric_limits<int>::min()) && (rhs == -1));
 }
 
 const char	*RPN::OperationFailed::what() const throw()
