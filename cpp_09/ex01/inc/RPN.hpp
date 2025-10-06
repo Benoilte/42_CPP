@@ -37,10 +37,10 @@ class RPN
 		bool	multOverflow(int lhs, int rhs);
 		bool	divOverflow(int lhs, int rhs);
 
-		const std::string	m_rpnSequence;
-		bool				m_succeed;
-		int					m_result;
-		std::list<int>		m_stack;
+		std::string		m_rpnSequence;
+		bool			m_succeed;
+		int				m_result;
+		std::list<int>	m_stack;
 
 };
 

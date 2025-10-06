@@ -30,7 +30,10 @@ RPN& RPN::operator=(const RPN &rhs)
 {
 	if (this != &rhs)
 	{
-		;
+		this->m_rpnSequence = rhs.m_rpnSequence;
+		this->m_succeed = rhs.m_succeed;
+		this->m_result = rhs.m_result;
+		this->m_stack = rhs.m_stack;
 	}
 
 	return *this;
