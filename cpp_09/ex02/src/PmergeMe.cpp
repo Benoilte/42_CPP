@@ -33,7 +33,28 @@ PmergeMe& PmergeMe::operator=(const PmergeMe &rhs)
 {
 	if (this != &rhs)
 	{
-		;
+		// Vector member
+
+		this->m_vecData = rhs.m_vecData;
+		this->m_vecLevel = rhs.m_vecLevel;
+		this->m_timeToSortVecData = rhs.m_timeToSortVecData;
+		this->m_pendVector = rhs.m_pendVector;
+		this->m_mainVector = rhs.m_mainVector;
+		this->m_vecComparisons = rhs.m_vecComparisons;
+
+		// Deque member
+
+		this->m_deqData = rhs.m_deqData;
+		this->m_deqLevel = rhs.m_deqLevel;
+		this->m_timeToSortDeqData = rhs.m_timeToSortDeqData;
+		this->m_pendDeque = rhs.m_pendDeque;
+		this->m_mainDeque = rhs.m_mainDeque;
+		this->m_deqComparisons = rhs.m_deqComparisons;
+
+		// common member
+
+		this->m_startTimer = rhs.m_startTimer;
+
 	}
 
 	return *this;

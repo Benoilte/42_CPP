@@ -29,7 +29,7 @@ Input& Input::operator=(const Input &rhs)
 {
 	if (this != &rhs)
 	{
-		;
+		this->m_input = rhs.m_input;
 	}
 
 	return *this;
