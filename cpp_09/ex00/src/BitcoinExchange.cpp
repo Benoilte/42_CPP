@@ -48,7 +48,9 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange &rhs)
 {
 	if (this != &rhs)
 	{
-		;
+		this->m_todayDate = rhs.m_todayDate;
+		this->m_inputStr = rhs.m_inputStr;
+		this->m_dateRateMap = rhs.m_dateRateMap;
 	}
 
 	return *this;
