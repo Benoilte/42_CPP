@@ -56,7 +56,7 @@ void				Input::fillInput(const std::string &str)
 			throw std::runtime_error("Error");
 		else
 		{
-			if ((n < 0) || isDuplicate(n))
+			if ((n < 0))
 				throw std::runtime_error("Error");
 			m_input.push_back(n);
 		}
