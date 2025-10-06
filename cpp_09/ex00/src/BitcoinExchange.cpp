@@ -62,7 +62,7 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange &rhs)
 
 void	BitcoinExchange::init(void)
 {
-	m_dataBaseFile.open("data.csv");
+	m_dataBaseFile.open("csvFile/data.csv");
 	if (!m_dataBaseFile.is_open())
 		throw BtcException("failed to open data base file");
 
