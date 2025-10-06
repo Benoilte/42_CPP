@@ -56,11 +56,8 @@ class BitcoinExchange
 		bool	isLeapYear(const int &year);
 		void	parseValue(std::string &line, float &exchangeRate, const std::string &del);
 		float	computeResult(const std::string &date, const float &value);
-		bool	multOverflow(const float &lhs, const float &rhs);
 
 		const std::string	convertToString(const int &n);
 };
-
-std::ostream	&operator<<(std::ostream &out, BitcoinExchange const &rhs);
 
 #endif

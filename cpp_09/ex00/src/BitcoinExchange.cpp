@@ -89,15 +89,17 @@ void	BitcoinExchange::initDataBase(void)
 		{
 			parseDate(line, date, ",");
 			parseValue(line, exchangeRate, ",");
+			if (exchangeRate > 100000)
+				throw BtcException("Exchange rate too large a number");
 			m_dateRateMap.insert(make_pair(date, exchangeRate));
 		}
 		catch(const BitcoinExchange::BtcException& e)
 		{
-			std::cerr << "Error: " << e.what() << std::endl;
+			std::cerr << "DB - Error: " << e.what() << std::endl;
 		}
 		catch(const std::exception& e)
 		{
-			std::cerr << "Error: " << e.what() << std::endl;
+			std::cerr << "DB - Error: " << e.what() << std::endl;
 		}
 		line.clear();
 		std::getline(m_dataBaseFile, line);
@@ -215,11 +217,7 @@ const std::string		BitcoinExchange::convertToString(const int &n)
 float	BitcoinExchange::computeResult(const std::string &date, const float &value)
 {
 	if (m_dateRateMap.find(date) != m_dateRateMap.end())
-	{
-		if (multOverflow(value, m_dateRateMap.at(date)))
-			throw BtcException("result is a too large a number");
 		return value * m_dateRateMap.at(date);
-	}
 
 	std::map<std::string,float>::iterator prevIt = m_dateRateMap.begin();
 
@@ -228,16 +226,7 @@ float	BitcoinExchange::computeResult(const std::string &date, const float &value
 		if (it->first > date)
 			break ;
 	}
-	if (multOverflow(value, prevIt->second))
-			throw BtcException("result is a too large a number");
 	return value * prevIt->second;
-}
-
-bool BitcoinExchange::multOverflow(const float &lhs, const float &rhs)
-{
-	if (lhs == 0 || rhs == 0) return false;
-
-	return std::abs(lhs) > std::numeric_limits<float>::max() / std::abs(rhs);
 }
 
 void	BitcoinExchange::display(void)
@@ -257,22 +246,21 @@ void	BitcoinExchange::display(void)
 			parseDate(line, date, " | ");
 			parseValue(line, value, " | ");
 			if (value > 1000)
-				throw BtcException("too large a number");
+				throw BtcException("too large number");
 			float res = computeResult(date, value);
 			std::cout << date << " => " << value << " = " << res << std::endl;
 		}
 		catch(const BitcoinExchange::BtcException& e)
 		{
-			std::cerr << "Error: " << e.what() << std::endl;
+			std::cerr << "IN - Error: " << e.what() << std::endl;
 		}
 		catch(const std::exception& e)
 		{
-			std::cerr << "Error: " << e.what() << std::endl;
+			std::cerr << "IN - Error: " << e.what() << std::endl;
 		}
 		line.clear();
 		std::getline(m_inputFile, line);
 	}
-	// What if computeValue overflow ?
 }
 
 //  ============| CUSTOM EXCEPTION |=============
@@ -302,9 +290,3 @@ const char	*BitcoinExchange::BtcException::what() const throw()
 //  ========| VIRTUAL METHODS |=========
 
 //  ======| EXTERNAL FUNCTIONS |========
-
-std::ostream& operator<<(std::ostream &out, BitcoinExchange const &rhs)
-{
-	(void)rhs;
-	return out;
-}
